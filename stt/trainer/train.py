@@ -1,7 +1,7 @@
 from transformers import WhisperFeatureExtractor, WhisperProcessor, WhisperTokenizer, WhisperForConditionalGeneration, Seq2SeqTrainingArguments, Seq2SeqTrainer
 import evaluate
 
-from dataset import Datasets
+from audiodatasets import AudioDatasets
 from datacollator import DataCollatorSpeechSeq2SeqWithPadding
 from utils import *
 # 파인튜닝을 진행하고자 하는 모델의 feature extractor를 로드
@@ -10,10 +10,28 @@ feature_extractor = WhisperFeatureExtractor.from_pretrained("openai/whisper-smal
 tokenizer = WhisperTokenizer.from_pretrained("openai/whisper-small", language="Korean", task="transcribe")
 processor = WhisperProcessor.from_pretrained("openai/whisper-base", language="Korean", task="transcribe")
 
-data_path = "./data/0.json"
-ds = Datasets(data_path)
+data_path = "C:\\flyai\\mallang\\stt\\trainer\\data\\"
+df = make_df(data_path)
+ds = AudioDatasets(df)
 split_data = ds.split(test_size=0.2)
-common_voice = split_data.map(preprocess, remove_columns=split_data.column_names["train"], num_proc=4)
+
+# split_data = {
+#     "train": ds[:int(len(ds) * 0.8)],
+#     "valid": ds[int(len(ds) * 0.1):],
+#     "test":  ds[int(len(ds) * 0.1):],
+# }
+
+def preprocess(data):
+    audio = data["audio"]
+
+    # input audio array로부터 log-Mel spectrogram 변환
+    data["input_features"] = feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0]
+
+    # target text를 label ids로 변환
+    data["labels"] = tokenizer(data["transcripts"]).input_ids
+    return data
+
+common_voice = split_data.map(preprocess, remove_columns=split_data.column_names["train"], num_proc=None)
 # common_voice.push_to_hub("업로드할 허깅페이스 주소 입력")
 
 data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
@@ -43,7 +61,7 @@ training_args = Seq2SeqTrainingArguments(
     load_best_model_at_end=True,
     metric_for_best_model="cer",  # 한국어의 경우 'wer'보다는 'cer'이 더 적합할 것
     greater_is_better=False,
-    push_to_hub=True,
+    push_to_hub=False,
 )
 
 trainer = Seq2SeqTrainer(

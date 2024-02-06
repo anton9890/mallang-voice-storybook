@@ -1,14 +1,14 @@
 from datasets import Dataset, DatasetDict
+from datasets import Audio
 import json
 
-class Datasets:
+class AudioDatasets:
     def __init__(self, data_path, push_to_hub=False):
         # open json file
-        with open(data_path, "r", encoding="utf-8") as file:
-            self.data_path = json.load(file)
-        self.ds = Dataset.from_dict({"audio": [path for path in self.data_path["audio"]["array"]],
-                                     "transcripts": [transcript for transcript in self.data_path["sentence"]]})
-        self.dataset = self.split(self.ds, push_to_hub=push_to_hub)
+        self.dataset_path = data_path
+        self.ds = Dataset.from_dict({"audio": [path for path in data_path["path"]],
+                                     "transcripts": [transcript for transcript in data_path["sentence"]]}).cast_column("audio", Audio(sampling_rate=16000))
+        self.dataset = self.split(push_to_hub=push_to_hub)
 
     def split(self, test_size=0.2, push_to_hub=False):
         train_testvalid = self.ds.train_test_split(test_size=test_size)
