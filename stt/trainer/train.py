@@ -10,16 +10,10 @@ feature_extractor = WhisperFeatureExtractor.from_pretrained("openai/whisper-smal
 tokenizer = WhisperTokenizer.from_pretrained("openai/whisper-small", language="Korean", task="transcribe")
 processor = WhisperProcessor.from_pretrained("openai/whisper-base", language="Korean", task="transcribe")
 
-data_path = "C:\\flyai\\mallang\\stt\\trainer\\data\\"
+data_path = "C:\\lee\\mallang\\stt\\trainer\\data\\"
 df = make_df(data_path)
 ds = AudioDatasets(df)
 split_data = ds.split(test_size=0.2)
-
-# split_data = {
-#     "train": ds[:int(len(ds) * 0.8)],
-#     "valid": ds[int(len(ds) * 0.1):],
-#     "test":  ds[int(len(ds) * 0.1):],
-# }
 
 def preprocess(data):
     audio = data["audio"]
@@ -31,8 +25,23 @@ def preprocess(data):
     data["labels"] = tokenizer(data["transcripts"]).input_ids
     return data
 
+def compute_metrics(pred):
+    pred_ids = pred.predictions
+    label_ids = pred.label_ids
+
+    # pad_token을 -100으로 치환
+    label_ids[label_ids == -100] = tokenizer.pad_token_id
+
+    # metrics 계산 시 special token들을 빼고 계산하도록 설정
+    pred_str = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
+    label_str = tokenizer.batch_decode(label_ids, skip_special_tokens=True)
+
+    cer = 100 * metric.compute(predictions=pred_str, references=label_str)
+
+    return {"cer": cer}
+
 common_voice = split_data.map(preprocess, remove_columns=split_data.column_names["train"], num_proc=None)
-# common_voice.push_to_hub("업로드할 허깅페이스 주소 입력")
+common_voice.push_to_hub("princesslucy/mallang_dataset")
 
 data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
 
@@ -46,16 +55,16 @@ training_args = Seq2SeqTrainingArguments(
     per_device_train_batch_size=16,
     gradient_accumulation_steps=1,  # 배치 크기가 2배 감소할 때마다 2배씩 증가
     learning_rate=1e-5,
-    warmup_steps=500,
-    max_steps=4000,  # epoch 대신 설정
+    warmup_steps=40,
+    max_steps=300,  # epoch 대신 설정
     gradient_checkpointing=True,
     fp16=True,
     evaluation_strategy="steps",
     per_device_eval_batch_size=8,
     predict_with_generate=True,
     generation_max_length=225,
-    save_steps=1000,
-    eval_steps=1000,
+    save_steps=50,
+    eval_steps=50,
     logging_steps=25,
     report_to=["tensorboard"],
     load_best_model_at_end=True,
@@ -76,10 +85,6 @@ trainer = Seq2SeqTrainer(
 
 trainer.train()
 
-
-
-# REPO_NAME = "ldhldh/mamba_chat_10kstep" #hf계정명/레포명
-# AUTH_TOKEN = "{token}" # write토큰<https://huggingface.co/settings/token>
 
 # kwargs = {
 #     "dataset_tags": "사용한 데이터셋의 주소 입력",
