@@ -3,6 +3,7 @@ import 'CombinedPage.dart';
 import 'main.dart';
 import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
+import 'package:mallang/Widget/call.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -34,6 +35,16 @@ class _MainState extends State<MainPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyPage()),
+              );
+            }
+          });
+          // Handle item selection here
+          setState(() {
+            _selectedIndex = index;
+            if (_selectedIndex == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PhonePage()),
               );
             }
           });

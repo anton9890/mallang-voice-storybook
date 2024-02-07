@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MyHomePage(title: '말랑 로그인')),
+      MaterialPageRoute(builder: (context) => MyHomePage(title: ' ')),
     );
   }
 
