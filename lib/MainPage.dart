@@ -19,7 +19,7 @@ class _MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true, // 뒤로가기 버튼 제거
+        automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
         title: Text(
           "말랑",
           style: TextStyle(
@@ -47,11 +47,10 @@ class _MainState extends State<MainPage> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
-            if (_selectedIndex == 0) {
+            if (_selectedIndex == 1) {
               // 홈 페이지로 이동
               // 예시: Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
-            } else if (_selectedIndex == 1) {
-
+            } else if (_selectedIndex == 0) {
               // 서재 페이지로 이동
               // 예시: Navigator.push(context, MaterialPageRoute(builder: (context) => LibraryPage()),);
             } else if (_selectedIndex == 2) {
@@ -66,12 +65,12 @@ class _MainState extends State<MainPage> {
 
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "홈",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: "서재",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "홈",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
