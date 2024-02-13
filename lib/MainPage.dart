@@ -20,7 +20,13 @@ class _MainState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        automaticallyImplyLeading: true, // 뒤로가기 버튼 제거
         title: Text("말랑"),
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.search)
+        //   )
+        // ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,

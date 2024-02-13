@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  dashed_stepper:
+    dependency: "direct main"
+    description:
+      name: dashed_stepper
+      sha256: "7d3afecaa84ca99173fc88d920ad369f8dc304ed4e4cc5ac281d57c29ad2a222"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -186,3 +194,4 @@ packages:
     version: "0.3.0"
 sdks:
   dart: ">=3.2.6 <4.0.0"
+  flutter: ">=1.17.0"
