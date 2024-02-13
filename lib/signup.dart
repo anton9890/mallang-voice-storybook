@@ -377,7 +377,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             width: 200, // 이미지의 너비 조정
             height: 200, // 이미지의 높이 조정
-            child: Image.asset('assets/images/title.png'),
+            child: Image.asset('assets/images/ballon.png'),
           ),
           SizedBox(height: 20), // 이미지와 텍스트 사이의 간격 조정
           Text(

@@ -15,6 +15,9 @@ class MainPage extends StatefulWidget {
 class _MainState extends State<MainPage> {
   int _selectedIndex = 0; // Track the selected index
 
+  // 사용자가 검색한 내용
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +35,19 @@ class _MainState extends State<MainPage> {
             icon: Icon(Icons.add_alert),
             onPressed: () {},
           ),
-          IconButton(
-            // 동화책 카테고리? 관심사 별로 볼 수 있게 하기
-            icon: Icon(Icons.menu),
-            onPressed: () {},
+        ],
+      ),
+      body: Column(
+        children: [
+          _serchBox(),
+          SizedBox(height: 20,),
+          _thirdMenu(),
+          Divider( // 추가한 선
+            color: Colors.grey,
+            height: 20,
+            thickness: 1,
           ),
+          _recommendMenu(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -62,7 +73,6 @@ class _MainState extends State<MainPage> {
             }
           });
         },
-
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
@@ -80,4 +90,74 @@ class _MainState extends State<MainPage> {
       ),
     );
   }
+
+  Widget _serchBox(){
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            hintText: '동화책을 검색해주세요',
+            suffixIcon: IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () => _searchController.clear(),
+            ),
+            prefixIcon: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: (){
+                // 검색창 누르면 보일 화면
+              },
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            )
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _thirdMenu(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            InkWell(
+              child: Image.asset('assets/images/star.png', width: 40, height: 40,),
+              onTap:(){},
+            ),
+            Text('추천', style: TextStyle(color: Colors.black.withOpacity(0.5))) // 텍스트 추가
+          ],
+        ),
+        Column(
+          children: [
+            InkWell(
+              child: Image.asset('assets/images/rainbow.png', width: 40, height: 40,),
+              onTap:(){},
+            ),
+            Text('인기', style: TextStyle(color: Colors.black.withOpacity(0.5))) // 텍스트 추가
+          ],
+        ),
+        Column(
+          children: [
+            InkWell(
+              child: Image.asset('assets/images/flower.png', width: 40, height: 40,),
+              onTap: (){},
+            ),
+            Text('카테고리', style: TextStyle(color: Colors.black.withOpacity(0.5))) // 텍스트 추가
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _recommendMenu(){
+    return Container(
+      child: Text('김찬돌님 이 동화책은 어떠세요?'),
+    );
+  }
+
 }

@@ -52,6 +52,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/images/title.png
-#  - assets/images/ballon.png
+    - assets/images/title.png
+    - assets/images/star.png
+    - assets/images/rainbow.png
+    - assets/images/ballon.png
+    - assets/images/circle.png
+    - assets/images/flower.png
+
 
