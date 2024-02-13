@@ -3,7 +3,7 @@ import 'CombinedPage.dart';
 import 'main.dart';
 import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
-import 'package:mallang/Widget/call.dart';
+// import 'package:mallang/Widget/call.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -19,14 +19,25 @@ class _MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         automaticallyImplyLeading: true, // 뒤로가기 버튼 제거
-        title: Text("말랑"),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.search)
-        //   )
-        // ],
+        title: Text(
+          "말랑",
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+        actions: [
+          IconButton(
+            // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
+            icon: Icon(Icons.add_alert),
+            onPressed: () {},
+          ),
+          IconButton(
+            // 동화책 카테고리? 관심사 별로 볼 수 있게 하기
+            icon: Icon(Icons.menu),
+            onPressed: () {},
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,
@@ -34,43 +45,33 @@ class _MainState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: (index) {
-          // Handle item selection here
           setState(() {
             _selectedIndex = index;
-            if (_selectedIndex == 4) {
+            if (_selectedIndex == 0) {
+              // 홈 페이지로 이동
+              // 예시: Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
+            } else if (_selectedIndex == 1) {
+
+              // 서재 페이지로 이동
+              // 예시: Navigator.push(context, MaterialPageRoute(builder: (context) => LibraryPage()),);
+            } else if (_selectedIndex == 2) {
+              // 마이 페이지로 이동
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyPage()),
               );
             }
           });
-          // Handle item selection here
-          setState(() {
-            _selectedIndex = index;
-            if (_selectedIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PhonePage()),
-              );
-            }
-          });
         },
+
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.speaker_notes),
-            label: "말랑 토크",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.phone_forwarded),
-            label: "전화",
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "홈",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.auto_graph),
-            label: "분석",
+            icon: Icon(Icons.book),
+            label: "서재",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
