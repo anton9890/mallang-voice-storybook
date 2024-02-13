@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
+// SignUpPage 클래서 정의
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  // _form키는 폼의 유효성을 검사하기 위한 키
+  // 이름, 이메일, 비밀번호, 비밀번호 확인, 성별 ..
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _birthdayController = TextEditingController();
+  final _phonenumberController = TextEditingController();
   List<bool> _genderSelection = [false, false];
 
+  // 회원가입 폼 위젯
+  // Column 위젯 안에 TextFormField와 Text 위젯을 사용하여 개인정보를 입력받기
+  // TextFormField에는 controller를 설정하여 입력된 값을 저장하고, validator를 설정하여 입력값의 유효성 검사
   Widget _formWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,12 +70,64 @@ class _SignUpPageState extends State<SignUpPage> {
           selectedColor: Colors.white,
         ),
         SizedBox(height: 35),
-        // Text('생년월일',
-        //   style: TextStyle(
-        //     fontSize: 18.0,),
-        //   textAlign: TextAlign.left,
-        // ),
-        // SizedBox(height: 35),
+        Text('휴대폰 번호',
+          style: TextStyle(
+            fontSize: 18.0,),
+          textAlign: TextAlign.left,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: _phonenumberController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: '010',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '전화번호를 다시 입력해주세요.';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(width: 8), // 각 칸 사이의 간격을 조절하
+            Expanded(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: '0000',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '전화번호를 다시 입력해주세요.';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: '0000',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '전화번호를 다시 입력해주세요.';
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 35),
         Text('이메일',
           style: TextStyle(
             fontSize: 18.0,),
@@ -140,6 +198,12 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // build 메서드는 위젯의 UI를 구성
+  // Scaffold 위젯을 사용하여 앱의 기본 구조 생성
+  // Padding으로 폼 주위에 여백을 추가
+  // SingleChildScrollView는 스크롤 가능한 컨텐츠를 담을 수 있는 위젯
+  // Form 위젯은 폼을 생성하고 _formKey를 설정하여 폼의 유효성 검사를 수행
+  // ElevatedButton은 회원가입 버튼을 생성하고, 유효성 검사를 통과한 경우에만 누를 수 있도록 함
   @override
   Widget build(BuildContext context) {
     return Scaffold(
