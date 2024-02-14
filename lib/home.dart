@@ -129,13 +129,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: Colors.black,
+                    color: Colors.yellow[100],
                   ),
                   child: ElevatedButton(
                     onPressed: _signInWithEmailAndPassword,
                     child: Text(
                       '로그인',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent, // Set transparent background for ElevatedButton
@@ -148,13 +148,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5), // Adjust the border radius as needed
-                    color: Colors.black, // Set the color of the button
+                    color: Colors.yellow[100], // Set the color of the button
                   ),
                   child: ElevatedButton(
                     onPressed: _navigateToSignUpPage,
                     child: Text(
                       '회원가입',
-                      style: TextStyle(color: Colors.white), // Set the text color
+                      style: TextStyle(color: Colors.black), // Set the text color
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent, // Set transparent background for ElevatedButton

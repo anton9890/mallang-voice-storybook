@@ -9,7 +9,7 @@ class MyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('마이 페이지'),
+        title: Text('관리'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,14 +27,14 @@ class MyPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Mallang 님',
+                      '김찬돌 님',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      'Mallang@example.com',
+                      'chandolkim@example.com',
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.grey,
