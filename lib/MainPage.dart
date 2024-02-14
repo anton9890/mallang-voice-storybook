@@ -220,11 +220,14 @@ class _MainState extends State<MainPage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          _searchBox(),
-          SizedBox(height: 20,),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _searchBox(),
+            SizedBox(height: 20,),
+            _fourMenu(),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,
@@ -361,4 +364,66 @@ class _MainState extends State<MainPage> {
       ],
     );
   }
+  Widget _buildCard(String text, String imagePath, Color color){
+    return InkWell(
+      onTap: (){},
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          width: 130,
+          height: 130,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 50,
+                height: 50,
+                fit: BoxFit.contain,
+              ),
+              SizedBox(height: 20),
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 15.0,  // 모든 텍스트의 크기를 동일하게 설정합니다.
+                  color: color,  // 텍스트의 색깔을 설정합니다.
+                ),
+              )
+            ],
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 메뉴 만들기
+  Widget _fourMenu(){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCard('신간도서', 'assets/images/star.png', Color(0xffffa07a)),
+            _buildCard('인기도서', 'assets/images/heart.png', Color(0xffADD797)),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCard('연령별 추천도서', 'assets/images/recommand.png', Color(0xffb0c4de)),
+            _buildCard('카테고리', 'assets/images/category.png', Color(0xffffb6c1)),
+          ],
+        ),
+      ],
+    );
+  }
 }
+
