@@ -1,186 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'main.dart';
-// import 'home.dart';
-// import 'package:mallang/Widget/Mypage.dart';
-// import 'package:mallang/Widget/library.dart';
-// import 'package:mallang/Widget/Alert.dart';
-//
-// class MainPage extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _MainState();
-//   }
-// }
-//
-// class _MainState extends State<MainPage> {
-//   int _selectedIndex = 0; // Track the selected index
-//
-//   // 사용자가 검색한 내용
-//   final TextEditingController _searchController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-//         title: Text(
-//           "말랑",
-//           style: TextStyle(
-//             fontSize: 20,
-//           ),
-//         ),
-//         actions: [
-//           IconButton(
-//             // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
-//             icon: Icon(Icons.add_alert),
-//             onPressed: () {},
-//           ),
-//         ],
-//       ),
-//       body: Column(
-//         children: [
-//           _searchBox(),
-//           SizedBox(height: 20,),
-//         ],
-//       ),
-//       bottomNavigationBar: BottomNavigationBar(
-//         selectedItemColor: Colors.green,
-//         unselectedItemColor: Colors.grey,
-//         type: BottomNavigationBarType.fixed,
-//         currentIndex: _selectedIndex,
-//         onTap: (index) {
-//           setState(() {
-//             _selectedIndex = index;
-//             if (_selectedIndex == 1) {
-//               // 홈 페이지로 이동
-//               // 예시: Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
-//             } else if (_selectedIndex == 0) {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => Mylibrary()),
-//               );
-//             } else if (_selectedIndex == 2) {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => MyPage()),
-//               );
-//             }
-//           });
-//         },
-//         items: [
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.book),
-//             label: "내 서재",
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.home),
-//             label: "홈",
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.person),
-//             label: "관리",
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget _searchBox() {
-//     return Padding(
-//       padding: EdgeInsets.all(8),
-//       child: Column(
-//         children: [
-//           Container(
-//             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-//             child: TextField(
-//               controller: _searchController,
-//               decoration: InputDecoration(
-//                 hintText: '동화책을 검색해주세요',
-//                 suffixIcon: IconButton(
-//                   icon: Icon(Icons.clear),
-//                   onPressed: () => _searchController.clear(),
-//                 ),
-//                 prefixIcon: IconButton(
-//                   icon: Icon(Icons.search),
-//                   onPressed: () {
-//                     // 검색창 누르면 보일 화면
-//                   },
-//                 ),
-//                 border: OutlineInputBorder(
-//                   borderRadius: BorderRadius.circular(20),
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SizedBox(height: 30),
-//           Container(
-//             width: double.infinity,
-//             height: 180,
-//             decoration: BoxDecoration(
-//               color: Colors.yellow[100],
-//               borderRadius: BorderRadius.circular(16),
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: Colors.grey.withOpacity(0.5),
-//                   spreadRadius: 3,
-//                   blurRadius: 7,
-//                   offset: Offset(0, 3),
-//                 ),
-//               ],
-//             ),
-//             child: Padding(
-//               padding: EdgeInsets.only(left: 10, top: 8),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     '김찬돌님 취향저격 도서',
-//                     style: TextStyle(
-//                       fontSize: 20,
-//                       color: Colors.black,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   ),
-//                   SizedBox(height: 5),
-//                   SingleChildScrollView(
-//                     scrollDirection: Axis.horizontal,
-//                     child: Row(
-//                       children: [
-//                         Image.asset(
-//                           'assets/images/구름빵.png',
-//                           width: 100,
-//                           height: 100,
-//                         ),
-//                         // SizedBox(width: ), // 이미지 사이의 간격
-//                         Image.asset(
-//                           'assets/images/토끼와거북이.png',
-//                           width: 100,
-//                           height: 100,
-//                         ),
-//                         SizedBox(width: 8), // 이미지 사이의 간격
-//                         Image.asset(
-//                           'assets/images/흥부놀부.png',
-//                           width: 100,
-//                           height: 100,
-//                         ),
-//                         SizedBox(width: 8), // 이미지 사이의 간격
-//                         Image.asset(
-//                           'assets/images/해와달이된오누이.png',
-//                           width: 100,
-//                           height: 100,
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'home.dart';
@@ -215,8 +32,13 @@ class _MainState extends State<MainPage> {
         actions: [
           IconButton(
             // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
-            icon: Icon(Icons.add_alert),
-            onPressed: () {},
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AlertPage()),
+              );
+            },
           ),
         ],
       ),
@@ -224,6 +46,8 @@ class _MainState extends State<MainPage> {
         child: Column(
           children: [
             _searchBox(),
+            SizedBox(height: 20,),
+            _recommendBook(),
             SizedBox(height: 20,),
             _fourMenu(),
           ],
@@ -271,79 +95,80 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _searchBox() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: '동화책을 검색해주세요',
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () => _searchController.clear(),
-                ),
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    // 검색창 누르면 보일 화면
-                  },
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
+  Widget _searchBox(){
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextField(
+        controller: _searchController,
+        onSubmitted: (value) {
+          // 'value'는 사용자가 입력한 텍스트
+          print('검색어: $value');
+        },
+        decoration: InputDecoration(
+          hintText: '동화책을 검색해주세요',
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear),
+            onPressed: () => _searchController.clear(),
+          ),
+          prefixIcon: IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              // 검색창 누르면 보일 화면
+              print('검색어: ${_searchController.text}');
+            },
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 추천 책 위젯
+  Widget _recommendBook(){
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.9, // 90%의 가로 공간을 차지하도록 설정
+      height: 200,
+      decoration: BoxDecoration(
+        color: Colors.yellow[100],
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(left: 13, top: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '김찬돌님 취향저격 도서',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            width: double.infinity,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.yellow[100],
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 13, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(height: 15),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  Text(
-                    '김찬돌님 취향저격 도서',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildBook('assets/images/구름빵.png', '구름빵'),
-                        _buildBook('assets/images/토끼와거북이.png', '토끼와거북이'),
-                        _buildBook('assets/images/흥부놀부.png', '흥부와 놀부'),
-                        _buildBook('assets/images/해님달님.png', '해님달님'),
-                      ],
-                    ),
-                  ),
+                  _buildBook('assets/images/구름빵.png', '구름빵'),
+                  _buildBook('assets/images/토끼와거북이.png', '토끼와거북이'),
+                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부'),
+                  _buildBook('assets/images/해님달님.png', '해님달님'),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -426,4 +251,3 @@ class _MainState extends State<MainPage> {
     );
   }
 }
-

@@ -20,7 +20,7 @@ class MyPage extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 40.0,
-                  backgroundImage: AssetImage('assets/profile_image.jpg'),
+                  backgroundImage: AssetImage('assets/images/heart.png'),
                 ),
                 SizedBox(width: 16.0),
                 Column(

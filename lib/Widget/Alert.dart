@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/main.dart';
 
 class AlertPage extends StatelessWidget {
   const AlertPage({Key? key}) : super(key: key);
@@ -13,13 +12,20 @@ class AlertPage extends StatelessWidget {
       ),
       body: Center(
         child: GestureDetector(
-          onTap: () {
-            // Navigate to the activity page
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AlertPage()),
-            );
-          },
+          // onTap: () {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => AlertPage()),
+          //   );
+          // },
+          child: Text(
+            '알림이 없습니다.',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
+          ),
         ),
       ),
     );
