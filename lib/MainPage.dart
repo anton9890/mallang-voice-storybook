@@ -6,9 +6,8 @@ import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';
 import 'package:mallang/Widget/BrandNew.dart';
 import 'package:mallang/Widget/PopularBook.dart';
-import 'pagetest.dart'; // 페이지 테스트 추가
+import 'package:mallang/pagetest.dart'; // 페이지 테스트 추가
 import 'package:mallang/Widget/cartagory.dart';
-
 
 class MainPage extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainState extends State<MainPage> {
-  int _selectedIndex = 0; // Track the selected index
+  int _selectedIndex = 1; // Track the selected index
 
   // 사용자가 검색한 내용
   final TextEditingController _searchController = TextEditingController();
@@ -215,7 +214,7 @@ class _MainState extends State<MainPage> {
       case '인기도서':
         targetScreen = PopularBook();
         break;
-    //case '연령별도서':
+    //case '연령별 추천 도서':
       case '카테고리':
         targetScreen = cartagory();
         break;
