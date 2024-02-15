@@ -34,7 +34,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
         ),
         // 화면의 메인 부분은 여러 텍스트와 체크박스로 구성되어 있습니다.
         // 각 체크박스는 해당 약관에 동의했는지 여부를 나타내는 불린 변수와 연결되어 있습니다.
-        body: Padding(
+        body: SingleChildScrollView(
           padding: EdgeInsets.only(top: 20),
           child: Center(
             child: Column(
@@ -44,12 +44,17 @@ class _TermsOfServiceState extends State<TermsOfService> {
                     fontSize: 16,
                   ),),
                 SizedBox(height: 10),
-                Text('말랑 서비스를 이용하기 전에 먼저 이용약관에 동의해주세요.',
+                Text('말랑 서비스를 이용하기 전에',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.withOpacity(0.5),
                   ),),
-                SizedBox(height: 70),
+                Text('먼저 이용약관에 동의해주세요.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey.withOpacity(0.5),
+                  ),),
+                SizedBox(height: 30),
                 // '전체 약관 동의' 체크박스는 별도의 Contatiner에 포함되어 있습니다.
                 _buildCheckboxWithContainer('전체 약관 동의', allAgreed, _handleAllAgreed),
                 SizedBox(height: 20,),
