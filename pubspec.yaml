@@ -60,6 +60,7 @@ flutter:
   - assets/images/category.png
   - assets/images/heart.png
   - assets/images/recommand.png
+#  - assets/images/background.png
   - assets/images/star.png
 #  - assets/images/ballon.png
 

@@ -5,6 +5,7 @@ import 'package:mallang/Widget/Mypage.dart';
 import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';
 import 'package:mallang/Widget/BrandNew.dart';
+import 'package:mallang/Widget/PopularBook.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -192,86 +193,55 @@ class _MainState extends State<MainPage> {
     );
   }
   Widget _buildCard(String text, String imagePath, Color color) {
-    if(text == '신간도서') {
-      return InkWell(
-        onTap: () {
+    return InkWell(
+      onTap: () {
+        if (text == '신간도서') {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => brandnewbook()),
           );
-        },
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
+        } else if (text == '인기도서') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PopularBook()),
+          );
+        }
+        // Add additional conditions for other cards if needed
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          width: 130,
+          height: 130,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 50,
+                height: 50,
+                fit: BoxFit.contain,
+              ),
+              SizedBox(height: 20),
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: color,
+                ),
+              )
+            ],
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Container(
-            width: 130,
-            height: 130,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  imagePath,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.contain,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 15.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
-                    color: color, // 텍스트의 색깔을 설정합니다.
-                  ),
-                )
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
         ),
-      );
-    } else {
-      return InkWell(
-        onTap: () {},
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            width: 130,
-            height: 130,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  imagePath,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.contain,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 15.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
-                    color: color, // 텍스트의 색깔을 설정합니다.
-                  ),
-                )
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 
   Widget _fourMenu(){
