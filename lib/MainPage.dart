@@ -6,6 +6,9 @@ import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';
 import 'package:mallang/Widget/BrandNew.dart';
 import 'package:mallang/Widget/PopularBook.dart';
+import 'pagetest.dart'; // 페이지 테스트 추가
+import 'package:mallang/Widget/cartagory.dart';
+
 
 class MainPage extends StatefulWidget {
   @override
@@ -128,7 +131,6 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  // 추천 책 위젯
   Widget _recommendBook(){
     return Container(
       width: MediaQuery.of(context).size.width * 0.9, // 90%의 가로 공간을 차지하도록 설정
@@ -177,36 +179,58 @@ class _MainState extends State<MainPage> {
   }
 
   Widget _buildBook(String imagePath, String title) {
-    return Column(
-      children: [
-        Image.asset(
-          imagePath,
-          width: 100,
-          height: 100,
-        ),
-        SizedBox(height: 7), // 이미지와 텍스트 사이 간격
-        Text(
-          title,
-          style: TextStyle(fontSize: 14),
-        ),
-      ],
-    );
-  }
-  Widget _buildCard(String text, String imagePath, Color color) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        if (text == '신간도서') {
+        if (title == '토끼와거북이') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => brandnewbook()),
-          );
-        } else if (text == '인기도서') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PopularBook()),
+            MaterialPageRoute(builder: (context) => test()), // pagetest 페이지로 이동
           );
         }
-        // Add additional conditions for other cards if needed
+      },
+      child: Column(
+        children: [
+          Image.asset(
+            imagePath,
+            width: 100,
+            height: 100,
+          ),
+          SizedBox(height: 7), // 이미지와 텍스트 사이 간격
+          Text(
+            title,
+            style: TextStyle(fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCard(String text, String imagePath, Color color) {
+    Widget? targetScreen;
+
+    switch (text) {
+      case '신간도서':
+        targetScreen = brandnewbook();
+        break;
+      case '인기도서':
+        targetScreen = PopularBook();
+        break;
+    //case '연령별도서':
+      case '카테고리':
+        targetScreen = cartagory();
+        break;
+      default:
+        break;
+    }
+
+    return InkWell(
+      onTap: () {
+        if (targetScreen != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => targetScreen!),
+          );
+        }
       },
       child: Card(
         elevation: 4,
@@ -229,8 +253,8 @@ class _MainState extends State<MainPage> {
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: 15.0,
-                  color: color,
+                  fontSize: 15.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
+                  color: color, // 텍스트의 색깔을 설정합니다.
                 ),
               )
             ],
