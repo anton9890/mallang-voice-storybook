@@ -102,7 +102,7 @@ class _MainState extends State<MainPage> {
 
   Widget _searchBox(){
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: TextField(
         controller: _searchController,
         onSubmitted: (value) {
