@@ -15,6 +15,15 @@ class test extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
+            // 배경 이미지
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
@@ -23,7 +32,7 @@ class test extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => brandnewbook()),
+                      MaterialPageRoute(builder: (context) => MainPage()),
                     );
                   },
                   child: Text('Back'),
