@@ -216,7 +216,7 @@ class _MainState extends State<MainPage> {
         break;
     //case '연령별 추천 도서':
       case '카테고리':
-        targetScreen = cartagory();
+        targetScreen = catagory();
         break;
       default:
         break;
