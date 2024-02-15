@@ -10,7 +10,7 @@ def encode_audio(audio):
     audio_content = audio.read()
     return base64.b64encode(audio_content).decode('utf8')
 
-files = open('tts_flask/a1.wav', 'rb')
+files = open('a1.wav', 'rb')
 
 # 파이썬 딕셔너리 형식으로 file 설정
 
