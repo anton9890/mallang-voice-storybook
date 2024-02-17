@@ -127,6 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 SizedBox(height: 40.0),
                 Container(
+                  width: 100,  // 너비 조정
+                  height: 50,  // 높이 조정
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.yellow[100],
@@ -146,6 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 SizedBox(height: 10),
                 Container(
+                  width: 100,  // 너비 조정
+                  height: 50,  // 높이 조정
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5), // Adjust the border radius as needed
                     color: Colors.yellow[100], // Set the color of the button
