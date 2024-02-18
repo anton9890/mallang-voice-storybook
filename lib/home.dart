@@ -17,8 +17,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _signInWithEmailAndPassword() {
     // 여기에 이메일/패스워드 로그인 로직을 추가하세요.
-    // 예: FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-
     // 로그인이 성공했다고 가정하고 다음 페이지로 이동
     Navigator.push(
       context,
@@ -62,115 +60,117 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Text(
-              '간편하게 로그인하고\n다양한 서비스를 이용하세요',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Text(
+                '간편하게 로그인하고\n다양한 서비스를 이용하세요',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText: '이메일을 입력해주세요.',
-                    prefixIcon: Icon(Icons.email),
-                    border: OutlineInputBorder(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      hintText: '이메일을 입력해주세요.',
+                      prefixIcon: Icon(Icons.email),
+                      border: OutlineInputBorder(),
+                    ),
                   ),
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: '비밀번호를 입력해주세요.',
-                    prefixIcon: Icon(Icons.lock),
-                    border: OutlineInputBorder(),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: '비밀번호를 입력해주세요.',
+                      prefixIcon: Icon(Icons.lock),
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
                   ),
-                  obscureText: true,
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        // Add logic for 아이디 찾기 button
-                      },
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          // Add logic for 아이디 찾기 button
+                        },
+                        child: Text(
+                          '아이디 찾기',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Add logic for 비밀번호 찾기 button
+                        },
+                        child: Text(
+                          '비밀번호 찾기',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 40.0),
+                  Container(
+                    width: 100,  // 너비 조정
+                    height: 50,  // 높이 조정
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.yellow[100],
+                    ),
+                    child: ElevatedButton(
+                      onPressed: _signInWithEmailAndPassword,
                       child: Text(
-                        '아이디 찾기',
+                        '로그인',
                         style: TextStyle(color: Colors.black),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Add logic for 비밀번호 찾기 button
-                      },
-                      child: Text(
-                        '비밀번호 찾기',
-                        style: TextStyle(color: Colors.black),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 40.0),
-                Container(
-                  width: 100,  // 너비 조정
-                  height: 50,  // 높이 조정
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.yellow[100],
                   ),
-                  child: ElevatedButton(
-                    onPressed: _signInWithEmailAndPassword,
-                    child: Text(
-                      '로그인',
-                      style: TextStyle(color: Colors.black),
+                  SizedBox(height: 10),
+                  Container(
+                    width: 100,  // 너비 조정
+                    height: 50,  // 높이 조정
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.yellow[100],
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent, // Set transparent background for ElevatedButton
-                      elevation: 0, // Remove shadow
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)), // Match the container's border radius
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  width: 100,  // 너비 조정
-                  height: 50,  // 높이 조정
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), // Adjust the border radius as needed
-                    color: Colors.yellow[100], // Set the color of the button
-                  ),
-                  child: ElevatedButton(
-                    onPressed: _navigateToSignUpPage,
-                    child: Text(
-                      '회원가입',
-                      style: TextStyle(color: Colors.black), // Set the text color
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent, // Set transparent background for ElevatedButton
-                      elevation: 0, // Remove shadow
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Match the container's border radius
+                    child: ElevatedButton(
+                      onPressed: _navigateToSignUpPage,
+                      child: Text(
+                        '회원가입',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
