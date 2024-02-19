@@ -1,107 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:mallang/MainPage.dart';
 
 void main() {
-  runApp(Mylibrary());
+   runApp(MyLibrary());
 }
-
-class Mylibrary extends StatelessWidget {
+class MyLibrary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Millie Home'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                ),
-                child: Text(
-                  '일반 소설 베스트',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+      debugShowCheckedModeBanner: false,
+      title: 'My Library',
+      home: MyLibraryPage(),
+    );
+  }
+}
+class MyLibraryPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('내 서재'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.yellow[100],
+              ),
+              child: Text(
+                '전체 도서',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  // child: Image.network(
-                  //   // 'https://wwit.design/images/posts/millie/millie_home_story_08.PNG',
-                  //   fit: BoxFit.cover,
-                  // ),
-                ),
+            ),
+            ListTile(
+              leading: Image.asset(
+                'assets/images/토끼와거북이.png',
               ),
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '책 제목',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      '작가',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et massa eget lectus finibus faucibus non nec magna.',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.favorite_border),
-                          onPressed: () {
-                            // Add your favorite action here
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () {
-                            // Add your share action here
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+              title: Text('토끼와 거북이'),
+              subtitle: Text('73% 읽는 중'),
+            ),
+            ListTile(
+              leading: Image.asset(
+                  'assets/images/호박목욕탕.png'),
+              title: Text('호박 목욕탕'),
+              subtitle: Text('68% 읽는 중'),
+            ),
+            ListTile(
+              leading: Image.asset(
+                  'assets/images/인기도서1.png'),
+              title: Text('내 사랑 티라노'),
+              subtitle: Text('14% 읽는 중'),
+            ),
+            ListTile(
+              leading: Image.asset(
+                  'assets/images/구름빵.png'),
+              title: Text('구름빵'),
+              subtitle: Text('59% 읽는 중'),
+            ),
+            ListTile(
+              leading: Image.asset(
+                  'assets/images/여우와두루미.png'),
+              title: Text('여우와 두루미'),
+              subtitle: Text('23% 읽는 중'),
+            ),
+            ListTile(
+              leading: Image.asset(
+                  'assets/images/인기도서3.png'),
+              title: Text('미로야 놀자'),
+              subtitle: Text('54% 읽는 중'),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+//
+// class MyLibrary extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(title: Text('Photo Grid')),
+//         body: PhotoGrid(),
+//       ),
+//     );
+//   }
+// }
+//
+// class PhotoGrid extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.count(
+//       crossAxisCount: 1,
+//       children: <Widget>[
+//         _buildPhotoWithDescription('assets/images/image1.jpg', '설명 1'),
+//         _buildPhotoWithDescription('assets/images/image2.jpg', '설명 2'),
+//         _buildPhotoWithDescription('assets/images/image3.jpg', '설명 3'),
+//         _buildPhotoWithDescription('assets/images/image4.jpg', '설명 4'),
+//         _buildPhotoWithDescription('assets/images/image5.jpg', '설명 5'),
+//       ],
+//     );
+//   }
+//
+//   Widget _buildPhotoWithDescription(String imagePath, String description) {
+//     return Column(
+//       children: <Widget>[
+//         Image.asset(imagePath),
+//         SizedBox(height: 8), // 사진과 설명 사이의 간격 조정
+//         Text(description),
+//       ],
+//     );
+//   }
+// }
