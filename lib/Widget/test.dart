@@ -14,14 +14,14 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
+      body: SingleChildScrollView( // Wrap your content in a SingleChildScrollView
+        child: Stack(
+          children: <Widget>[
+            Column(
               children: <Widget>[
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
+                    padding: const EdgeInsets.only(top: 60.0),
                     child: InkWell(  // InkWell 위젯 추가
                       onTap: () {
                         Navigator.push(
@@ -55,7 +55,7 @@ class _TestState extends State<Test> {
                 Center(
                   child: Text(
                     '토끼와 거북이',
-                    style: TextStyle(fontSize: 23),
+                    style: TextStyle(fontSize: 28),
                   ),
                 ),
                 Center(
@@ -64,39 +64,119 @@ class _TestState extends State<Test> {
                     style: TextStyle(fontSize: 15, color: Colors.grey),
                   ),
                 ),
-              ],
-            ),
-          ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.3,
-            minChildSize: 0.3,
-            maxChildSize: 0.9,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.amber[100],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(1, 3),
+                                ),
+                              ],
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/거.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Handle the onPressed event
+                              print('거북이 목소리 tapped');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50), // Make it elliptical
+                              ),
+                              primary: Colors.yellow[100], // Change the button color
+                            ),
+                            child: Text('거북이로 읽기'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/토.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Handle the onPressed event
+                              print('토끼 목소리 tapped');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50), // Make it elliptical
+                              ),
+                              primary: Colors.yellow[100], // Change the button color
+                            ),
+                            child: Text('토끼로 읽기'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Container(
+                  width: 380.0,
+                  height: 180.0,
+                  color: Colors.yellow[100],
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '줄거리',
+                          style: TextStyle(fontSize: 20, color: Colors.blueAccent),
+                        ),
+                        SizedBox(height: 10), // Add spacing between texts
+                        Text(
+                          '옛날에 토끼가 거북이를 놀려댔다가, 거북이가 제안한 달리기 시합에 참여하게 됩니다. 토끼는 결승선 앞에서 거북이가 멀리 뒤쳐져있어서 잠을 청하게 되는데, 그사이에 거북이는 차근차근 가다가 결승선을 먼저 통과하게 됩니다.',
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                child: ListView.builder(
-                  controller: scrollController,
-                  itemCount: 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Text(
-                        '옛날 옛적, 깊은 산 속에 토끼와 거북이가 살았습니다. 하루는 토끼가 다리가 짧은 거북이를 놀려댔습니다. 그러자 화가 난 거북이는 토끼에게 달리기 시합을 하자고 제안했습니다. 토끼는 어이가 없다고 코웃음을 치며 흔쾌히 내기를 받아들였습니다.시합이 시작되자, 토끼는 거북이를 한참 앞서며 달려갔습니다. 결승선이 조금밖에 남지 않았을 때, 토끼는 저 멀리 있는 거북이를 확인하고 나무그늘에 누워 잠이 들었습니다. 그 사이 거북이는 토끼를 제치고 결승선을 넘어갑니다. 토끼가 잠에서 깨고 본 것은 결승선을 먼저 넘어 기뻐하고 있는 거북이였습니다.',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
