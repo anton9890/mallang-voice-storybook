@@ -2,14 +2,8 @@ import librosa # apt-get install ffmpeg  : linux에서 필요
 from flask import Flask
 from flask import request, send_file
 import base64
-import io
 import soundfile as sf
 import base64
-import torch
-import torchaudio
-from TTS.api import TTS
-from TTS.tts.configs.xtts_config import XttsConfig
-from TTS.tts.models.xtts import Xtts
 from mallang_xtts import *
 def encode_audio(audio):
     audio_content = audio.read()
