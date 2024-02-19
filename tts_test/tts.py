@@ -34,7 +34,7 @@ def api():
     y = down_sample(y, sr, 22050)
     tts(text)
 
-    return send_file("C:\\flyai\mallang\\tts_test\\wavs\\output.wav", as_attachment=True)
+    return send_file("./wavs/output.wav", as_attachment=True)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=False)
