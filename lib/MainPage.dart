@@ -42,7 +42,7 @@ class _MainState extends State<MainPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AlertPage()),
+                MaterialPageRoute(builder: (context) => MyLibrary()),
               );
             },
           ),
@@ -73,7 +73,7 @@ class _MainState extends State<MainPage> {
             } else if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Mylibrary()),
+                MaterialPageRoute(builder: (context) => MyLibrary()),
               );
             } else if (_selectedIndex == 2) {
               Navigator.push(

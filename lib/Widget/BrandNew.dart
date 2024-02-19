@@ -50,7 +50,7 @@ class brandnewbook extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildBookImage('assets/images/티니핑:도감스티커북.png'),
+                  _buildBookImage('assets/images/티니핑.png'),
                   _buildBookImage('assets/images/호박목욕탕.png'),
                   _buildBookImage('assets/images/홀짝홀짝호로록.png'),
                 ],
