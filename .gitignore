@@ -42,3 +42,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 tts_test/model/model.pth
+tts_test/model/vocab.json
+tts_test/model/vocab.json
+tts_test/model/config.json
