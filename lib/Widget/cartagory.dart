@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'wmain.dart';
-// import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
 import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';

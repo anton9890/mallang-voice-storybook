@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mallang/Widget/Agebook.dart';
 import 'main.dart';
 import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
@@ -214,7 +215,9 @@ class _MainState extends State<MainPage> {
       case '인기도서':
         targetScreen = PopularBook();
         break;
-    //case '연령별 추천 도서':
+    case '연령별 추천도서':
+        targetScreen = agebook();
+        break;
       case '카테고리':
         targetScreen = catagory();
         break;
@@ -237,8 +240,8 @@ class _MainState extends State<MainPage> {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          width: 130,
-          height: 130,
+          width: 170,
+          height: 170,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
