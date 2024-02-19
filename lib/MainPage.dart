@@ -9,6 +9,7 @@ import 'package:mallang/Widget/BrandNew.dart';
 import 'package:mallang/Widget/PopularBook.dart';
 import 'package:mallang/pagetest.dart'; // 페이지 테스트 추가
 import 'package:mallang/Widget/cartagory.dart';
+import 'package:mallang/Widget/test.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _MainState extends State<MainPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyLibrary()),
+                MaterialPageRoute(builder: (context) => AlertPage()),
               );
             },
           ),
@@ -184,7 +185,7 @@ class _MainState extends State<MainPage> {
         if (title == '토끼와거북이') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => test()), // pagetest 페이지로 이동
+            MaterialPageRoute(builder: (context) => Test()), // pagetest 페이지로 이동
           );
         }
       },
