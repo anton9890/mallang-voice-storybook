@@ -207,6 +207,7 @@ class catagory extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Image.asset('assets/images/chick.png',),
     );
   }
 }
