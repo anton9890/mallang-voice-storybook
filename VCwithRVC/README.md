@@ -3,6 +3,8 @@ python 3.10.7 환경에서 개발되었습니다.
 server/server.py == 추론서버 실행 파일
 client/client.py == 서버에 음성파일을 보내는 클라이언트 실행파일
 
+https://huggingface.co/kimbori/RVC_E1I4/tree/main
+
 1. 위 허깅페이스 링크에서 RVCsubfiles를 다운로드 한 뒤 내용물을 server 폴더 안에 그대로 넣는다.
 
 2. server.py 환경설정
