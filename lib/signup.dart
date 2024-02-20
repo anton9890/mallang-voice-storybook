@@ -5,6 +5,13 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'dart:async';
+// fast api 통신할 때 필요한 라이브러리
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -21,12 +28,12 @@ class _SignUpPageState extends State<SignUpPage> {
   //final GlobalKey<FormState> _formKey3 = GlobalKey<FormState>();
 
   // 각 입력 필드에 대한 컨트롤러 생성
-  final _usernameController = TextEditingController();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phonenumberController = TextEditingController();
-  final _birthdayController = TextEditingController();
+  final _ageController = TextEditingController();
   List<bool> _genderSelection = [false, false];
 
   final recorder = FlutterSoundRecorder();
@@ -47,14 +54,16 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future startRecord() async {
     isRecordingDone = false;
-    await recorder.startRecorder(toFile: 'audio.aac',);
+    await recorder.startRecorder(toFile: 'audio.aac', codec: Codec.aacADTS);
   }
 
-  Future stopRecorder() async {
+  // 녹음을 멈추고 녹음된 파일의 경로를 반환
+  Future<String> stopRecorder() async {
     isRecordingDone = true;
     final filePath = await recorder.stopRecorder();
     final file = File(filePath!);
     print('녹음 파일 경로: $filePath');
+    return filePath;
   }
 
   @override
@@ -194,6 +203,10 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
     } else if (_currentStep == 5) {
+      registerUser();
+      stopRecorder().then((filePath) {
+        sendAudioFile(filePath);
+      });
       Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: '')));
     }
   }
@@ -231,6 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
 
+
   Widget _formWidgetFirstPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +258,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         SizedBox(height: 10,),
         TextFormField(
-          controller: _usernameController,
+          controller: _nameController,
           decoration: InputDecoration(
             hintText: '띄어쓰기 없이 한글 입력',
             border: OutlineInputBorder(),
@@ -258,7 +272,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         SizedBox(height: 20),
         Text(
-          '생년원일',
+          '나이',
           style: TextStyle(
             fontSize: 16.0,
           ),
@@ -266,9 +280,9 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         SizedBox(height: 10,),
         TextFormField(
-          controller: _birthdayController,
+          controller: _ageController,
           decoration: InputDecoration(
-            hintText: '생년월일 8자리 (YYYYMMDD)',
+            hintText: '5세이면 5을 입력해주세요',
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -622,4 +636,60 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  // 회원 정보 서버로 보내기
+  Future registerUser() async{
+    String gender = _genderSelection[0] ? '남성' : '여성';
+    String phoneNumber = _phonenumberController.text;
+    String age = _ageController.text;
+    String name = _nameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    Map<String, String> data = {
+      'name' : name,
+      'email' : email,
+      'password' : password,
+      'gender' : gender,
+      'phoneNumber' : phoneNumber,
+      'age' : age,
+      'interests' : _selectedInterests.join(','),
+    };
+
+    final response = await http.post(
+      Uri.parse('http://172.23.245.219:8000/account/register'),  // 서버의 URL
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 200) {
+      print('register 성공!');
+    } else {
+      print('에러 발생: ${response.body}');
+    }
+  }
+
+  // 녹음된 파일 서버로 보내기
+  Future<void> sendAudioFile(String filePath) async {
+    var request = http.MultipartRequest('POST', Uri.parse('http://172.23.245.219:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'file',
+        filePath,
+        contentType: MediaType('audio', 'aac'), //
+      ),
+    );
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      print('audio 성공!');
+    } else {
+      print('에러 발생: ${response.body}');
+    }
+  }
+
 }

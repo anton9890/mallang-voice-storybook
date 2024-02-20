@@ -10,8 +10,14 @@ import 'package:mallang/Widget/PopularBook.dart';
 import 'package:mallang/pagetest.dart'; // 페이지 테스트 추가
 import 'package:mallang/Widget/cartagory.dart';
 import 'package:mallang/Widget/test.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class MainPage extends StatefulWidget {
+  final String email;
+  const MainPage(this.email);
+
   @override
   State<StatefulWidget> createState() {
     return _MainState();
@@ -21,8 +27,29 @@ class MainPage extends StatefulWidget {
 class _MainState extends State<MainPage> {
   int _selectedIndex = 1; // Track the selected index
 
+  String? userName;
+
   // 사용자가 검색한 내용
   final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
+  Future<void> getUserInfo() async {
+    final response = await http.get(Uri.parse('http://172.23.245.219:8000/account/get/${widget.email}'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
+      setState(() {
+        userName = data['name'];
+      });
+    } else {
+      throw Exception('유저 정보를 가져올 수 없습니다');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +106,7 @@ class _MainState extends State<MainPage> {
             } else if (_selectedIndex == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyPage()),
+                MaterialPageRoute(builder: (context) => MyPage(widget.email)),
               );
             }
           });
@@ -154,10 +181,10 @@ class _MainState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '김찬돌님 취향저격 도서',
+              '$userName 님 취향저격 도서',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.black,
+                color: Colors.blue,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -185,7 +212,7 @@ class _MainState extends State<MainPage> {
         if (title == '토끼와거북이') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Test()), // pagetest 페이지로 이동
+            MaterialPageRoute(builder: (context) => Test(widget.email)), // pagetest 페이지로 이동
           );
         }
       },
@@ -216,7 +243,7 @@ class _MainState extends State<MainPage> {
       case '인기도서':
         targetScreen = PopularBook();
         break;
-    case '연령별 추천도서':
+      case '연령별 추천도서':
         targetScreen = agebook();
         break;
       case '카테고리':

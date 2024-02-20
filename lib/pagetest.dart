@@ -6,7 +6,8 @@ import 'package:mallang/Widget/brandnew.dart';
 import 'package:mallang/MainPage.dart';
 
 class test extends StatelessWidget {
-  const test({Key? key}) : super(key: key);
+  final String email;
+  const test(this.email, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class test extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
+                      MaterialPageRoute(builder: (context) => MainPage(email)),
                     );
                   },
                   child: Text('Back'),

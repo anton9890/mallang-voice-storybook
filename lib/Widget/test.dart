@@ -4,7 +4,8 @@ import 'package:mallang/pagetest.dart';
 // import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 
 class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
+  final String email;
+  const Test(this.email, {Key? key}) : super(key: key);
 
   @override
   _TestState createState() => _TestState();
@@ -26,7 +27,7 @@ class _TestState extends State<Test> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => test()), // pagetest 페이지로 이동
+                          MaterialPageRoute(builder: (context) => test(widget.email)), // pagetest 페이지로 이동
                         );
                       },
                       child: Container(

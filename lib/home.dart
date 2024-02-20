@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'CombinedPage.dart';
 import 'MainPage.dart';
 import 'Splash.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -15,15 +17,46 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _signInWithEmailAndPassword() {
-    // 여기에 이메일/패스워드 로그인 로직을 추가하세요.
-    // 로그인이 성공했다고 가정하고 다음 페이지로 이동
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MainPage()),
+  // 로그인 정보 서버에 보내기
+  Future _signInWithEmailAndPassword() async {
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
+
+    final String url = 'http://172.23.245.219:8000/account/login';
+    // 이메일과 비밀번호를 json형식으로 인코딩
+    final String body = json.encode({
+      'email' : email,
+      'password' : password,
+    });
+
+    // http.post 메서드를 사용하여 서버에 post요청
+    final http.Response response = await http.post(
+      Uri.parse(url),
+      // 요청 본문의 형식이 JSON임을 알림
+      headers: {'Content-Type': 'application/json'},
+      // 여기서는 사용자가 입력한 이메일, 비밀번호를 json 형식으로 변환한 문자열 전달
+      body: body,
     );
-    // 팝업창 표시
-    _showLoginSuccessDialog();
+
+    if (response.statusCode == 200) {
+      // 응답 본문을 UTF-8 문자열로 변환
+      String responseBody = utf8.decode(response.bodyBytes);
+
+      // 응답 본문을 JSON으로 변환
+      String jsonData = jsonDecode(responseBody);
+
+      if (jsonData == 'success') {
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainPage(email)),
+        );
+        _showLoginSuccessDialog();
+      }
+      else {
+        _showLoginfailDialog();
+      }
+    }
   }
 
   void _navigateToSignUpPage() {
@@ -40,6 +73,26 @@ class _MyHomePageState extends State<MyHomePage> {
         return AlertDialog(
           title: Text('로그인 성공'),
           content: Text('로그인이 성공적으로 완료되었습니다.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // 다이얼로그 닫기
+              },
+              child: Text('확인'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showLoginfailDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 실패'),
+          content: Text('로그인을 다시 해주세요.'),
           actions: [
             TextButton(
               onPressed: () {
