@@ -14,51 +14,49 @@ class PopularBook extends StatelessWidget {
         centerTitle: true,
         title: Text('인기도서'),
       ),
-      body: Scrollbar( // Scrollbar를 추가합니다.
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  height: 30, // Container의 높이 설정
-                  color: Colors.yellow[100], // 배경색 설정
-                  child: Center(
-                    child: Text(
-                      '인기도서 베스트 12',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                height: 30, // Container의 높이 설정
+                color: Colors.yellow[100], // 배경색 설정
+                child: Center(
+                  child: Text(
+                    '인기도서 베스트 12',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                   ),
                 ),
-                SizedBox(height: 20),
-                _buildBookRow([
-                  BookInfo(imagePath: 'assets/images/토끼와거북이.png', text: '토끼와 거북이'),
-                  BookInfo(imagePath: 'assets/images/해님달님.png', text: '해님달님'),
-                  BookInfo(imagePath: 'assets/images/인기도서3.png', text: '미로야 놀자'),
-                ]),
-                SizedBox(height: 20),
-                _buildBookRow([
-                  BookInfo(imagePath: 'assets/images/인기도서4.png', text: '주근깨가 어때서?'),
-                  BookInfo(imagePath: 'assets/images/인기도서5.png', text: '도도도 도착!'),
-                  BookInfo(imagePath: 'assets/images/인기도서6.png', text: '아빠랑 간질간질'),
-                ]),
-                SizedBox(height: 20),
-                _buildBookRow([
-                  BookInfo(imagePath: 'assets/images/도와줘,브루너.png', text: '도와줘, 브루너'),
-                  BookInfo(imagePath: 'assets/images/봄날의즐거운모자대회.png', text: '봄날의 즐거운 모자 대회'),
-                  BookInfo(imagePath: 'assets/images/변신요가.png', text: '변신 요가'),
-                ]),
-                SizedBox(height: 20),
-                _buildBookRow([
-                  BookInfo(imagePath: 'assets/images/인기도서1.png', text: '내 사랑 티라노'),
-                  BookInfo(imagePath: 'assets/images/인기도서2.png', text: '밥의 오싹오싹 맛집'),
-                  BookInfo(imagePath: 'assets/images/친구의전설.png', text: '친구의 전설'),
-                ]),
-                SizedBox(height: 20), // 스크롤의 마지막 간격
-              ],
-            ),
+              ),
+              SizedBox(height: 20),
+              _buildBookRow([
+                BookInfo(imagePath: 'assets/images/토끼와거북이.png', text: '토끼와 거북이'),
+                BookInfo(imagePath: 'assets/images/해님달님.png', text: '해님달님'),
+                BookInfo(imagePath: 'assets/images/인기도서3.png', text: '미로야 놀자'),
+              ]),
+              SizedBox(height: 20),
+              _buildBookRow([
+                BookInfo(imagePath: 'assets/images/인기도서4.png', text: '주근깨가 어때서?'),
+                BookInfo(imagePath: 'assets/images/인기도서5.png', text: '도도도 도착!'),
+                BookInfo(imagePath: 'assets/images/인기도서6.png', text: '아빠랑 간질간질'),
+              ]),
+              SizedBox(height: 20),
+              _buildBookRow([
+                BookInfo(imagePath: 'assets/images/도와줘,브루너.png', text: '도와줘, 브루너'),
+                BookInfo(imagePath: 'assets/images/봄날의즐거운모자대회.png', text: '봄날의 즐거운 모자 대회'),
+                BookInfo(imagePath: 'assets/images/변신요가.png', text: '변신 요가'),
+              ]),
+              SizedBox(height: 20),
+              _buildBookRow([
+                BookInfo(imagePath: 'assets/images/인기도서1.png', text: '내 사랑 티라노'),
+                BookInfo(imagePath: 'assets/images/인기도서2.png', text: '밥의 오싹오싹 맛집'),
+                BookInfo(imagePath: 'assets/images/친구의전설.png', text: '친구의 전설'),
+              ]),
+              SizedBox(height: 20), // 스크롤의 마지막 간격
+            ],
           ),
         ),
       ),
