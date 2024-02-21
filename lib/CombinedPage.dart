@@ -25,6 +25,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
           title: Text(
             '약관 동의',
             style: TextStyle(
+              fontFamily: 'Moebius',
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -38,6 +39,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
                 Text(
                   '말랑에 오신 것을 환영합니다!',
                   style: TextStyle(
+                    fontFamily: 'Moebius',
                     fontSize: 16,
                   ),
                 ),
@@ -45,6 +47,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
                 Text(
                   '말랑 서비스를 이용하기 전에',
                   style: TextStyle(
+                    fontFamily: 'Moebius',
                     fontSize: 16,
                     color: Colors.grey.withOpacity(0.5),
                   ),
@@ -52,6 +55,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
                 Text(
                   '먼저 이용약관에 동의해주세요.',
                   style: TextStyle(
+                    fontFamily: 'Moebius',
                     fontSize: 16,
                     color: Colors.grey.withOpacity(0.5),
                   ),
@@ -87,7 +91,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('다음', style: TextStyle(fontSize: 16, color: Colors.white)),
+            child: Text('다음', style: TextStyle(fontFamily: 'Moebius', fontSize: 16, color: Colors.white)),
           ),
         ),
       ),
@@ -110,6 +114,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
         title: Text(
           title,
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16,
             fontWeight: value ? FontWeight.bold : FontWeight.normal,
           ),
@@ -128,6 +133,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
       title: Text(
         title,
         style: TextStyle(
+          fontFamily: 'Moebius',
           fontSize: 16,
           fontWeight: value ? FontWeight.bold : FontWeight.normal,
         ),

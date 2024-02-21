@@ -57,9 +57,11 @@ class _MainState extends State<MainPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
+        backgroundColor: Color(0xffffe4e1),
         title: Text(
           "말랑",
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 20,
           ),
         ),
@@ -76,15 +78,19 @@ class _MainState extends State<MainPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _searchBox(),
-            SizedBox(height: 20,),
-            _recommendBook(),
-            SizedBox(height: 20,),
-            _fourMenu(),
-          ],
+      body: Container(
+        //color: Color(0xffF4f1b1),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              _searchBox(),
+              SizedBox(height: 20,),
+              _recommendBook(),
+              SizedBox(height: 20,),
+              _fourMenu(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -139,7 +145,11 @@ class _MainState extends State<MainPage> {
           print('검색어: $value');
         },
         decoration: InputDecoration(
+          filled: true, // 이 부분을 추가
+          fillColor: Colors.white, // 배경색을 원하는 색상으로 설정
           hintText: '동화책을 검색해주세요',
+          // labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+          hintStyle: TextStyle(fontFamily: 'Moebius'),
           suffixIcon: IconButton(
             icon: Icon(Icons.clear),
             onPressed: () => _searchController.clear(),
@@ -153,6 +163,7 @@ class _MainState extends State<MainPage> {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.white),
           ),
         ),
       ),
@@ -161,42 +172,45 @@ class _MainState extends State<MainPage> {
 
   Widget _recommendBook(){
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9, // 90%의 가로 공간을 차지하도록 설정
-      height: 200,
-      decoration: BoxDecoration(
-        color: Colors.yellow[100],
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
-        padding: EdgeInsets.only(left: 13, top: 10),
+        padding: EdgeInsets.only(left: 3, top: 1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '$userName 님 취향저격 도서',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.blue,
-                fontWeight: FontWeight.w500,
-              ),
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 40, // 텍스트 높이에 맞게 조절
+                  decoration: BoxDecoration(
+                    color: Color(0xfffaebd7), // 배경 색 및 투명도 조절
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    '$userName 님 취향저격 도서 \u{1F340}',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontFamily: 'Moebius',
+                      color: Color(0xff929292),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 15),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildBook('assets/images/구름빵.png', '구름빵'),
-                  _buildBook('assets/images/토끼와거북이.png', '토끼와거북이'),
-                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부'),
-                  _buildBook('assets/images/해님달님.png', '해님달님'),
+                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
+                  _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이', width: 150, height: 200),
+                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부', width: 150, height: 200),
+                  _buildBook('assets/images/해님달님.png', '해님달님', width: 150, height: 200),
                 ],
               ),
             ),
@@ -206,32 +220,38 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _buildBook(String imagePath, String title) {
+
+
+  Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
     return GestureDetector(
       onTap: () {
-        if (title == '토끼와거북이') {
+        if (title == '토끼와 거북이') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Test(widget.email)), // pagetest 페이지로 이동
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
           );
         }
       },
-      child: Column(
-        children: [
-          Image.asset(
-            imagePath,
-            width: 100,
-            height: 100,
-          ),
-          SizedBox(height: 7), // 이미지와 텍스트 사이 간격
-          Text(
-            title,
-            style: TextStyle(fontSize: 14),
-          ),
-        ],
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              width: width,
+              height: height,
+            ),
+            SizedBox(height: 5),
+            Text(
+              title,
+              style: TextStyle(fontSize: 16, fontFamily: 'Moebius'),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 
   Widget _buildCard(String text, String imagePath, Color color) {
     Widget? targetScreen;
@@ -301,6 +321,7 @@ class _MainState extends State<MainPage> {
   Widget _fourMenu(){
     return Column(
       children: [
+        // SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

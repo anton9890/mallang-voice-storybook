@@ -24,7 +24,11 @@ class MyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('관리'),
+        title: Text('관리',
+          style: TextStyle(
+            fontFamily: 'Moebius'
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,6 +56,7 @@ class MyPage extends StatelessWidget {
                           Text(
                             '${snapshot.data!['name']} 님',
                             style: TextStyle(
+                              fontFamily: 'Moebius',
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -59,6 +64,7 @@ class MyPage extends StatelessWidget {
                           Text(
                             '$email',
                             style: TextStyle(
+                              fontFamily: 'Moebius',
                               fontSize: 16.0,
                               color: Colors.grey,
                             ),
@@ -74,21 +80,34 @@ class MyPage extends StatelessWidget {
                   Text(
                     '내 데이터 관리',
                     style: TextStyle(
+                      fontFamily: 'Moebius',
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   ListTile(
                     leading: Icon(Icons.payment),
-                    title: Text('녹음 기록'),
+                    title: Text('녹음 기록',
+                      style: TextStyle(
+                          fontFamily: 'Moebius'
+                      ),
+                    ),
                   ),
                   ListTile(
                     leading: Icon(Icons.account_balance_wallet),
-                    title: Text('분석 내역'),
+                    title: Text('분석 내역',
+                      style: TextStyle(
+                          fontFamily: 'Moebius'
+                      ),
+                    ),
                   ),
                   ListTile(
                     leading: Icon(Icons.credit_card),
-                    title: Text('개인정보 수정'),
+                    title: Text('개인정보 수정',
+                      style: TextStyle(
+                          fontFamily: 'Moebius'
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   Divider(thickness: 1.0),
@@ -97,16 +116,25 @@ class MyPage extends StatelessWidget {
                     '알림 설정',
                     style: TextStyle(
                       fontSize: 20.0,
+                      fontFamily: 'Moebius',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SwitchListTile(
-                    title: Text('푸시 알림'),
+                    title: Text('푸시 알림',
+                      style: TextStyle(
+                          fontFamily: 'Moebius'
+                      ),
+                    ),
                     value: true,
                     onChanged: (bool value) {},
                   ),
                   SwitchListTile(
-                    title: Text('이메일 알림'),
+                    title: Text('이메일 알림',
+                      style: TextStyle(
+                          fontFamily: 'Moebius'
+                      ),
+                    ),
                     value: false,
                     onChanged: (bool value) {},
                   ),

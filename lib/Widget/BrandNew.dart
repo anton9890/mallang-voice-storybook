@@ -12,7 +12,11 @@ class brandnewbook extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('신간도서'),
+        title: const Text('신간도서',
+          style: TextStyle(
+            fontFamily: 'Moebius',
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(

@@ -56,6 +56,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Moebius
+      fonts:
+#        - asset: assets/fonts/Moebius.ttf
+#        - asset: assets/fonts/Moebius Bold.ttf
+#        - asset: assets/fonts/뫼비우스 Bold.ttf
+        - asset: assets/fonts/뫼비우스 Regular.ttf
+
   assets:
   - assets/images/title.png
   - assets/images/구름빵.png
@@ -104,3 +112,5 @@ flutter:
   - assets/images/거.png
   - assets/images/토.png
   - assets/images/chick.png
+  - assets/images/sea.png
+  - assets/images/to.png

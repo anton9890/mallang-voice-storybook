@@ -71,14 +71,24 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 성공'),
-          content: Text('로그인이 성공적으로 완료되었습니다.'),
+          title: Text('로그인 성공',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),),
+          content: Text('로그인이 성공적으로 완료되었습니다.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: Text('확인'),
+              child: Text('확인',
+                style: TextStyle(
+                  fontFamily: 'Moebius',
+                ),
+              ),
             ),
           ],
         );
@@ -91,7 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 실패'),
+          title: Text('로그인 실패',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),
+          ),
+
           content: Text('로그인을 다시 해주세요.'),
           actions: [
             TextButton(
@@ -122,6 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 '간편하게 로그인하고\n다양한 서비스를 이용하세요',
                 style: TextStyle(
+                  fontFamily: 'Moebius',
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -140,6 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: '이메일을 입력해주세요.',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+                      hintStyle: TextStyle(fontFamily: 'Moebius'), // 힌트 폰트 변경
                     ),
                   ),
                   SizedBox(height: 20.0),
@@ -150,6 +168,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: '비밀번호를 입력해주세요.',
                       prefixIcon: Icon(Icons.lock),
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+                      hintStyle: TextStyle(fontFamily: 'Moebius'),
                     ),
                     obscureText: true,
                   ),
@@ -163,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '아이디 찾기',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                       TextButton(
@@ -172,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '비밀번호 찾기',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                     ],
@@ -189,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _signInWithEmailAndPassword,
                       child: Text(
                         '로그인',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
@@ -210,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _navigateToSignUpPage,
                       child: Text(
                         '회원가입',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,

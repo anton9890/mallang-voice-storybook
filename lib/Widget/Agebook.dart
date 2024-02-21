@@ -177,6 +177,18 @@ class agebook extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Color(0xffDaeefa),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
+          ),
+        ),
+        child: Image.asset('assets/images/sea.png'),
+      ),
+      //bottomNavigationBar: Image.asset('assets/images/sea.png'),
+
     );
   }
 }

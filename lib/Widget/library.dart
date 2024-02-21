@@ -113,6 +113,7 @@ class BookItem extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
+                  fontFamily: 'Moebius',
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                 ),

@@ -5,7 +5,7 @@ import 'package:mallang/pagetest.dart';
 
 class Test extends StatefulWidget {
   final String email;
-  const Test(this.email, {Key? key}) : super(key: key);
+  const Test(this.email, String title, {Key? key}) : super(key: key);
 
   @override
   _TestState createState() => _TestState();
@@ -15,7 +15,7 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( // Wrap your content in a SingleChildScrollView
+      body: SingleChildScrollView(
         child: Stack(
           children: <Widget>[
             Column(
@@ -23,11 +23,11 @@ class _TestState extends State<Test> {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 60.0),
-                    child: InkWell(  // InkWell 위젯 추가
+                    child: InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => test(widget.email)), // pagetest 페이지로 이동
+                          MaterialPageRoute(builder: (context) => test(widget.email)),
                         );
                       },
                       child: Container(
@@ -56,13 +56,13 @@ class _TestState extends State<Test> {
                 Center(
                   child: Text(
                     '토끼와 거북이',
-                    style: TextStyle(fontSize: 28),
+                    style: TextStyle(fontSize: 28,fontFamily: 'Moebius',),
                   ),
                 ),
                 Center(
                   child: Text(
                     '김미견 그림/만화',
-                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                    style: TextStyle(fontSize: 15,fontFamily: 'Moebius', color: Colors.grey),
                   ),
                 ),
                 SizedBox(height: 20,),
@@ -149,6 +149,46 @@ class _TestState extends State<Test> {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(1, 3),
+                                ),
+                              ],
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/to.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Handle the onPressed event
+                              print('그냥 듣기 tapped');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50), // Make it elliptical
+                              ),
+                              primary: Colors.yellow[100], // Change the button color
+                            ),
+                            child: Text('그냥 듣기'),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10,),
@@ -163,12 +203,12 @@ class _TestState extends State<Test> {
                       children: [
                         Text(
                           '줄거리',
-                          style: TextStyle(fontSize: 20, color: Colors.blueAccent),
+                          style: TextStyle(fontSize: 20,fontFamily: 'Moebius', color: Colors.black),
                         ),
                         SizedBox(height: 10), // Add spacing between texts
                         Text(
                           '옛날에 토끼가 거북이를 놀려댔다가, 거북이가 제안한 달리기 시합에 참여하게 됩니다. 토끼는 결승선 앞에서 거북이가 멀리 뒤쳐져있어서 잠을 청하게 되는데, 그사이에 거북이는 차근차근 가다가 결승선을 먼저 통과하게 됩니다.',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: TextStyle(fontSize: 16,fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ],
                     ),

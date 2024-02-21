@@ -86,6 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
         title: Text(
           '회원가입',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 20,
             fontWeight: FontWeight.bold,),
         ),
@@ -118,6 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
         height: 25,
         step: _currentStep,
         labels: ['개인정보 입력','회원정보 입력','관심분야 설정','목소리 녹음'],
+        labelStyle: TextStyle(fontFamily: 'Moebius'),
         indicatorColor: Colors.black,
         length: 4,
         dotSize: 12,
@@ -165,7 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
       visible: _currentStep != 1 && _currentStep != 5,
       child: TextButton(
         onPressed: _currentStep > 1 ? () => setState(() => _currentStep -= 1) : null,
-        child: const Text('이전', style: TextStyle(color: Colors.black)),
+        child: const Text('이전', style: TextStyle(fontFamily: 'Moebius',
+            color: Colors.black)),
       ),
     );
   }
@@ -173,7 +176,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildSkipButton() {
     return TextButton(
       onPressed: () => setState(() => _currentStep = 5),
-      child: Text('스킵', style: TextStyle(color: Colors.grey)),
+      child: Text('스킵', style: TextStyle(fontFamily: 'Moebius',
+          color: Colors.grey)),
     );
   }
 
@@ -181,8 +185,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextButton(
       onPressed: _handleNextOrCompleteButtonPress,
       child: _currentStep == 5
-          ? Text('완료', style: TextStyle(color: Colors.black))
-          : Text('다음', style: TextStyle(color: Colors.black)),
+          ? Text('완료', style: TextStyle(fontFamily: 'Moebius',color: Colors.black))
+          : Text('다음', style: TextStyle(fontFamily: 'Moebius',color: Colors.black)),
     );
   }
 
@@ -220,7 +224,11 @@ class _SignUpPageState extends State<SignUpPage> {
           Align(
             alignment: Alignment.center,
             child: TextButton(
-              child: Text('확인'),
+              child: Text('확인',
+                style: TextStyle(
+                  fontFamily: 'Moebius',
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -252,6 +260,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '이름',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -261,6 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _nameController,
           decoration: InputDecoration(
             hintText: '띄어쓰기 없이 한글 입력',
+            hintStyle: TextStyle(fontFamily: 'Moebius'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -274,6 +284,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '나이',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -283,6 +294,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _ageController,
           decoration: InputDecoration(
             hintText: '5세이면 5을 입력해주세요',
+            hintStyle: TextStyle(fontFamily: 'Moebius'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -296,6 +308,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '성별',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -303,8 +316,15 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 10,),
         ToggleButtons(
           children: <Widget>[
-            Center(child: Text('남성')),
-            Center(child: Text('여성')),
+            Center(child: Text('남성',
+              style: TextStyle(
+                fontFamily: 'Moebius',
+              ),
+            )),
+            Center(child: Text('여성',
+              style: TextStyle(
+                fontFamily: 'Moebius',
+              ),)),
           ],
           onPressed: (int index) {
             setState(() {
@@ -326,6 +346,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '휴대폰 번호',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -340,6 +361,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '010',
                   border: OutlineInputBorder(),
+                  hintStyle: TextStyle(fontFamily: 'Moebius'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -356,6 +378,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
+                  hintStyle: TextStyle(fontFamily: 'Moebius'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -372,6 +395,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
+                  hintStyle: TextStyle(fontFamily: 'Moebius'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -393,6 +417,7 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         Text('이메일',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -401,6 +426,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _emailController,
           decoration: InputDecoration(
             hintText: '이메일을 입력해주세요',
+            hintStyle: TextStyle(fontFamily: 'Moebius'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -419,6 +445,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 35),
         Text('비밀번호',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -428,6 +455,7 @@ class _SignUpPageState extends State<SignUpPage> {
           obscureText: true,
           decoration: InputDecoration(
             hintText: '비밀번호를 입력해주세요',
+            hintStyle: TextStyle(fontFamily: 'Moebius'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -440,6 +468,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 35),
         Text('비밀번호 확인',
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -449,6 +478,7 @@ class _SignUpPageState extends State<SignUpPage> {
           obscureText: true,
           decoration: InputDecoration(
             hintText: '비밀번호를 재입력해주세요',
+            hintStyle: TextStyle(fontFamily: 'Moebius'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -497,12 +527,14 @@ class _SignUpPageState extends State<SignUpPage> {
               TextSpan(
                 text: categoryText,
                 style: TextStyle(
+                  fontFamily: 'Moeibus',
                   fontSize: 18,
                 ),
               ),
               TextSpan(
                 text: categoryEmoji,
                 style: TextStyle(
+                  fontFamily: 'Moeibus',
                   fontSize: 17,
                   color: color,
                 ),
@@ -532,7 +564,8 @@ class _SignUpPageState extends State<SignUpPage> {
               _selectedInterests.add(interest);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('5개 이상 선택할 수 없습니다.')),
+                SnackBar(content: Text('5개 이상 선택할 수 없습니다.',
+                )),
               );
             }
           } else {
@@ -555,6 +588,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.'),
           Text('조용한 환경에서 정확한 발음으로 할수록 좋아요 :)',
             style: TextStyle(
+              fontFamily: 'Moebius',
               color: Colors.grey,
             ),),
           SizedBox(height: 30,),
@@ -565,7 +599,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   : Duration.zero;
 
               String twoDigits(int n) => n.toString().padLeft(2, '0');
-
               final twoDigitMinutes =
               twoDigits(duration.inMinutes.remainder(60));
               final twoDigitSeconds =
@@ -575,6 +608,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 '$twoDigitMinutes:$twoDigitSeconds',
                 style: const TextStyle(
                   color: Colors.black,
+                  fontFamily: 'Moebius',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -604,6 +638,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+  //근데 발표 끝나고 말하는거면 2시까지 우리 암것도 못함..?
 
   Widget _formWidgetLastPage() {
     return Center(
@@ -618,17 +653,19 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(height: 20), // 이미지와 텍스트 사이의 간격 조정
           Text(
             '환영합니다!',
-            style: TextStyle(fontSize: 20), // 텍스트의 크기 조정
+            style: TextStyle(fontSize: 20, fontFamily: 'Moebius'),
+            // 텍스트의 크기 조정
           ),
           Text(
             '가입이 완료되었습니다.',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20, fontFamily: 'Moebius'),
           ),
           SizedBox(height: 20,),
           Text(
             '로그인하고 말랑 서비스를 이용해보세요 :)',
             style: TextStyle(
               fontSize: 14,
+              fontFamily: 'Moebius',
               color: Colors.grey.withOpacity(0.5),
             ),
           )
