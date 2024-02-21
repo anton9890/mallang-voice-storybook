@@ -23,7 +23,7 @@ class PopularBook extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               Container(
                 width: double.infinity,
                 height: 30, // Container의 높이 설정

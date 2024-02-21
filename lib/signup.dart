@@ -581,11 +581,27 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('아이들이 동화책을 읽을 때,'),
-          Text('더욱 몰입하고 재미를 느낄 수 있도록'),
-          Text('어머님, 아버님의 목소리 녹음이 필요해요.'),
+          Text('아이들이 동화책을 읽을 때,',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
+          Text('더욱 몰입하고 재미를 느낄 수 있도록',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
+          Text('어머님, 아버님의 목소리 녹음이 필요해요.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
           SizedBox(height: 30,),
-          Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.'),
+          Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
           Text('조용한 환경에서 정확한 발음으로 할수록 좋아요 :)',
             style: TextStyle(
               fontFamily: 'Moebius',
@@ -630,10 +646,26 @@ class _SignUpPageState extends State<SignUpPage> {
             },
           ),
           SizedBox(height: 30),
-          Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.'),
-          Text('토끼는 거북이를 보고 먼저 말을 걸었어요.'),
-          Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?'),
-          Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?'),
+          Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
+          Text('토끼는 거북이를 보고 먼저 말을 걸었어요.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
+          Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
+          Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+              // fontSize: 20,
+            ),),
         ],
       ),
     );
@@ -694,7 +726,7 @@ class _SignUpPageState extends State<SignUpPage> {
     };
 
     final response = await http.post(
-      Uri.parse('http://172.23.245.219:8000/account/register'),  // 서버의 URL
+      Uri.parse('http://172.16.93.69:8000/account/register'),  // 서버의 URL
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -710,7 +742,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // 녹음된 파일 서버로 보내기
   Future<void> sendAudioFile(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://172.23.245.219:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
+    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',

@@ -22,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    final String url = 'http://172.23.245.219:8000/account/login';
+    final String url = 'http://20.249.17.142:8000/account/login';
     // 이메일과 비밀번호를 json형식으로 인코딩
     final String body = json.encode({
       'email' : email,
@@ -39,7 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     if (response.statusCode == 200) {
-      // 응답 본문을 UTF-8 문자열로 변환
       String responseBody = utf8.decode(response.bodyBytes);
 
       // 응답 본문을 JSON으로 변환

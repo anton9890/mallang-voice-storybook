@@ -9,7 +9,7 @@ class MyPage extends StatelessWidget {
   const MyPage(this.email);
 
   Future<Map<String, dynamic>> getUserInfo() async {
-    final response = await http.get(Uri.parse('http://172.23.245.219:8000/account/get/${email}'));
+    final response = await http.get(Uri.parse('http://20.249.17.142:8000/account/get/${email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
