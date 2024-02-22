@@ -1,8 +1,7 @@
-import librosa # apt-get install ffmpeg  : linux에서 필요
+import librosa
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import FileResponse
 import asyncio
-from pydantic import BaseModel
 
 import soundfile as sf
 
@@ -16,10 +15,6 @@ def down_sample(y, sr, resample_sr):
 
 app = FastAPI()
 print("start app")
-
-class TTSItem(BaseModel):
-    text: str = Form(...)
-    wav: UploadFile = File(...)
 
 @app.post('/tts') 
 async def api(text: str = Form(...), wav: UploadFile = File(...)):
