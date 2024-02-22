@@ -12,14 +12,18 @@ class brandnewbook extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('신간도서'),
+        title: const Text('신간도서',
+          style: TextStyle(
+            fontFamily: 'Moebius',
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -50,7 +54,7 @@ class brandnewbook extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildBookImage('assets/images/티니핑:도감스티커북.png'),
+                  _buildBookImage('assets/images/티니핑.png'),
                   _buildBookImage('assets/images/호박목욕탕.png'),
                   _buildBookImage('assets/images/홀짝홀짝호로록.png'),
                 ],

@@ -12,14 +12,18 @@ class PopularBook extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('인기도서'),
+        title: Text('인기도서',
+          style: TextStyle(
+            fontFamily: 'Moebius',
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               Container(
                 width: double.infinity,
                 height: 30, // Container의 높이 설정
@@ -27,7 +31,8 @@ class PopularBook extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '인기도서 베스트 12',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                    style: TextStyle(fontSize: 20,fontFamily: 'Moebius',
+                        fontWeight: FontWeight.bold, color: Colors.black),
                   ),
                 ),
               ),
@@ -97,7 +102,7 @@ class PopularBook extends StatelessWidget {
         SizedBox(height: 5), // 텍스트와 이미지 사이의 간격 조절
         Text(
           text,
-          style: TextStyle(fontSize: 12), // 텍스트의 크기 조절
+          style: TextStyle(fontSize: 12, fontFamily: 'Moebius'), // 텍스트의 크기 조절
         ),
       ],
     );

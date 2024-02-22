@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mallang/Widget/Agebook.dart';
 import 'main.dart';
 import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
@@ -8,8 +9,15 @@ import 'package:mallang/Widget/BrandNew.dart';
 import 'package:mallang/Widget/PopularBook.dart';
 import 'package:mallang/pagetest.dart'; // 페이지 테스트 추가
 import 'package:mallang/Widget/cartagory.dart';
+import 'package:mallang/Widget/test.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class MainPage extends StatefulWidget {
+  final String email;
+  const MainPage(this.email);
+
   @override
   State<StatefulWidget> createState() {
     return _MainState();
@@ -19,8 +27,29 @@ class MainPage extends StatefulWidget {
 class _MainState extends State<MainPage> {
   int _selectedIndex = 1; // Track the selected index
 
+  String? userName;
+
   // 사용자가 검색한 내용
   final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
+  Future<void> getUserInfo() async {
+    final response = await http.get(Uri.parse('http://20.249.17.142:8000/account/get/${widget.email}'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
+      setState(() {
+        userName = data['name'];
+      });
+    } else {
+      throw Exception('유저 정보를 가져올 수 없습니다');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +57,11 @@ class _MainState extends State<MainPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
+        backgroundColor: Color(0xffffe4e1),
         title: Text(
           "말랑",
           style: TextStyle(
+            fontFamily: 'Moebius',
             fontSize: 20,
           ),
         ),
@@ -47,15 +78,19 @@ class _MainState extends State<MainPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _searchBox(),
-            SizedBox(height: 20,),
-            _recommendBook(),
-            SizedBox(height: 20,),
-            _fourMenu(),
-          ],
+      body: Container(
+        //color: Color(0xffF4f1b1),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              _searchBox(),
+              SizedBox(height: 20,),
+              _recommendBook(),
+              SizedBox(height: 20,),
+              _fourMenu(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -72,12 +107,12 @@ class _MainState extends State<MainPage> {
             } else if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Mylibrary()),
+                MaterialPageRoute(builder: (context) => MyLibrary()),
               );
             } else if (_selectedIndex == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyPage()),
+                MaterialPageRoute(builder: (context) => MyPage(widget.email)),
               );
             }
           });
@@ -110,7 +145,11 @@ class _MainState extends State<MainPage> {
           print('검색어: $value');
         },
         decoration: InputDecoration(
+          filled: true, // 이 부분을 추가
+          fillColor: Colors.white, // 배경색을 원하는 색상으로 설정
           hintText: '동화책을 검색해주세요',
+          // labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+          hintStyle: TextStyle(fontFamily: 'Moebius'),
           suffixIcon: IconButton(
             icon: Icon(Icons.clear),
             onPressed: () => _searchController.clear(),
@@ -124,6 +163,7 @@ class _MainState extends State<MainPage> {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.white),
           ),
         ),
       ),
@@ -132,42 +172,45 @@ class _MainState extends State<MainPage> {
 
   Widget _recommendBook(){
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9, // 90%의 가로 공간을 차지하도록 설정
-      height: 200,
-      decoration: BoxDecoration(
-        color: Colors.yellow[100],
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
-        padding: EdgeInsets.only(left: 13, top: 10),
+        padding: EdgeInsets.only(left: 3, top: 1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '김찬돌님 취향저격 도서',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-              ),
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 40, // 텍스트 높이에 맞게 조절
+                  decoration: BoxDecoration(
+                    color: Color(0xfffaebd7), // 배경 색 및 투명도 조절
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    '$userName 님 취향저격 도서 \u{1F340}',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontFamily: 'Moebius',
+                      color: Color(0xff929292),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 15),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildBook('assets/images/구름빵.png', '구름빵'),
-                  _buildBook('assets/images/토끼와거북이.png', '토끼와거북이'),
-                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부'),
-                  _buildBook('assets/images/해님달님.png', '해님달님'),
+                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
+                  _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이', width: 150, height: 200),
+                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부', width: 150, height: 200),
+                  _buildBook('assets/images/해님달님.png', '해님달님', width: 150, height: 200),
                 ],
               ),
             ),
@@ -177,32 +220,38 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _buildBook(String imagePath, String title) {
+
+
+  Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
     return GestureDetector(
       onTap: () {
-        if (title == '토끼와거북이') {
+        if (title == '토끼와 거북이') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => test()), // pagetest 페이지로 이동
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
           );
         }
       },
-      child: Column(
-        children: [
-          Image.asset(
-            imagePath,
-            width: 100,
-            height: 100,
-          ),
-          SizedBox(height: 7), // 이미지와 텍스트 사이 간격
-          Text(
-            title,
-            style: TextStyle(fontSize: 14),
-          ),
-        ],
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              width: width,
+              height: height,
+            ),
+            SizedBox(height: 5),
+            Text(
+              title,
+              style: TextStyle(fontSize: 16, fontFamily: 'Moebius'),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 
   Widget _buildCard(String text, String imagePath, Color color) {
     Widget? targetScreen;
@@ -214,7 +263,9 @@ class _MainState extends State<MainPage> {
       case '인기도서':
         targetScreen = PopularBook();
         break;
-    //case '연령별 추천 도서':
+      case '연령별 추천도서':
+        targetScreen = agebook();
+        break;
       case '카테고리':
         targetScreen = catagory();
         break;
@@ -237,8 +288,8 @@ class _MainState extends State<MainPage> {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          width: 130,
-          height: 130,
+          width: 170,
+          height: 170,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -270,6 +321,7 @@ class _MainState extends State<MainPage> {
   Widget _fourMenu(){
     return Column(
       children: [
+        // SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

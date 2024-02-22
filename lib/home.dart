@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'CombinedPage.dart';
 import 'MainPage.dart';
 import 'Splash.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -15,15 +17,45 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _signInWithEmailAndPassword() {
-    // 여기에 이메일/패스워드 로그인 로직을 추가하세요.
-    // 로그인이 성공했다고 가정하고 다음 페이지로 이동
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MainPage()),
+  // 로그인 정보 서버에 보내기
+  Future _signInWithEmailAndPassword() async {
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
+
+    final String url = 'http://20.249.17.142:8000/account/login';
+    // 이메일과 비밀번호를 json형식으로 인코딩
+    final String body = json.encode({
+      'email' : email,
+      'password' : password,
+    });
+
+    // http.post 메서드를 사용하여 서버에 post요청
+    final http.Response response = await http.post(
+      Uri.parse(url),
+      // 요청 본문의 형식이 JSON임을 알림
+      headers: {'Content-Type': 'application/json'},
+      // 여기서는 사용자가 입력한 이메일, 비밀번호를 json 형식으로 변환한 문자열 전달
+      body: body,
     );
-    // 팝업창 표시
-    _showLoginSuccessDialog();
+
+    if (response.statusCode == 200) {
+      String responseBody = utf8.decode(response.bodyBytes);
+
+      // 응답 본문을 JSON으로 변환
+      String jsonData = jsonDecode(responseBody);
+
+      if (jsonData == 'success') {
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainPage(email)),
+        );
+        _showLoginSuccessDialog();
+      }
+      else {
+        _showLoginfailDialog();
+      }
+    }
   }
 
   void _navigateToSignUpPage() {
@@ -38,8 +70,43 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 성공'),
-          content: Text('로그인이 성공적으로 완료되었습니다.'),
+          title: Text('로그인 성공',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),),
+          content: Text('로그인이 성공적으로 완료되었습니다.',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // 다이얼로그 닫기
+              },
+              child: Text('확인',
+                style: TextStyle(
+                  fontFamily: 'Moebius',
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showLoginfailDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('로그인 실패',
+            style: TextStyle(
+              fontFamily: 'Moebius',
+            ),
+          ),
+
+          content: Text('로그인을 다시 해주세요.'),
           actions: [
             TextButton(
               onPressed: () {
@@ -69,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 '간편하게 로그인하고\n다양한 서비스를 이용하세요',
                 style: TextStyle(
+                  fontFamily: 'Moebius',
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -87,6 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: '이메일을 입력해주세요.',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+                      hintStyle: TextStyle(fontFamily: 'Moebius'), // 힌트 폰트 변경
                     ),
                   ),
                   SizedBox(height: 20.0),
@@ -97,6 +167,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: '비밀번호를 입력해주세요.',
                       prefixIcon: Icon(Icons.lock),
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
+                      hintStyle: TextStyle(fontFamily: 'Moebius'),
                     ),
                     obscureText: true,
                   ),
@@ -110,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '아이디 찾기',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                       TextButton(
@@ -119,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '비밀번호 찾기',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                     ],
@@ -136,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _signInWithEmailAndPassword,
                       child: Text(
                         '로그인',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
@@ -157,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _navigateToSignUpPage,
                       child: Text(
                         '회원가입',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,

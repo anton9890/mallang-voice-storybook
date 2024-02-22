@@ -34,6 +34,11 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   dashed_stepper: ^0.0.4
+  flutter_sound: ^9.2.13
+  permission_handler: ^11.3.0
+  http: ^1.2.0
+  dio: ^5.4.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +56,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Moebius
+      fonts:
+#        - asset: assets/fonts/Moebius.ttf
+#        - asset: assets/fonts/Moebius Bold.ttf
+#        - asset: assets/fonts/뫼비우스 Bold.ttf
+        - asset: assets/fonts/뫼비우스 Regular.ttf
+
   assets:
   - assets/images/title.png
   - assets/images/구름빵.png
@@ -69,7 +82,7 @@ flutter:
   - assets/images/호박목욕탕.png
   - assets/images/홀짝홀짝호로록.png
   - assets/images/장수탕선녀님.png
-  - assets/images/티니핑:도감스티커북.png
+  - assets/images/티니핑.png
   - assets/images/클림트의 정원으로.png
   - assets/images/친구의전설.png
   - assets/images/도와줘,브루너.png
@@ -92,4 +105,12 @@ flutter:
   - assets/images/bee.png
   - assets/images/giraffe.png
   - assets/images/lion.png
+  - assets/images/1-2.png
+  - assets/images/1-1.png
+  - assets/images/1.png
   - assets/images/rabbit.png
+  - assets/images/거.png
+  - assets/images/토.png
+  - assets/images/chick.png
+  - assets/images/sea.png
+  - assets/images/to.png

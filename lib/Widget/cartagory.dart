@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'wmain.dart';
-// import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
 import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';
@@ -19,6 +17,7 @@ class catagory extends StatelessWidget {
           '카테고리',
           style: TextStyle(
             fontSize: 20,
+            fontFamily: 'Moebius',
           ),
         ),
       ),
@@ -59,6 +58,7 @@ class catagory extends StatelessWidget {
                       '명작동화',
                       style: TextStyle(
                         fontSize: 16,
+                        fontFamily: 'Moebius',
                         color: Colors.black,
                       ),
                     ),
@@ -67,6 +67,7 @@ class catagory extends StatelessWidget {
                       '유명한 이야기가 좋아요',
                       style: TextStyle(
                         fontSize: 14,
+                        fontFamily: 'Moebius',
                         color: Color(0xffffa07a),
                       ),
                     ),
@@ -102,6 +103,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '전래동화',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -110,6 +112,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '옛날 이야기가 좋아요',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 14,
                         color: Color(0xffADD797),
                       ),
@@ -146,6 +149,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '이솝우화',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -154,6 +158,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '동물 이야기가 좋아요',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 14,
                         color: Color(0xffb0c4de),
                       ),
@@ -190,6 +195,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '그림책',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -198,6 +204,7 @@ class catagory extends StatelessWidget {
                     Text(
                       '그림 보는게 좋아요',
                       style: TextStyle(
+                        fontFamily: 'Moebius',
                         fontSize: 14,
                         color: Color(0xffffb6c1),
                       ),
@@ -209,6 +216,7 @@ class catagory extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Image.asset('assets/images/chick.png',),
     );
   }
 }
