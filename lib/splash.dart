@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
         child: Container(
           // Use the Image widget instead of Text
           child: Image.asset(
-            'assets/images/title.png',
+            'assets/images/splash.png',
             width: 120, // Adjust the width as needed
             height: 120, // Adjust the height as needed
           ),

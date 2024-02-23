@@ -51,7 +51,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://172.23.252.79:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -85,7 +85,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://172.23.252.79:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -118,7 +118,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://172.23.252.79:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

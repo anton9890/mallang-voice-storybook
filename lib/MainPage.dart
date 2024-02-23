@@ -39,7 +39,7 @@ class _MainState extends State<MainPage> {
   }
 
   Future<void> getUserInfo() async {
-    final response = await http.get(Uri.parse('http://20.249.17.142:8000/account/get/${widget.email}'));
+    final response = await http.get(Uri.parse('http://172.23.252.79:8000/account/get/${widget.email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
