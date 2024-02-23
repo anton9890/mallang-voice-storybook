@@ -41,6 +41,8 @@ dependencies:
   provider: ^6.1.1
   audioplayers: ^5.2.1
   animated_text_kit: ^4.2.2
+  speech_to_text: ^6.6.0
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -98,7 +100,7 @@ flutter:
   - assets/images/ballon.png
   - assets/images/인기도서6.png
   - assets/images/background.png
-  - assets/images/background2.png
+#  - assets/images/background2.png
   - assets/images/rabbit.png
   - assets/images/7.png
   - assets/images/12.png
@@ -113,6 +115,7 @@ flutter:
   - assets/images/rabbit.png
   - assets/images/거.png
   - assets/images/토.png
+  - assets/images/speech.png
   - assets/images/chick.png
   - assets/images/sea.png
   - assets/images/to.png
@@ -120,3 +123,4 @@ flutter:
   - assets/images/prev.png
   - assets/images/next.png
   - assets/images/splash.png
+  - assets/images/blur.png

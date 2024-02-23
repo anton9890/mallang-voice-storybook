@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:mallang/CombinedPage.dart';
 import 'package:mallang/Widget/test.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
 import '../home.dart';
 import 'package:mallang/Widget/brandnew.dart';
@@ -13,18 +14,32 @@ import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:mallang/signup.dart';
+import 'package:flutter/material.dart';
+import 'package:dashed_stepper/dashed_stepper.dart';
+import 'home.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
+import 'dart:async';
+// fast api 통신할 때 필요한 라이브러리
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:path_provider/path_provider.dart';
 
 class test extends StatefulWidget {
   final String email;
   final String title;
-  final String? character;
+  final String? selectedcharacter;
 
-  const test(this.email, this.title, this.character, {Key? key}) : super(key: key);
+  const test(this.email, this.title, this.selectedcharacter, {Key? key}) : super(key: key);
 
   @override
   _testState createState() => _testState();
 }
+
 
 class _testState extends State<test> {
   List<dynamic> scriptData = [];
@@ -32,11 +47,41 @@ class _testState extends State<test> {
   Image? role; // 역할
   int currentIndex = 0; // 현재 스크립트의 인덱스
   int? currentAudio;
+  bool getScript_done = false;
 
+  final recorder = FlutterSoundRecorder();
+  bool isRecordingDone = false;
   final audioPlayer = AudioPlayer();
+
+  Future initRecorder() async{
+    final status = await Permission.microphone.request();
+    if (status != PermissionStatus.granted){
+      throw '마이크 권한을 허용해주세요';
+    }
+    await recorder.openRecorder();
+    recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
+  }
+
+  Future startRecord() async {
+    isRecordingDone = false;
+    await recorder.startRecorder(toFile: 'audio.aac', codec: Codec.aacADTS);
+  }
+
+  // 녹음을 멈추고 녹음된 파일의 경로를 반환
+  Future<String> stopRecorder() async {
+    isRecordingDone = true;
+    final filePath = await recorder.stopRecorder();
+    final file = File(filePath!);
+    print('녹음 파일 경로: $filePath');
+    voiceChange(filePath);
+
+
+    return filePath;
+  }
 
   @override
   void initState() {
+    initRecorder();
     super.initState();
     getScripts();
     getAudio();
@@ -51,7 +96,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://172.23.252.79:8000/data/get/file'),
+      Uri.parse('http://20.249.17.142:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -70,7 +115,8 @@ class _testState extends State<test> {
       // 스크립트를 받아온 후 첫번째 스크립트의 배경을 설정
       getImage(scriptData[currentIndex]['background'], 'background');
       getImage(scriptData[currentIndex]['role'], 'role');
-
+      getAudio();
+      getScript_done = true;
     } else {
       throw Exception('Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
     }
@@ -85,7 +131,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://172.23.252.79:8000/data/get/file'),
+      Uri.parse('http://20.249.17.142:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -110,31 +156,33 @@ class _testState extends State<test> {
   }
 
   Future<void> getAudio() async {
-    Map<String, String> data = {
-      'email' : widget.email,
-      'type' : 'audio',
-      'book' : widget.title,
-      'file' : currentIndex.toString(),
-    };
+    audioPlayer.stop();
+    if(scriptData[currentIndex]['role'] != widget.selectedcharacter) {
+      Map<String, String> data = {
+        'email': widget.email,
+        'type': 'audio',
+        'book': widget.title,
+        'file': currentIndex.toString(),
+      };
 
-    final response = await http.post(
-      Uri.parse('http://172.23.252.79:8000/data/get/file'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
+      final response = await http.post(
+        Uri.parse('http://20.249.17.142:8000/data/get/file'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
 
-    if (response.statusCode == 200) {
-      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      print(jsonResponse);
-      var audioData = jsonResponse['data'];
-      var bytes = base64Decode(audioData);
-      await audioPlayer.play(BytesSource(bytes));
-    } else {
-      throw Exception('Failed to load audio data');
+      if (response.statusCode == 200) {
+        Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        print(jsonResponse);
+        var audioData = jsonResponse['data'];
+        var bytes = base64Decode(audioData);
+        await audioPlayer.play(BytesSource(bytes));
+      } else {
+        throw Exception('Failed to load audio data');
+      }
     }
-
     // 오디오 파일을 재생합니다.
     // print('http://20.249.17.142:8000/data/audio/${widget.title}/${currentIndex}');
     // await audioPlayer.play(UrlSource('http://20.249.17.142:8000/data/audio/${widget.title}/${currentIndex}'));
@@ -152,6 +200,14 @@ class _testState extends State<test> {
       getImage(scriptData[currentIndex]['background'] ,'background');
       getImage(scriptData[currentIndex]['role'], '');
     }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Test(widget.email, widget.title),
+        ),
+      );
+    }
   }
 
   void prevScript() {
@@ -167,7 +223,7 @@ class _testState extends State<test> {
 
   @override
   Widget build(BuildContext context) {
-    double progress = scriptData.length > 0 ? currentIndex / scriptData.length : 0;
+    double progress = (scriptData.length-1) > 0 ? currentIndex / (scriptData.length-1) : 0;
     Map<String, dynamic> currentScript = scriptData.isNotEmpty ? scriptData[currentIndex] : {};
 
 
@@ -204,7 +260,7 @@ class _testState extends State<test> {
   Widget buildPrevButton() {
     return Positioned(
       left: 10.0,
-      bottom: 30.0,
+      bottom: 20.0,
       child: InkWell(
         onTap: () {
           prevScript();
@@ -212,48 +268,143 @@ class _testState extends State<test> {
         },
         child: Image.asset(
           'assets/images/prev.png',
-          width: 100.0,
+          width: 70.0,
           height: 100.0,
         ),
       ),
     );
   }
 
-  // 다음 버튼을 그리는 위젯
+
+// 다음 버튼을 그리는 위젯
   Widget buildNextButton() {
     return Positioned(
       right: 10.0,
-      bottom: 30.0,
-      child: InkWell(
-        onTap: () {
-          nextScript();
-          getAudio();
-        },
-        child: Image.asset(
-          'assets/images/next.png',
-          width: 100.0,
-          height: 100.0,
-        ),
+      bottom: 20.0,
+      child: Stack(
+        children: [
+          InkWell(
+            onTap: () {
+              nextScript();
+              getAudio();
+            },
+            child: Image.asset(
+              'assets/images/next.png',
+              width: 70.0,
+              height: 100.0,
+            ),
+          ),
+          buildSpeechButton(), // 음성 버튼 추가
+        ],
       ),
     );
   }
 
-  // 마이크 버튼
-  Widget buildMicrophoneButton() {
+// 음성 버튼
+  Widget buildSpeechButton() {
     return Positioned(
-      left: MediaQuery.of(context).size.height / 2 - 40,
-      bottom: 40.0,
+      top: -30.0, // 아래로 이동하여 간격을 줍니다.
+      right: 0.0,
       child: InkWell(
         onTap: () {
-          // Add your microphone button action here
+          // Add your speech button action here
         },
         child: Image.asset(
-          'assets/images/mic.png',
-          width: 90.0,
+          'assets/images/speech.png',
+          width: 35.0,
           height: 90.0,
         ),
       ),
     );
+  }
+
+
+  // 마이크 버튼
+  Widget buildMicrophoneButton() {
+    if (getScript_done) {
+      if (scriptData[currentIndex]['role'] == widget.selectedcharacter) {
+        return Positioned(
+          left: (MediaQuery
+              .of(context)
+              .size
+              .width - 50), // 가로 중앙으로 위치하도록 수정
+          bottom: 20.0,
+          child: Material(
+            color: Colors.white, // 배경색을 흰색으로 설정
+            shape: CircleBorder(), // 원 모양으로 테두리 모양 설정
+            child: InkWell(
+              onTap: () {
+                // Add your microphone button action here
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child:
+                IconButton(
+                  icon: Icon(
+                    recorder.isRecording ? Icons.stop : Icons.mic,
+                    color: Colors.green[400], // 아이콘 색상
+                  ),
+                  iconSize: 80,
+                  onPressed: () async {
+                    if (recorder.isRecording) {
+                      await stopRecorder();
+                    }
+                    else {
+                      await startRecord();
+                    }
+                    setState(() {});
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+      else {
+        return Positioned(
+          top: 0.0,
+          right: 0.0,
+          child: Material(
+            color: Colors.transparent, // 투명 배경 설정
+            child: InkWell(
+              onTap: () {
+                // Add your speech button action here
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.speaker,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    else {
+      return Positioned(
+        top: 0.0,
+        right: 0.0,
+        child: Material(
+          color: Colors.transparent, // 투명 배경 설정
+          child: InkWell(
+            onTap: () {
+              // Add your speech button action here
+            },
+            borderRadius: BorderRadius.circular(12),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.speaker,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   // 텍스트
@@ -293,7 +444,7 @@ class _testState extends State<test> {
                   fontSize: 20.0,
                   fontFamily: 'Moebius',
                 ),
-                speed: Duration(milliseconds: 200),
+                speed: Duration(milliseconds: 50),
                 repeatForever: false,
                 totalRepeatCount: 1,
               ),
@@ -316,4 +467,27 @@ class _testState extends State<test> {
     );
   }
 
+  Future<void> voiceChange(String filePath) async {
+    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/api/rvc/${widget.email}/${widget.title}/${scriptData[currentIndex]['role']}'));  // 서버의 URL
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'file',
+        filePath,
+        contentType: MediaType('audio', 'aac'), //
+      ),
+    );
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+      var audioData = jsonResponse['data'];
+      var bytes = base64Decode(audioData);
+      await audioPlayer.play(BytesSource(bytes));
+    } else {
+      throw Exception('Failed to load audio data');
+    }
+  }
 }

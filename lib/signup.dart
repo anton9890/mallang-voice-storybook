@@ -636,7 +636,7 @@ class _SignUpPageState extends State<SignUpPage> {
             icon: Icon(recorder.isRecording ? Icons.stop : Icons.mic),
             iconSize: 50,
             onPressed: () async {
-              if (recorder.isRecording){
+              if (recorder.isRecording) {
                 await stopRecorder();
               }
               else {
@@ -670,7 +670,6 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-  //근데 발표 끝나고 말하는거면 2시까지 우리 암것도 못함..?
 
   Widget _formWidgetLastPage() {
     return Center(
@@ -742,7 +741,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // 녹음된 파일 서버로 보내기
   Future<void> sendAudioFile(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
+    var request = http.MultipartRequest('POST', Uri.parse('http://172.16.93.69:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',
