@@ -120,8 +120,8 @@ class _TestState extends State<Test> {
                   child: Column(
                     children: [
                       Container(
-                        width: 100.0,
-                        height: 100.0,
+                        width: 80.0,
+                        height: 80.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
@@ -152,11 +152,13 @@ class _TestState extends State<Test> {
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           primary: Colors.yellow[100],
+                          padding: EdgeInsets.all(2.0),
+                          fixedSize: Size(100,30),
                         ),
-                        child: Text('${turtle ?? "거북이"}로 읽기',
+                        child: Text('${turtle ?? "거북이"} 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
                           ),
@@ -170,8 +172,8 @@ class _TestState extends State<Test> {
                   child: Column(
                     children: [
                       Container(
-                        width: 100.0,
-                        height: 100.0,
+                        width: 80.0,
+                        height: 80.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
@@ -205,12 +207,14 @@ class _TestState extends State<Test> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           primary: Colors.yellow[100],
+                          padding: EdgeInsets.all(2.0),
+                          fixedSize: Size(100,30),
                         ),
-                        child: Text('${rabbit ?? "토끼"}로 읽기',
-                        style: TextStyle(
+                        child: Text('${rabbit ?? "토끼"} 모드',
+                          style: TextStyle(
                             fontFamily: 'Moebius',
+                          ),
                         ),
-                      ),
                       ),
                     ],
                   ),
@@ -220,8 +224,8 @@ class _TestState extends State<Test> {
                   child: Column(
                     children: [
                       Container(
-                        width: 100.0,
-                        height: 100.0,
+                        width: 80.0,
+                        height: 80.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
@@ -255,6 +259,8 @@ class _TestState extends State<Test> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           primary: Colors.yellow[100],
+                          padding: EdgeInsets.all(2.0),
+                          fixedSize: Size(100,30),
                         ),
                         child: Text('감상 모드',
                           style: TextStyle(
@@ -272,7 +278,7 @@ class _TestState extends State<Test> {
               width: 380.0,
               decoration: BoxDecoration(
                 color: Colors.yellow[100],
-                borderRadius: BorderRadius.circular(20.0), // 모든 모서리를 둥글게 만듭니다.
+                borderRadius: BorderRadius.circular(25.0), // 모든 모서리를 둥글게 만듭니다.
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
