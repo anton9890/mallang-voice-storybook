@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
-import 'package:mallang/CombinedPage.dart';
+// import 'package:mallang/CombinedPage.dart';
 import 'package:mallang/Widget/test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
@@ -27,6 +27,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 
 class test extends StatefulWidget {
@@ -113,7 +114,7 @@ class _testState extends State<test> {
       });
 
       // 스크립트를 받아온 후 첫번째 스크립트의 배경을 설정
-      getImage(scriptData[currentIndex]['background'], 'background');
+      getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], 'role');
       getAudio();
       getScript_done = true;
@@ -197,16 +198,11 @@ class _testState extends State<test> {
       setState(() {
         currentIndex++;
       });
-      getImage(scriptData[currentIndex]['background'] ,'background');
+      getImage(currentIndex.toString() ,'background');
       getImage(scriptData[currentIndex]['role'], '');
     }
     else{
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Test(widget.email, widget.title),
-        ),
-      );
+      showPop();
     }
   }
 
@@ -216,11 +212,61 @@ class _testState extends State<test> {
       setState(() {
         currentIndex--;
       });
-      getImage(scriptData[currentIndex]['background'], 'background');
+      getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], '');
     }
   }
 
+  void showPop() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                height: 200.0, // 높이를 원하는 값으로 설정하세요
+                width: 200.0, // 너비를 원하는 값으로 설정하세요
+                child: Lottie.asset(
+                  'assets/lottie/lottie1.json',
+                  fit: BoxFit.contain,
+                ),
+              ),
+              SizedBox(height: 30,),
+              Text(
+                '${widget.title} 를 다 읽으셨네요 !',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Moebius',
+                ),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            Center(
+              child: TextButton(
+                child: Text(
+                  '꾹 눌러서 나가기❤️',
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Test(widget.email, widget.title),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+          backgroundColor: Colors.white,
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     double progress = (scriptData.length-1) > 0 ? currentIndex / (scriptData.length-1) : 0;
@@ -259,7 +305,7 @@ class _testState extends State<test> {
   // 이전 버튼을 그리는 위젯
   Widget buildPrevButton() {
     return Positioned(
-      left: 10.0,
+      left: 30.0,
       bottom: 20.0,
       child: InkWell(
         onTap: () {
@@ -268,7 +314,7 @@ class _testState extends State<test> {
         },
         child: Image.asset(
           'assets/images/prev.png',
-          width: 70.0,
+          width: 60.0,
           height: 100.0,
         ),
       ),
@@ -279,8 +325,8 @@ class _testState extends State<test> {
 // 다음 버튼을 그리는 위젯
   Widget buildNextButton() {
     return Positioned(
-      right: 10.0,
-      bottom: 20.0,
+      right: 20.0,
+      bottom: 17.0,
       child: Stack(
         children: [
           InkWell(
@@ -290,33 +336,33 @@ class _testState extends State<test> {
             },
             child: Image.asset(
               'assets/images/next.png',
-              width: 70.0,
+              width: 58.0,
               height: 100.0,
             ),
           ),
-          buildSpeechButton(), // 음성 버튼 추가
+          // buildSpeechButton(), // 음성 버튼 추가
         ],
       ),
     );
   }
 
-// 음성 버튼
-  Widget buildSpeechButton() {
-    return Positioned(
-      top: -30.0, // 아래로 이동하여 간격을 줍니다.
-      right: 0.0,
-      child: InkWell(
-        onTap: () {
-          // Add your speech button action here
-        },
-        child: Image.asset(
-          'assets/images/speech.png',
-          width: 35.0,
-          height: 90.0,
-        ),
-      ),
-    );
-  }
+// //음성 버튼
+//   Widget buildSpeechButton() {
+//     return Positioned(
+//       top: -30.0, // 아래로 이동하여 간격을 줍니다.
+//       right: 0.0,
+//       child: InkWell(
+//         onTap: () {
+//           // Add your speech button action here
+//         },
+//         child: Image.asset(
+//           'assets/images/speech.png',
+//           width: 35.0,
+//           height: 90.0,
+//         ),
+//       ),
+//     );
+//   }
 
 
   // 마이크 버튼
@@ -428,7 +474,7 @@ class _testState extends State<test> {
               color: Colors.white.withOpacity(0.6),
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
-                image: this.role?.image ?? AssetImage('assets/images/background.png'),
+                image: this.role?.image ?? AssetImage('assets/images/불꽃길.png'),
                 fit: BoxFit.cover,
                 alignment: Alignment.topLeft,
               ),
@@ -436,7 +482,7 @@ class _testState extends State<test> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0), // 이미지와 텍스트 사이에 간격을 추가합니다.
+              padding: const EdgeInsets.only(left: 8.0),
               child: TyperAnimatedTextKit(
                 key: UniqueKey(),
                 text: [currentScript['text'] ?? ''],
@@ -459,7 +505,7 @@ class _testState extends State<test> {
   // 하단 진행 바
   Widget buildProgressBar(double progress) {
     return SizedBox(
-      height: 30.0,
+      height: 20.0,
       child: LinearProgressIndicator(
         value: progress,
         valueColor: AlwaysStoppedAnimation(Color(0xffa5ea89)),

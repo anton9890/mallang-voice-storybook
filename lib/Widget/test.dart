@@ -161,6 +161,7 @@ class _TestState extends State<Test> {
                         child: Text('${turtle ?? "거북이"} 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
+                              color: Colors.black,
                           ),
                         ),
                       ),
@@ -213,6 +214,7 @@ class _TestState extends State<Test> {
                         child: Text('${rabbit ?? "토끼"} 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -265,6 +267,7 @@ class _TestState extends State<Test> {
                         child: Text('감상 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -281,7 +284,7 @@ class _TestState extends State<Test> {
                 borderRadius: BorderRadius.circular(25.0), // 모든 모서리를 둥글게 만듭니다.
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

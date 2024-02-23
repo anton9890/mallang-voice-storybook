@@ -43,6 +43,12 @@ dependencies:
   animated_text_kit: ^4.2.2
   speech_to_text: ^6.6.0
   get: ^4.6.6
+  flutter_launcher_icons: ^0.13.1
+  lottie: ^3.1.0
+flutter_icons:
+  image_path: "images/ic_launcher.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
@@ -100,7 +106,6 @@ flutter:
   - assets/images/ballon.png
   - assets/images/인기도서6.png
   - assets/images/background.png
-#  - assets/images/background2.png
   - assets/images/rabbit.png
   - assets/images/7.png
   - assets/images/12.png
@@ -119,8 +124,21 @@ flutter:
   - assets/images/chick.png
   - assets/images/sea.png
   - assets/images/to.png
-  - assets/images/mic.png
+#  - assets/images/mic.png
   - assets/images/prev.png
-  - assets/images/next.png
   - assets/images/splash.png
-  - assets/images/blur.png
+  - assets/images/토거.png
+  - assets/images/prev.png
+  - assets/images/ic_launcher.png
+  - assets/images/next.png
+  - assets/images/그림1.png
+  - assets/images/토낑.png
+  - assets/images/그림2.png
+  - assets/images/3.png
+#  - assets/images/4.png
+  - assets/images/찐막.png
+  - assets/images/배경.png
+  - assets/images/appbar.png
+  - assets/images/검색토끼.png
+  - assets/lottie/lottie1.json
+

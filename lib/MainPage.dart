@@ -13,7 +13,6 @@ import 'package:mallang/Widget/test.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class MainPage extends StatefulWidget {
   final String email;
   const MainPage(this.email);
@@ -39,7 +38,7 @@ class _MainState extends State<MainPage> {
   }
 
   Future<void> getUserInfo() async {
-    final response = await http.get(Uri.parse('http:/172.23.252.79:8000/account/get/${widget.email}'));
+    final response = await http.get(Uri.parse('http://20.249.17.142:8000/account/get/${widget.email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -55,15 +54,18 @@ class _MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false, // 제목을 가운데 정렬하지 않음
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-        backgroundColor: Color(0xffffe4e1),
-        title: Text(
-          "말랑",
-          style: TextStyle(
-            fontFamily: 'Moebius',
-            fontSize: 20,
-          ),
+        backgroundColor: Color(0xffffd966),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/appbar.png', // 이미지 경로 지정
+              width: 120, // 이미지 너비 조절
+              height: 140, // 이미지 높이 조절
+            ),
+            SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
+          ],
         ),
         actions: [
           IconButton(
@@ -78,7 +80,15 @@ class _MainState extends State<MainPage> {
           ),
         ],
       ),
+
+      backgroundColor: Color(0xffffd966),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/배경.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         //color: Color(0xffF4f1b1),
         child: SingleChildScrollView(
           child: Column(
@@ -135,7 +145,7 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _searchBox(){
+  Widget _searchBox() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: TextField(
@@ -145,55 +155,47 @@ class _MainState extends State<MainPage> {
           print('검색어: $value');
         },
         decoration: InputDecoration(
-          filled: true, // 이 부분을 추가
-          fillColor: Colors.white, // 배경색을 원하는 색상으로 설정
+          filled: true,
+          fillColor: Colors.white,
           hintText: '동화책을 검색해주세요',
-          // labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
           hintStyle: TextStyle(fontFamily: 'Moebius'),
-          suffixIcon: IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () => _searchController.clear(),
-          ),
-          prefixIcon: IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // 검색창 누르면 보일 화면
-              print('검색어: ${_searchController.text}');
-            },
+          prefixIcon: Image.asset(
+            'assets/images/검색토끼.png',
+            width: 20, // 이미지의 너비 설정
+            height: 24, // 이미지의 높이 설정
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide.none, // 테두리 색상 없애기
           ),
         ),
       ),
     );
   }
 
-  Widget _recommendBook(){
+  Widget _recommendBook() {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.95,
       child: Padding(
-        padding: EdgeInsets.only(left: 3, top: 1),
+        padding: EdgeInsets.only(left: 0, top: 1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 40, // 텍스트 높이에 맞게 조절
-                  decoration: BoxDecoration(
-                    color: Color(0xfffaebd7), // 배경 색 및 투명도 조절
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
+//                 Container(
+//                   width: double.infinity,
+//                   height: 40, // 텍스트 높이에 맞게 조절
+//                   decoration: BoxDecoration(
+//                     color: Color(0xfffaebd7), // 배경 색 및 투명도 조절
+// 향                  ),
+//                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    '$userName 님 취향저격 도서 \u{1F340}',
+                    '$userName님을 위한 취향저격 도서 📚',
                     style: TextStyle(
-                      fontSize: 21,
+                      fontSize: 24, // 폰트 크기 조정
                       fontFamily: 'Moebius',
                       color: Color(0xff929292),
                       fontWeight: FontWeight.w500,
@@ -207,9 +209,9 @@ class _MainState extends State<MainPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
                   _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이', width: 150, height: 200),
-                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부', width: 150, height: 200),
+                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
+                  _buildBook('assets/images/인기도서5.png', '도도도 도착!', width: 150, height: 200),
                   _buildBook('assets/images/해님달님.png', '해님달님', width: 150, height: 200),
                 ],
               ),
@@ -219,8 +221,6 @@ class _MainState extends State<MainPage> {
       ),
     );
   }
-
-
 
   Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
     return GestureDetector(
@@ -251,7 +251,6 @@ class _MainState extends State<MainPage> {
       ),
     );
   }
-
 
   Widget _buildCard(String text, String imagePath, Color color) {
     Widget? targetScreen;
@@ -288,8 +287,8 @@ class _MainState extends State<MainPage> {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          width: 170,
-          height: 170,
+          width: 150,
+          height: 150,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -303,7 +302,8 @@ class _MainState extends State<MainPage> {
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: 15.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
+                  fontFamily: 'Moebius',
+                  fontSize: 18.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
                   color: color, // 텍스트의 색깔을 설정합니다.
                 ),
               )
