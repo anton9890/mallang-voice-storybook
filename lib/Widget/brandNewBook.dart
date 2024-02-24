@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/CombinedPage.dart';
-import '../main.dart';
-import '../home.dart';
-import 'package:mallang/pagetest.dart';
 
-class brandnewbook extends StatelessWidget {
-  const brandnewbook({Key? key}) : super(key: key);
+class BrandNewBookPage extends StatelessWidget {
+  const BrandNewBookPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

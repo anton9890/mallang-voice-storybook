@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'wmain.dart';
-// import 'home.dart';
-import 'package:mallang/Widget/Mypage.dart';
-import 'package:mallang/Widget/library.dart';
-import 'package:mallang/Widget/Alert.dart';
-import 'package:mallang/Widget/BrandNew.dart';
-import 'package:mallang/Widget/PopularBook.dart';
 
-class agebook extends StatelessWidget {
-  const agebook({Key? key});
+class AgeBookPage extends StatelessWidget {
+  const AgeBookPage({Key? key});
 
   @override
   Widget build(BuildContext context) {

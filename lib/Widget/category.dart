@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/Widget/Mypage.dart';
-import 'package:mallang/Widget/library.dart';
-import 'package:mallang/Widget/Alert.dart';
-import 'package:mallang/Widget/BrandNew.dart';
-import 'package:mallang/Widget/PopularBook.dart';
 
-class catagory extends StatelessWidget {
-  const catagory({Key? key});
+class CategoryPage extends StatelessWidget {
+  const CategoryPage({Key? key});
 
   @override
   Widget build(BuildContext context) {

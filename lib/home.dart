@@ -1,249 +1,330 @@
 import 'package:flutter/material.dart';
-import 'CombinedPage.dart';
-import 'MainPage.dart';
-import 'Splash.dart';
-import 'package:http/http.dart' as http;
+import 'package:mallang/Widget/ageBook.dart';
+import 'package:mallang/Widget/mypage.dart';
+import 'package:mallang/Widget/myLibrary.dart';
+import 'package:mallang/Widget/notification.dart';
+import 'package:mallang/Widget/brandNewBook.dart';
+import 'package:mallang/Widget/popularBook.dart';
+import 'package:mallang/Widget/category.dart';
+import 'package:mallang/Widget/test.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class HomePage extends StatefulWidget {
+  final String email;
+  const HomePage(this.email);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    return _MainState();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _MainState extends State<HomePage> {
+  int _selectedIndex = 1; // Track the selected index
+  String? userName;
 
-  // 로그인 정보 서버에 보내기
-  Future _signInWithEmailAndPassword() async {
-    final String email = _emailController.text;
-    final String password = _passwordController.text;
+  // 사용자가 검색한 내용
+  final TextEditingController _searchController = TextEditingController();
 
-    final String url = 'http://20.249.17.142:8000/account/login';
-    // 이메일과 비밀번호를 json형식으로 인코딩
-    final String body = json.encode({
-      'email' : email,
-      'password' : password,
-    });
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
 
-    // http.post 메서드를 사용하여 서버에 post요청
-    final http.Response response = await http.post(
-      Uri.parse(url),
-      // 요청 본문의 형식이 JSON임을 알림
-      headers: {'Content-Type': 'application/json'},
-      // 여기서는 사용자가 입력한 이메일, 비밀번호를 json 형식으로 변환한 문자열 전달
-      body: body,
-    );
+  Future<void> getUserInfo() async {
+    final response = await http.get(Uri.parse('http://20.249.17.142:8000/account/get/${widget.email}'));
 
     if (response.statusCode == 200) {
-      String responseBody = utf8.decode(response.bodyBytes);
-
-      // 응답 본문을 JSON으로 변환
-      String jsonData = jsonDecode(responseBody);
-
-      if (jsonData == 'success') {
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainPage(email)),
-        );
-        _showLoginSuccessDialog();
-      }
-      else {
-        _showLoginfailDialog();
-      }
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
+      setState(() {
+        userName = data['name'];
+      });
+    } else {
+      throw Exception('유저 정보를 가져올 수 없습니다');
     }
-  }
-
-  void _navigateToSignUpPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TermsOfService()),
-    );
-  }
-
-  void _showLoginSuccessDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('로그인 성공',
-            style: TextStyle(
-              fontFamily: 'Moebius',
-            ),),
-          content: Text('로그인이 성공적으로 완료되었습니다.',
-            style: TextStyle(
-              fontFamily: 'Moebius',
-            ),),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-              },
-              child: Text('확인',
-                style: TextStyle(
-                  fontFamily: 'Moebius',
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showLoginfailDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('로그인 실패',
-            style: TextStyle(
-              fontFamily: 'Moebius',
-            ),
-          ),
-
-          content: Text('로그인을 다시 해주세요.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-              },
-              child: Text('확인'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: Text(
-                '간편하게 로그인하고\n다양한 서비스를 이용하세요',
-                style: TextStyle(
-                  fontFamily: 'Moebius',
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+        centerTitle: false, // 제목을 가운데 정렬하지 않음
+        automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
+        backgroundColor: Color(0xffffd966),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/appbar.png', // 이미지 경로 지정
+              width: 120, // 이미지 너비 조절
+              height: 140, // 이미지 높이 조절
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: '이메일을 입력해주세요.',
-                      prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
-                      hintStyle: TextStyle(fontFamily: 'Moebius'), // 힌트 폰트 변경
+            SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
+          ],
+        ),
+        actions: [
+          IconButton(
+            // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationPage()),
+              );
+            },
+          ),
+        ],
+      ),
+
+      backgroundColor: Color(0xffffd966),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/배경.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        //color: Color(0xffF4f1b1),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              _searchBox(),
+              SizedBox(height: 20,),
+              _recommendBook(),
+              SizedBox(height: 20,),
+              _fourMenu(),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+            if (_selectedIndex == 1) {
+            } else if (_selectedIndex == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyLibrary()),
+              );
+            } else if (_selectedIndex == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyPage(widget.email)),
+              );
+            }
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: "내 서재",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "홈",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "관리",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _searchBox() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: TextField(
+        controller: _searchController,
+        onSubmitted: (value) {
+          // 'value'는 사용자가 입력한 텍스트
+          print('검색어: $value');
+        },
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          hintText: '동화책을 검색해주세요',
+          hintStyle: TextStyle(fontFamily: 'Pretendard'),
+          prefixIcon: Image.asset(
+            'assets/images/검색토끼.png',
+            width: 20, // 이미지의 너비 설정
+            height: 24, // 이미지의 높이 설정
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide.none, // 테두리 색상 없애기
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _recommendBook() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      child: Padding(
+        padding: EdgeInsets.only(left: 0, top: 1),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    '$userName님을 위한 취향저격 도서 📚',
+                    style: TextStyle(
+                      fontSize: 24, // 폰트 크기 조정
+                      fontFamily: 'Pretendard',
+                      color: Color(0xff929292),
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: '비밀번호를 입력해주세요.',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
-                      hintStyle: TextStyle(fontFamily: 'Moebius'),
-                    ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          // Add logic for 아이디 찾기 button
-                        },
-                        child: Text(
-                          '아이디 찾기',
-                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          // Add logic for 비밀번호 찾기 button
-                        },
-                        child: Text(
-                          '비밀번호 찾기',
-                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 40.0),
-                  Container(
-                    width: 100,  // 너비 조정
-                    height: 50,  // 높이 조정
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.yellow[100],
-                    ),
-                    child: ElevatedButton(
-                      onPressed: _signInWithEmailAndPassword,
-                      child: Text(
-                        '로그인',
-                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 100,  // 너비 조정
-                    height: 50,  // 높이 조정
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.yellow[100],
-                    ),
-                    child: ElevatedButton(
-                      onPressed: _navigateToSignUpPage,
-                      child: Text(
-                        '회원가입',
-                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      ),
-                    ),
-                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 15),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이', width: 150, height: 200),
+                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
+                  _buildBook('assets/images/인기도서5.png', '도도도 도착!', width: 150, height: 200),
+                  _buildBook('assets/images/해님달님.png', '해님달님', width: 150, height: 200),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
+    return GestureDetector(
+      onTap: () {
+        if (title == '토끼와 거북이') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
+          );
+        }
+      },
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              width: width,
+              height: height,
+            ),
+            SizedBox(height: 5),
+            Text(
+              title,
+              style: TextStyle(fontSize: 16, fontFamily: 'Pretendard'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCard(String text, String imagePath, Color color) {
+    Widget? targetScreen;
+
+    switch (text) {
+      case '신간도서':
+        targetScreen = BrandNewBookPage();
+        break;
+      case '인기도서':
+        targetScreen = PopularBook();
+        break;
+      case '연령별 추천도서':
+        targetScreen = AgeBookPage();
+        break;
+      case '카테고리':
+        targetScreen = CategoryPage();
+        break;
+      default:
+        break;
+    }
+
+    return InkWell(
+      onTap: () {
+        if (targetScreen != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => targetScreen!),
+          );
+        }
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          width: 150,
+          height: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 50,
+                height: 50,
+                fit: BoxFit.contain,
+              ),
+              SizedBox(height: 20),
+              Text(
+                text,
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontSize: 18.0, // 모든 텍스트의 크기를 동일하게 설정합니다.
+                  color: color, // 텍스트의 색깔을 설정합니다.
+                ),
+              )
+            ],
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _fourMenu(){
+    return Column(
+      children: [
+        // SizedBox(height: 0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCard('신간도서', 'assets/images/carrot.png', Color(0xffffa07a)),
+            _buildCard('인기도서', 'assets/images/turtle.png', Color(0xffADD797)),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCard('연령별 추천도서', 'assets/images/chickchick.png', Color(0xffb0c4de)),
+            _buildCard('카테고리', 'assets/images/dinasour.png', Color(0xffffb6c1)),
+          ],
+        ),
+      ],
     );
   }
 }

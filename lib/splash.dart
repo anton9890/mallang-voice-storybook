@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'home.dart';
+import 'login.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
-  _SplashState createState() => _SplashState();
+  _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
@@ -20,7 +19,7 @@ class _SplashState extends State<Splash> {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MyHomePage(title: ' ')),
+      MaterialPageRoute(builder: (context) => LoginPage(title: ' ')),
     );
   }
 

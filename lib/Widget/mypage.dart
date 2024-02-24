@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
-import '../home.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -47,7 +45,7 @@ class MyPage extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 40.0,
-                        backgroundImage: AssetImage('assets/images/heart.png'),
+                        backgroundImage: AssetImage('assets/images/마이페이지토끼.png'),
                       ),
                       SizedBox(width: 16.0),
                       Column(

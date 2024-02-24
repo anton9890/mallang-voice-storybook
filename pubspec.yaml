@@ -37,7 +37,8 @@ dependencies:
   flutter_sound: ^9.2.13
   permission_handler: ^11.3.0
   http: ^1.2.0
-  dio: ^5.4.1
+#  dio: ^5.4.11
+  dio : ^4.0.0
   provider: ^6.1.1
   audioplayers: ^5.2.1
   animated_text_kit: ^4.2.2
@@ -45,6 +46,10 @@ dependencies:
   get: ^4.6.6
   flutter_launcher_icons: ^0.13.1
   lottie: ^3.1.0
+  flutter_animated_button: ^2.0.3
+  button_animations: ^2.0.0+3
+  chat_gpt_sdk: ^2.0.0
+
 flutter_icons:
   image_path: "images/ic_launcher.png"
   android: true
@@ -67,12 +72,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
-    - family: Moebius
+    - family: Pretendard
       fonts:
 #        - asset: assets/fonts/Moebius.ttf
 #        - asset: assets/fonts/Moebius Bold.ttf
 #        - asset: assets/fonts/뫼비우스 Bold.ttf
-        - asset: assets/fonts/뫼비우스 Regular.ttf
+#        - asset: assets/fonts/뫼비우스 Regular.ttf
+#        - asset: assets/fonts/Pretendard-Medium.otf
+        - asset: assets/fonts/Pretendard-Regular.otf
+
+
 
   assets:
   - assets/images/title.png
@@ -115,8 +124,6 @@ flutter:
   - assets/images/giraffe.png
   - assets/images/lion.png
   - assets/images/1-2.png
-  - assets/images/1-1.png
-  - assets/images/1.png
   - assets/images/rabbit.png
   - assets/images/거.png
   - assets/images/토.png
@@ -124,10 +131,8 @@ flutter:
   - assets/images/chick.png
   - assets/images/sea.png
   - assets/images/to.png
-#  - assets/images/mic.png
   - assets/images/prev.png
   - assets/images/splash.png
-  - assets/images/토거.png
   - assets/images/prev.png
   - assets/images/ic_launcher.png
   - assets/images/next.png
@@ -135,10 +140,17 @@ flutter:
   - assets/images/토낑.png
   - assets/images/그림2.png
   - assets/images/3.png
-#  - assets/images/4.png
   - assets/images/찐막.png
   - assets/images/배경.png
   - assets/images/appbar.png
   - assets/images/검색토끼.png
   - assets/lottie/lottie1.json
-
+  - assets/images/마이페이지토끼.png
+  - assets/lottie/lottie2.json
+  - assets/images/mic.png
+  - assets/images/pause.png
+  - assets/images/carrot.png
+  - assets/images/chickchick.png
+  - assets/images/dinasour.png
+  - assets/images/turtle.png
+  - assets/images/stt.png

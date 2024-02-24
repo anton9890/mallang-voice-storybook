@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:dashed_stepper/dashed_stepper.dart';
-import 'home.dart';
+import 'package:lottie/lottie.dart';
+import 'login.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'dart:async';
 // fast api 통신할 때 필요한 라이브러리
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:dio/dio.dart';
+import 'dart:convert';import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:path_provider/path_provider.dart';
-
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -86,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
         title: Text(
           '회원가입',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 20,
             fontWeight: FontWeight.bold,),
         ),
@@ -119,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
         height: 25,
         step: _currentStep,
         labels: ['개인정보 입력','회원정보 입력','관심분야 설정','목소리 녹음'],
-        labelStyle: TextStyle(fontFamily: 'Moebius'),
+        labelStyle: TextStyle(fontFamily: 'Pretendard', fontSize: 11),
         indicatorColor: Colors.black,
         length: 4,
         dotSize: 12,
@@ -167,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
       visible: _currentStep != 1 && _currentStep != 5,
       child: TextButton(
         onPressed: _currentStep > 1 ? () => setState(() => _currentStep -= 1) : null,
-        child: const Text('이전', style: TextStyle(fontFamily: 'Moebius',
+        child: const Text('이전', style: TextStyle(fontFamily: 'Pretendard',
             color: Colors.black)),
       ),
     );
@@ -176,7 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildSkipButton() {
     return TextButton(
       onPressed: () => setState(() => _currentStep = 5),
-      child: Text('스킵', style: TextStyle(fontFamily: 'Moebius',
+      child: Text('스킵', style: TextStyle(fontFamily: 'Pretendard',
           color: Colors.grey)),
     );
   }
@@ -185,8 +183,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextButton(
       onPressed: _handleNextOrCompleteButtonPress,
       child: _currentStep == 5
-          ? Text('완료', style: TextStyle(fontFamily: 'Moebius',color: Colors.black))
-          : Text('다음', style: TextStyle(fontFamily: 'Moebius',color: Colors.black)),
+          ? Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black))
+          : Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black)),
     );
   }
 
@@ -211,7 +209,7 @@ class _SignUpPageState extends State<SignUpPage> {
       stopRecorder().then((filePath) {
         sendAudioFile(filePath);
       });
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: '')));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(title: '')));
     }
   }
 
@@ -226,7 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: TextButton(
               child: Text('확인',
                 style: TextStyle(
-                  fontFamily: 'Moebius',
+                  fontFamily: 'Pretendard',
                 ),
               ),
               onPressed: () {
@@ -260,7 +258,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '이름',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -270,7 +268,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _nameController,
           decoration: InputDecoration(
             hintText: '띄어쓰기 없이 한글 입력',
-            hintStyle: TextStyle(fontFamily: 'Moebius'),
+            hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -284,7 +282,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '나이',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -294,7 +292,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _ageController,
           decoration: InputDecoration(
             hintText: '5세이면 5을 입력해주세요',
-            hintStyle: TextStyle(fontFamily: 'Moebius'),
+            hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -308,7 +306,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '성별',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -318,12 +316,12 @@ class _SignUpPageState extends State<SignUpPage> {
           children: <Widget>[
             Center(child: Text('남성',
               style: TextStyle(
-                fontFamily: 'Moebius',
+                fontFamily: 'Pretendard',
               ),
             )),
             Center(child: Text('여성',
               style: TextStyle(
-                fontFamily: 'Moebius',
+                fontFamily: 'Pretendard',
               ),)),
           ],
           onPressed: (int index) {
@@ -346,7 +344,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           '휴대폰 번호',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,
           ),
           textAlign: TextAlign.left,
@@ -361,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '010',
                   border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Moebius'),
+                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -378,7 +376,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Moebius'),
+                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -395,7 +393,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Moebius'),
+                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -417,7 +415,7 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         Text('이메일',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -426,7 +424,7 @@ class _SignUpPageState extends State<SignUpPage> {
           controller: _emailController,
           decoration: InputDecoration(
             hintText: '이메일을 입력해주세요',
-            hintStyle: TextStyle(fontFamily: 'Moebius'),
+            hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -445,7 +443,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 35),
         Text('비밀번호',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -455,7 +453,7 @@ class _SignUpPageState extends State<SignUpPage> {
           obscureText: true,
           decoration: InputDecoration(
             hintText: '비밀번호를 입력해주세요',
-            hintStyle: TextStyle(fontFamily: 'Moebius'),
+            hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -468,7 +466,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 35),
         Text('비밀번호 확인',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
@@ -478,7 +476,7 @@ class _SignUpPageState extends State<SignUpPage> {
           obscureText: true,
           decoration: InputDecoration(
             hintText: '비밀번호를 재입력해주세요',
-            hintStyle: TextStyle(fontFamily: 'Moebius'),
+            hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
           ),
           validator: (value) {
@@ -527,14 +525,14 @@ class _SignUpPageState extends State<SignUpPage> {
               TextSpan(
                 text: categoryText,
                 style: TextStyle(
-                  fontFamily: 'Moeibus',
+                  fontFamily: 'Pretendard',
                   fontSize: 18,
                 ),
               ),
               TextSpan(
                 text: categoryEmoji,
                 style: TextStyle(
-                  fontFamily: 'Moeibus',
+                  fontFamily: 'Pretendard',
                   fontSize: 17,
                   color: color,
                 ),
@@ -583,28 +581,27 @@ class _SignUpPageState extends State<SignUpPage> {
         children: [
           Text('아이들이 동화책을 읽을 때,',
             style: TextStyle(
-              fontFamily: 'Moebius',
-              // fontSize: 20,
+              fontFamily: 'Pretendard',
             ),),
           Text('더욱 몰입하고 재미를 느낄 수 있도록',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           Text('어머님, 아버님의 목소리 녹음이 필요해요.',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           SizedBox(height: 30,),
           Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           Text('조용한 환경에서 정확한 발음으로 할수록 좋아요 :)',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               color: Colors.grey,
             ),),
           SizedBox(height: 30,),
@@ -624,7 +621,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 '$twoDigitMinutes:$twoDigitSeconds',
                 style: const TextStyle(
                   color: Colors.black,
-                  fontFamily: 'Moebius',
+                  fontFamily: 'Pretendard',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -648,22 +645,22 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(height: 30),
           Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           Text('토끼는 거북이를 보고 먼저 말을 걸었어요.',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
           Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?',
             style: TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
         ],
@@ -677,26 +674,26 @@ class _SignUpPageState extends State<SignUpPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 200, // 이미지의 너비 조정
-            height: 200, // 이미지의 높이 조정
-            child: Image.asset('assets/images/ballon.png'),
+            width: 200, // 애니메이션의 너비 조정
+            height: 200, // 애니메이션의 높이 조정
+            child: Lottie.asset('assets/lottie/lottie2.json'), // 로티 애니메이션 파일 불러오기
           ),
-          SizedBox(height: 20), // 이미지와 텍스트 사이의 간격 조정
+          SizedBox(height: 20), // 애니메이션과 텍스트 사이의 간격 조정
           Text(
             '환영합니다!',
-            style: TextStyle(fontSize: 20, fontFamily: 'Moebius'),
+            style: TextStyle(fontSize: 20, fontFamily: 'Pretendard'),
             // 텍스트의 크기 조정
           ),
           Text(
             '가입이 완료되었습니다.',
-            style: TextStyle(fontSize: 20, fontFamily: 'Moebius'),
+            style: TextStyle(fontSize: 20, fontFamily: 'Pretendard'),
           ),
           SizedBox(height: 20,),
           Text(
             '로그인하고 말랑 서비스를 이용해보세요 :)',
             style: TextStyle(
               fontSize: 14,
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               color: Colors.grey.withOpacity(0.5),
             ),
           )
@@ -704,6 +701,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
 
   // 회원 정보 서버로 보내기
   Future registerUser() async{
@@ -725,7 +723,7 @@ class _SignUpPageState extends State<SignUpPage> {
     };
 
     final response = await http.post(
-      Uri.parse('http://172.16.93.69:8000/account/register'),  // 서버의 URL
+      Uri.parse('http://20.249.17.142:8000/account/register'),  // 서버의 URL
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -741,7 +739,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // 녹음된 파일 서버로 보내기
   Future<void> sendAudioFile(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://172.16.93.69:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
+    var request = http.MultipartRequest('POST', Uri.parse('http://http://20.249.17.142:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',

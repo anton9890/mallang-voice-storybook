@@ -1,34 +1,24 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
-// import 'package:mallang/CombinedPage.dart';
 import 'package:mallang/Widget/test.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../main.dart';
-import '../home.dart';
-import 'package:mallang/Widget/brandnew.dart';
-import 'package:mallang/MainPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:mallang/signup.dart';
-import 'package:flutter/material.dart';
-import 'package:dashed_stepper/dashed_stepper.dart';
-import 'home.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
 import 'dart:async';
+
 // fast api 통신할 때 필요한 라이브러리
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:lottie/lottie.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:mallang/stt.dart';
 
 class test extends StatefulWidget {
   final String email;
@@ -221,52 +211,60 @@ class _testState extends State<test> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                height: 200.0, // 높이를 원하는 값으로 설정하세요
-                width: 200.0, // 너비를 원하는 값으로 설정하세요
-                child: Lottie.asset(
-                  'assets/lottie/lottie1.json',
-                  fit: BoxFit.contain,
+        return Transform.rotate(
+          angle: -pi / -2,  // 90도 회전
+          child: AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  height: 150.0, // 높이를 원하는 값으로 설정하세요
+                  width: 150.0, // 너비를 원하는 값으로 설정하세요
+                  child: Lottie.asset(
+                    'assets/lottie/lottie1.json',
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-              SizedBox(height: 30,),
-              Text(
-                '${widget.title} 를 다 읽으셨네요 !',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: 'Moebius',
+                SizedBox(height: 30,),
+                Text(
+                  '${widget.title}를 다 읽으셨네요 !',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: 'Pretendard',
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              Center(
+                child: TextButton(
+                  child: Text(
+                    '꾹 눌러서 나가기❤️',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Test(widget.email, widget.title),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
+            backgroundColor: Colors.white,
           ),
-          actions: <Widget>[
-            Center(
-              child: TextButton(
-                child: Text(
-                  '꾹 눌러서 나가기❤️',
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Test(widget.email, widget.title),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-          backgroundColor: Colors.white,
         );
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     double progress = (scriptData.length-1) > 0 ? currentIndex / (scriptData.length-1) : 0;
@@ -282,6 +280,7 @@ class _testState extends State<test> {
             buildPrevButton(),
             buildNextButton(),
             buildMicrophoneButton(),
+            buildsttButton(),
             buildScriptText(currentScript),
           ],
         ),
@@ -321,6 +320,31 @@ class _testState extends State<test> {
     );
   }
 
+  Widget buildsttButton() {
+    return Positioned(
+      left: 757.0,
+      bottom: 80.0,
+      child: Stack(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SttPage()
+                ),
+              );
+            },
+            child: Image.asset(
+              'assets/images/stt.png',
+              width: 45.0,
+              height: 100.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
 // 다음 버튼을 그리는 위젯
   Widget buildNextButton() {
@@ -332,7 +356,6 @@ class _testState extends State<test> {
           InkWell(
             onTap: () {
               nextScript();
-              getAudio();
             },
             child: Image.asset(
               'assets/images/next.png',
@@ -340,101 +363,61 @@ class _testState extends State<test> {
               height: 100.0,
             ),
           ),
-          // buildSpeechButton(), // 음성 버튼 추가
         ],
       ),
     );
   }
 
-// //음성 버튼
-//   Widget buildSpeechButton() {
-//     return Positioned(
-//       top: -30.0, // 아래로 이동하여 간격을 줍니다.
-//       right: 0.0,
-//       child: InkWell(
-//         onTap: () {
-//           // Add your speech button action here
-//         },
-//         child: Image.asset(
-//           'assets/images/speech.png',
-//           width: 35.0,
-//           height: 90.0,
-//         ),
-//       ),
-//     );
-//   }
-
-
-  // 마이크 버튼
   Widget buildMicrophoneButton() {
+    bool isRecording = false;
+
     if (getScript_done) {
       if (scriptData[currentIndex]['role'] == widget.selectedcharacter) {
         return Positioned(
-          left: (MediaQuery
-              .of(context)
-              .size
-              .width - 50), // 가로 중앙으로 위치하도록 수정
-          bottom: 20.0,
-          child: Material(
-            color: Colors.white, // 배경색을 흰색으로 설정
-            shape: CircleBorder(), // 원 모양으로 테두리 모양 설정
+            left: (MediaQuery.of(context).size.width),
+            bottom: 20.0,
             child: InkWell(
-              onTap: () {
-                // Add your microphone button action here
+              onTap: () async {
+                if (recorder.isRecording) {
+                  await stopRecorder();
+                } else {
+                  await startRecord();
+                }
+                setState(() {});
               },
               child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child:
-                IconButton(
-                  icon: Icon(
-                    recorder.isRecording ? Icons.stop : Icons.mic,
-                    color: Colors.green[400], // 아이콘 색상
-                  ),
-                  iconSize: 80,
-                  onPressed: () async {
-                    if (recorder.isRecording) {
-                      await stopRecorder();
-                    }
-                    else {
-                      await startRecord();
-                    }
-                    setState(() {});
-                  },
+                padding: EdgeInsets.all(9.0),
+                child: Image.asset(
+                  recorder.isRecording ? 'assets/images/pause.png' : 'assets/images/mic.png',
+                  width: 70,
+                  height: 70,
                 ),
               ),
-            ),
-          ),
-        );
-      }
+            ));}
       else {
         return Positioned(
           top: 0.0,
           right: 0.0,
           child: Material(
-            color: Colors.transparent, // 투명 배경 설정
+            color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                // Add your speech button action here
+//
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.speaker,
-                  color: Colors.white,
-                ),
               ),
             ),
           ),
         );
       }
-    }
-    else {
+    } else {
       return Positioned(
         top: 0.0,
         right: 0.0,
         child: Material(
-          color: Colors.transparent, // 투명 배경 설정
+          color: Colors.transparent,
           child: InkWell(
             onTap: () {
               // Add your speech button action here
@@ -442,10 +425,6 @@ class _testState extends State<test> {
             borderRadius: BorderRadius.circular(12),
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.speaker,
-                color: Colors.white,
-              ),
             ),
           ),
         ),
@@ -488,7 +467,7 @@ class _testState extends State<test> {
                 text: [currentScript['text'] ?? ''],
                 textStyle: TextStyle(
                   fontSize: 20.0,
-                  fontFamily: 'Moebius',
+                  fontFamily: 'Pretendard',
                 ),
                 speed: Duration(milliseconds: 50),
                 repeatForever: false,
@@ -498,7 +477,6 @@ class _testState extends State<test> {
           ),
         ],
       ),
-
     );
   }
 

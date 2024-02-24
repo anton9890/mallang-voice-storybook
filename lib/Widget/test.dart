@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/MainPage.dart';
+import 'package:mallang/home.dart';
 import 'package:mallang/pagetest.dart';
 // import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:button_animations/button_animations.dart';
 
 class Test extends StatefulWidget {
   final String email;
@@ -55,7 +56,7 @@ class _TestState extends State<Test> {
 
       setState(() {
         this.info = info;
-        this.parent = character[0];
+        this.parent = "";
         this.rabbit = character[1];
         this.turtle = character[2];
       });
@@ -139,31 +140,26 @@ class _TestState extends State<Test> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
+                      AnimatedButton(
+                        child: Text('${turtle ?? "거북이"} 모드',
+                          style: TextStyle(
+                            fontFamily: 'Moebius',
+                            color: Colors.black,
+                          ),),
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => test(widget.email, widget.title, turtle), // 'rabbit' 값을 전달
                             ),
                           );
-                          // Handle the onPressed event
-                          print('거북이 목소리 tapped');
                         },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          primary: Colors.yellow[100],
-                          padding: EdgeInsets.all(2.0),
-                          fixedSize: Size(100,30),
-                        ),
-                        child: Text('${turtle ?? "거북이"} 모드',
-                          style: TextStyle(
-                            fontFamily: 'Moebius',
-                              color: Colors.black,
-                          ),
-                        ),
+                        height: 40,
+                        width: 100,
+                        type: null,
+                        color: Colors.yellow[100],
+                        shadowColor: Colors.amber,
+                        borderRadius: 30,
                       ),
                     ],
                   ),
@@ -192,31 +188,26 @@ class _TestState extends State<Test> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle the onPressed event
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => test(widget.email, widget.title, rabbit),
-                            ),
-                          );
-                          print('토끼 목소리 tapped');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          primary: Colors.yellow[100],
-                          padding: EdgeInsets.all(2.0),
-                          fixedSize: Size(100,30),
-                        ),
+                      AnimatedButton(
                         child: Text('${rabbit ?? "토끼"} 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
                             color: Colors.black,
-                          ),
-                        ),
+                          ),),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => test(widget.email, widget.title, rabbit), // 'rabbit' 값을 전달
+                            ),
+                          );
+                        },
+                        height: 40,
+                        width: 100,
+                        type: null,
+                        color: Colors.yellow[100],
+                        shadowColor: Colors.amber,
+                        borderRadius: 30,
                       ),
                     ],
                   ),
@@ -245,31 +236,26 @@ class _TestState extends State<Test> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle the onPressed event
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => test(widget.email, widget.title, parent), // 'turtle' 값을 전달
-                            ),
-                          );
-                          print('그냥 듣기 tapped');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          primary: Colors.yellow[100],
-                          padding: EdgeInsets.all(2.0),
-                          fixedSize: Size(100,30),
-                        ),
+                      AnimatedButton(
                         child: Text('감상 모드',
                           style: TextStyle(
                             fontFamily: 'Moebius',
                             color: Colors.black,
-                          ),
-                        ),
+                          ),),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => test(widget.email, widget.title, parent), // 'rabbit' 값을 전달
+                            ),
+                          );
+                        },
+                        height: 40,
+                        width: 100,
+                        type: null,
+                        color: Colors.yellow[100],
+                        shadowColor: Colors.amber,
+                        borderRadius: 30,
                       ),
                     ],
                   ),
@@ -284,7 +270,7 @@ class _TestState extends State<Test> {
                 borderRadius: BorderRadius.circular(25.0), // 모든 모서리를 둥글게 만듭니다.
               ),
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
