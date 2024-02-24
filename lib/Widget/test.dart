@@ -90,7 +90,7 @@ class _TestState extends State<Test> {
                           offset: Offset(0, 3),
                         ),
                       ],
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/images/토끼와거북이.png'),
                         fit: BoxFit.cover,
                       ),
@@ -99,20 +99,20 @@ class _TestState extends State<Test> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Center(
               child: Text(
                 '${widget.title}',
-                style: TextStyle(fontSize: 28, fontFamily: 'Moebius'),
+                style: const TextStyle(fontSize: 28, fontFamily: 'Pretendard'),
               ),
             ),
-            Center(
+            const Center(
               child: Text(
                 '김미견 그림/만화',
-                style: TextStyle(fontSize: 15, fontFamily : 'Moebius', color: Colors.grey),
+                style: TextStyle(fontSize: 15, fontFamily : 'Pretendard', color: Colors.grey),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -130,10 +130,10 @@ class _TestState extends State<Test> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 5,
                               blurRadius: 7,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/거.png'),
                             fit: BoxFit.cover,
                           ),
@@ -143,7 +143,7 @@ class _TestState extends State<Test> {
                       AnimatedButton(
                         child: Text('${turtle ?? "거북이"} 모드',
                           style: TextStyle(
-                            fontFamily: 'Moebius',
+                            fontFamily: 'Pretendard',
                             color: Colors.black,
                           ),),
                         onTap: () {
@@ -157,8 +157,8 @@ class _TestState extends State<Test> {
                         height: 40,
                         width: 100,
                         type: null,
-                        color: Colors.yellow[100],
-                        shadowColor: Colors.amber,
+                        color: Colors.white70,
+                        shadowColor: Colors.amber[300],
                         borderRadius: 30,
                       ),
                     ],
@@ -181,17 +181,17 @@ class _TestState extends State<Test> {
                               offset: Offset(0, 3),
                             ),
                           ],
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/토.png'),
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       AnimatedButton(
                         child: Text('${rabbit ?? "토끼"} 모드',
                           style: TextStyle(
-                            fontFamily: 'Moebius',
+                            fontFamily: 'Pretendard',
                             color: Colors.black,
                           ),),
                         onTap: () {
@@ -205,8 +205,8 @@ class _TestState extends State<Test> {
                         height: 40,
                         width: 100,
                         type: null,
-                        color: Colors.yellow[100],
-                        shadowColor: Colors.amber,
+                        color: Colors.white70,
+                        shadowColor: Colors.amber[300],
                         borderRadius: 30,
                       ),
                     ],
@@ -239,7 +239,7 @@ class _TestState extends State<Test> {
                       AnimatedButton(
                         child: Text('감상 모드',
                           style: TextStyle(
-                            fontFamily: 'Moebius',
+                            fontFamily: 'Pretendard',
                             color: Colors.black,
                           ),),
                         onTap: () {
@@ -253,8 +253,8 @@ class _TestState extends State<Test> {
                         height: 40,
                         width: 100,
                         type: null,
-                        color: Colors.yellow[100],
-                        shadowColor: Colors.amber,
+                        color: Colors.white70,
+                        shadowColor: Colors.amber[300],
                         borderRadius: 30,
                       ),
                     ],
@@ -266,7 +266,7 @@ class _TestState extends State<Test> {
             Container(
               width: 380.0,
               decoration: BoxDecoration(
-                color: Colors.yellow[100],
+                color: Colors.orange[100],
                 borderRadius: BorderRadius.circular(25.0), // 모든 모서리를 둥글게 만듭니다.
               ),
               child: Padding(
@@ -276,7 +276,7 @@ class _TestState extends State<Test> {
                   children: [
                     Text(
                       '${info}',
-                      style: TextStyle(fontSize: 16, fontFamily: 'Moebius', color: Colors.black),
+                      style: TextStyle(fontSize: 16, fontFamily: 'Pretendard', color: Colors.black),
                     ),
                   ],
                 ),

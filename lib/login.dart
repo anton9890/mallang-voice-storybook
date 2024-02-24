@@ -32,12 +32,15 @@ class LoginPage extends StatelessWidget {
       showDialog(
         context: context,
         builder: (BuildContext context) {
+          // 로그인 성공 시 키보드 숨기기
+          FocusScope.of(context).unfocus();
+
           return AlertDialog(
             title: const Text(
               '로그인 성공',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: 'Moebius',
+                fontFamily: 'Pretendard',
                 color: Colors.black,
               ),
             ),
@@ -45,7 +48,7 @@ class LoginPage extends StatelessWidget {
               '로그인이 성공적으로 완료되었습니다.',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: 'Moebius',
+                fontFamily: 'Pretendard',
                 color: Colors.black,
               ),
             ),
@@ -58,8 +61,8 @@ class LoginPage extends StatelessWidget {
                   child: const Text(
                     '확인',
                     style: TextStyle(
-                      fontFamily: 'Moebius',
-                      color: Colors.blueAccent,
+                      fontFamily: 'Pretendard',
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -78,13 +81,13 @@ class LoginPage extends StatelessWidget {
             title: const Text('로그인 실패',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: 'Moebius',
+                fontFamily: 'Pretendard',
               ),
             ),
             content: const Text('로그인을 다시 해주세요.',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: 'Mobius',
+                fontFamily: 'Pretendard',
               ),),
             actions: [
               Center( // 여기 추가
@@ -207,7 +210,7 @@ class LoginPage extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10), // 테두리 둥글기 설정
-                      color: Colors.yellow[100],
+                      color: Colors.orange,
                     ),
                     child:
                     ElevatedButton(
@@ -215,7 +218,7 @@ class LoginPage extends StatelessWidget {
                       style: MallangButtonStyle.noSplash,
                       child: const Text(
                         '로그인 하기',
-                        style: TextStyle(fontFamily: 'Pretendard', color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontFamily: 'Pretendard', color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

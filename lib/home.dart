@@ -52,7 +52,7 @@ class _MainState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: false, // 제목을 가운데 정렬하지 않음
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-        backgroundColor: Color(0xffffd966),
+        backgroundColor: const Color(0xffffd966),
         title: Row(
           children: [
             Image.asset(
@@ -121,7 +121,7 @@ class _MainState extends State<HomePage> {
             }
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: "내 서재",
@@ -152,7 +152,7 @@ class _MainState extends State<HomePage> {
           filled: true,
           fillColor: Colors.white,
           hintText: '동화책을 검색해주세요',
-          hintStyle: TextStyle(fontFamily: 'Pretendard'),
+          hintStyle: const TextStyle(fontFamily: 'Pretendard'),
           prefixIcon: Image.asset(
             'assets/images/검색토끼.png',
             width: 20, // 이미지의 너비 설정
@@ -171,17 +171,17 @@ class _MainState extends State<HomePage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       child: Padding(
-        padding: EdgeInsets.only(left: 0, top: 1),
+        padding: const EdgeInsets.only(left: 0, top: 1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     '$userName님을 위한 취향저격 도서 📚',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24, // 폰트 크기 조정
                       fontFamily: 'Pretendard',
                       color: Color(0xff929292),
@@ -191,7 +191,7 @@ class _MainState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -220,7 +220,7 @@ class _MainState extends State<HomePage> {
         }
       },
       child: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Image.asset(
@@ -228,10 +228,10 @@ class _MainState extends State<HomePage> {
               width: width,
               height: height,
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               title,
-              style: TextStyle(fontSize: 16, fontFamily: 'Pretendard'),
+              style: const TextStyle(fontSize: 16, fontFamily: 'Pretendard'),
             ),
           ],
         ),
@@ -308,7 +308,6 @@ class _MainState extends State<HomePage> {
   Widget _fourMenu(){
     return Column(
       children: [
-        // SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -316,7 +315,7 @@ class _MainState extends State<HomePage> {
             _buildCard('인기도서', 'assets/images/turtle.png', Color(0xffADD797)),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

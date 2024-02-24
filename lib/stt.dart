@@ -100,7 +100,7 @@ class _SttPageState extends State<SttPage> {
           padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
           child: Text(_text,
             style: const TextStyle(
-              fontFamily: 'Moebius',
+              fontFamily: 'Pretendard',
               fontSize: 20,
             ),
           ),

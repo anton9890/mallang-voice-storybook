@@ -74,11 +74,6 @@ flutter:
   fonts:
     - family: Pretendard
       fonts:
-#        - asset: assets/fonts/Moebius.ttf
-#        - asset: assets/fonts/Moebius Bold.ttf
-#        - asset: assets/fonts/뫼비우스 Bold.ttf
-#        - asset: assets/fonts/뫼비우스 Regular.ttf
-#        - asset: assets/fonts/Pretendard-Medium.otf
         - asset: assets/fonts/Pretendard-Regular.otf
 
 

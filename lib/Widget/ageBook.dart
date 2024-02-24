@@ -8,7 +8,7 @@ class AgeBookPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           '연령별 추천도서',
           style: TextStyle(
             fontSize: 20,
@@ -16,7 +16,7 @@ class AgeBookPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 1.0,
@@ -34,7 +34,7 @@ class AgeBookPage extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -47,8 +47,8 @@ class AgeBookPage extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '1~2세 추천동화',
                       style: TextStyle(
                         fontSize: 16,
@@ -70,7 +70,7 @@ class AgeBookPage extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -83,8 +83,8 @@ class AgeBookPage extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '3~4세 추천도서',
                       style: TextStyle(
                         fontSize: 16,
@@ -106,7 +106,7 @@ class AgeBookPage extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -119,8 +119,8 @@ class AgeBookPage extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '5~6세 추천도서',
                       style: TextStyle(
                         fontSize: 16,
@@ -142,7 +142,7 @@ class AgeBookPage extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -155,8 +155,8 @@ class AgeBookPage extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '7세 이상 추천도서',
                       style: TextStyle(
                         fontSize: 16,
@@ -171,7 +171,7 @@ class AgeBookPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xffDaeefa),
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(20.0),
@@ -180,8 +180,6 @@ class AgeBookPage extends StatelessWidget {
         ),
         child: Image.asset('assets/images/sea.png'),
       ),
-      //bottomNavigationBar: Image.asset('assets/images/sea.png'),
-
     );
   }
 }

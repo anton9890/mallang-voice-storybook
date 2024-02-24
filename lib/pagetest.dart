@@ -228,7 +228,7 @@ class _testState extends State<test> {
                 SizedBox(height: 30,),
                 Text(
                   '${widget.title}를 다 읽으셨네요 !',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                     fontFamily: 'Pretendard',
                   ),
@@ -238,7 +238,7 @@ class _testState extends State<test> {
             actions: <Widget>[
               Center(
                 child: TextButton(
-                  child: Text(
+                  child: const Text(
                     '꾹 눌러서 나가기❤️',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
@@ -310,6 +310,7 @@ class _testState extends State<test> {
         onTap: () {
           prevScript();
           getAudio();
+          audioPlayer.stop();
         },
         child: Image.asset(
           'assets/images/prev.png',
@@ -328,6 +329,7 @@ class _testState extends State<test> {
         children: [
           InkWell(
             onTap: () {
+              audioPlayer.stop();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SttPage()

@@ -49,7 +49,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontSize: 16,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.grey.withOpacity(0.9),
                   ),
                 ),
                 Text(
@@ -57,7 +57,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontSize: 16,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.grey.withOpacity(0.9),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -80,18 +80,18 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
             }
                 : null,
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               backgroundColor: (allAgreed || (serviceAgreed && privacyAgreed))
-                  ? Colors.black // 변경된 부분
-                  : Colors.blueGrey.withOpacity(0.5), // 변경된 부분
+                  ? Colors.orange // 변경된 부분
+                  : Colors.orange.withOpacity(0.5), // 변경된 부분
               surfaceTintColor: (allAgreed || (serviceAgreed && privacyAgreed))
-                  ? Colors.black // 변경된 부분
-                  : Colors.blueGrey.withOpacity(0.5), // 변경된 부분
+                  ? Colors.orange // 변경된 부분
+                  : Colors.orange.withOpacity(0.5), // 변경된 부분
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('다음', style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, color: Colors.white)),
+            child: Text('다음', style: TextStyle(fontFamily: 'Pretendard', fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ),
       ),
@@ -120,7 +120,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           ),
         ),
         controlAffinity: ListTileControlAffinity.leading,
-        activeColor: Colors.black,
+        activeColor: Colors.orangeAccent,
       ),
     );
   }
@@ -139,14 +139,14 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
         ),
       ),
       controlAffinity: ListTileControlAffinity.leading,
-      activeColor: Colors.black,
+      activeColor: Colors.orangeAccent,
     );
   }
 
   Widget _buildTermsCheckboxes() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.all(5),
       child: Column(
         children: [
           _buildCheckbox(
