@@ -8,8 +8,7 @@ Future<String> getResponse(String question) async {
   final response = await http.post(
     Uri.parse('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions'),
     headers: {
-      'Authorization': 'Bearer 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',
-      'Content-Type': 'application/json',
+///
     },
     body: jsonEncode({
       'prompt': "Tell me like you're explaining to an eight-year-old.",
@@ -80,7 +79,8 @@ class _SttPageState extends State<SttPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('말랑한테 물어봐! \u{1f60e}',
+        title: const Text(
+          '말랑한테 물어봐! \u{1f60e}',
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontSize: 20,
@@ -91,15 +91,23 @@ class _SttPageState extends State<SttPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orangeAccent,
         onPressed: _listen,
-        shape: CircleBorder(side: BorderSide(color: Colors.orangeAccent ?? Colors.orangeAccent, width: 4.0)),
-        child: Icon(_isListening ? Icons.stop : Icons.mic),
-
+        shape: CircleBorder(
+          side: BorderSide(
+            color: Colors.orangeAccent ?? Colors.orangeAccent,
+            width: 4.0,
+          ),
+        ),
+        child: Icon(
+          _isListening ? Icons.stop : Icons.mic,
+          size: 40, // 마이크 아이콘 크기 조정
+        ),
       ),
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
           padding: const EdgeInsets.fromLTRB(90.0, 30.0, 30.0, 150.0),
-          child: Text(_text,
+          child: Text(
+            _text,
             style: const TextStyle(
               fontFamily: 'Pretendard',
               fontSize: 20,
@@ -109,6 +117,7 @@ class _SttPageState extends State<SttPage> {
       ),
     );
   }
+
 
   void _listen() async {
     print('Listening function called');
