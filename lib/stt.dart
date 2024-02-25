@@ -1,17 +1,49 @@
+// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+//
+// Future<Map<String, dynamic>> readJsonFile(String filePath) async {
+//   final jsonString = await rootBundle.loadString(filePath);
+//   final jsonData = jsonDecode(jsonString);
+//   return jsonData;
+// }
+//
+//
+// void main() {
+//   // JSON 파일을 읽어들입니다.
+//   String jsonString = File('lib/토끼와 거북이.json').readAsStringSync();
+//
+//   // JSON 문자열을 파싱하여 Map으로 변환합니다.
+//   Map<String, dynamic> data = jsonDecode(jsonString);
+//
+//   // 필요한 내용에 접근합니다.
+//   String storyTitle = data['title'];
+//   List<Map<String, dynamic>> storyContents = List<Map<String, dynamic>>.from(data['contents'] as List<dynamic>);
+//
+//   // 토끼와 거북이 이야기의 내용을 출력합니다.
+//   print('Title: $storyTitle');
+//   print('Contents:');
+//   for (var content in storyContents) {
+//     print('${content['character']}: ${content['speech']}');
+//   }
+// }
 
 Future<String> getResponse(String question) async {
+
   final response = await http.post(
     Uri.parse('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions'),
     headers: {
-///
+      'Authorization': 'Bearer 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',
+      'Content-Type': 'application/json',
     },
     body: jsonEncode({
-      'prompt': "Tell me like you're explaining to an eight-year-old.",
+      'prompt': "",
       'temperature': 0,
       'max_tokens': 60,
     }),
@@ -53,7 +85,7 @@ class SttPage extends StatefulWidget {
 class _SttPageState extends State<SttPage> {
   final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
-  String _text = "어떤 것에 대해 궁금한 거야?\n    무엇이든 물어봐도 돼!";
+  String _text = "어떤 것에 대해 궁금한 거야?\n무엇이든 물어봐도 돼!";
 
   @override
   void initState() {
@@ -105,7 +137,7 @@ class _SttPageState extends State<SttPage> {
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
-          padding: const EdgeInsets.fromLTRB(90.0, 30.0, 30.0, 150.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
           child: Text(
             _text,
             style: const TextStyle(
@@ -134,7 +166,7 @@ class _SttPageState extends State<SttPage> {
               _text = val.recognizedWords;
               String gptResponse = await getResponse(_text);
               setState(() {
-                _text = 'User: $_text\nGPT-3: $gptResponse';
+                _text = 'User : $_text\n GPT-3: $gptResponse';
               });
             }
           },
