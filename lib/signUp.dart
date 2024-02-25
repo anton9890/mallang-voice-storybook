@@ -349,7 +349,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         Row(
           children: [
             Expanded(
@@ -386,7 +386,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: TextFormField(
                 keyboardType: TextInputType.phone,
@@ -419,7 +419,7 @@ class _SignUpPageState extends State<SignUpPage> {
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         TextFormField(
           controller: _emailController,
           decoration: const InputDecoration(
@@ -440,14 +440,14 @@ class _SignUpPageState extends State<SignUpPage> {
             }
           },
         ),
-        SizedBox(height: 35),
+        const SizedBox(height: 35),
         const Text('비밀번호',
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         TextFormField(
           controller: _passwordController,
           obscureText: true,
