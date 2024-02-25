@@ -123,7 +123,7 @@ class _SttPageState extends State<SttPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orangeAccent,
         onPressed: _listen,
-        shape: CircleBorder(
+        shape: const CircleBorder(
           side: BorderSide(
             color: Colors.orangeAccent ?? Colors.orangeAccent,
             width: 4.0,
@@ -131,7 +131,8 @@ class _SttPageState extends State<SttPage> {
         ),
         child: Icon(
           _isListening ? Icons.stop : Icons.mic,
-          size: 40, // 마이크 아이콘 크기 조정
+          size: 40,
+          color: Colors.white,// 마이크 아이콘 크기 조정
         ),
       ),
       body: SingleChildScrollView(

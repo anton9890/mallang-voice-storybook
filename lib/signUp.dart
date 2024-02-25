@@ -166,7 +166,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: TextButton(
         onPressed: _currentStep > 1 ? () => setState(() => _currentStep -= 1) : null,
         child: const Text('이전', style: TextStyle(fontFamily: 'Pretendard',
-            color: Colors.black)),
+            color: Color(0xffffb13d), fontSize: 20)),
       ),
     );
   }
@@ -175,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextButton(
       onPressed: () => setState(() => _currentStep = 5),
       child: const Text('스킵', style: TextStyle(fontFamily: 'Pretendard',
-          color: Colors.grey)),
+          color: Colors.grey, fontSize: 20)),
     );
   }
 
@@ -183,8 +183,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextButton(
       onPressed: _handleNextOrCompleteButtonPress,
       child: _currentStep == 5
-          ? const Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black))
-          : const Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black)),
+          ? const Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Color(0xffffb13d), fontSize: 20))
+          : const Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Color(0xffffb13d), fontSize: 20)),
     );
   }
 
@@ -263,7 +263,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         TextFormField(
           controller: _nameController,
           decoration: const InputDecoration(

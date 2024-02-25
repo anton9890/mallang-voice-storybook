@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(Duration(milliseconds: 1500), () {});
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginPage(title: ' ')),
@@ -27,13 +27,10 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          // Use the Image widget instead of Text
-          child: Image.asset(
-            'assets/images/splash.png',
-            width: 120, // Adjust the width as needed
-            height: 120, // Adjust the height as needed
-          ),
+        child: Image.asset(
+          'assets/images/splash.png',
+          width: 120, // Adjust the width as needed
+          height: 120, // Adjust the height as needed
         ),
       ),
     );

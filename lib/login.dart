@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mallang/Style/buttonStyle.dart';
 import 'termsOfService.dart';
-import 'home.dart';
+import 'mainTab.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
     _navigateToMainPage(String email) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage(email)),
+        MaterialPageRoute(builder: (context) => MainTabPage(email)),
       );
     }
 
@@ -165,7 +165,7 @@ class LoginPage extends StatelessWidget {
                 '아이가 즐거워지는\n동화 낭독 시간',
                 style: TextStyle(
                   fontFamily: 'Pretendard',
-                  fontSize: 28.0,
+                  fontSize: 27.0,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
