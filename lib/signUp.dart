@@ -737,9 +737,10 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
-  // 녹음된 파일 서버로 보내기
+// 녹음된 파일 서버로 보내기
   Future<void> sendAudioFile(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://http://20.249.17.142:8000/data/upload/parent_audio/{email}'));  // 서버의 URL
+    String email = _emailController.text;
+    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/data/upload/parent_audio/${email}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',
