@@ -10,29 +10,31 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 Future<String> getResponse(String question) async {
+  var jsonBody = jsonEncode({
+    'model': 'gpt-3.5-turbo',
+    'messages': [
+      {'role': 'user', 'content': question}
+    ],
+    'temperature': 0,
+    'max_tokens': 1000,
+  });
+  print(jsonBody);
   final response = await http.post(
-    Uri.parse(
-        'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions'),
+    Uri.parse('https://api.openai.com/v1/chat/completions'),
     headers: {
       'Authorization':
-      'Bearer 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',
+          'Bearer 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',
       'Content-Type': 'application/json',
     },
-    body: jsonEncode({
-      'prompt': "",
-      'temperature': 0,
-      'max_tokens': 60,
-    }),
+    body: jsonBody,
   );
 
   if (response.statusCode == 200) {
-    var responseBody = jsonDecode(response.body);
+    var responseBody = jsonDecode(utf8.decode(response.bodyBytes));
     if (responseBody.containsKey('choices') &&
         responseBody['choices'].isNotEmpty &&
-        responseBody['choices'][0].containsKey('text')) {
-      return utf8.decode(responseBody['choices'][0]['text']
-          .trim()
-          .codeUnits);
+        responseBody['choices'][0].containsKey('message')) {
+      return responseBody['choices'][0]['message']['content'];
     } else {
       return '잘못된 포맷';
     }
@@ -41,6 +43,7 @@ Future<String> getResponse(String question) async {
     return '응답 오류';
   }
 }
+
 
 class Stt extends StatelessWidget {
   const Stt({Key? key}) : super(key: key);
@@ -63,8 +66,6 @@ class SttPage extends StatefulWidget {
 
 class _SttPageState extends State<SttPage> {
   final SpeechToText _speech = stt.SpeechToText();
-
-  // bool _isListening = false;
   String _text = "어떤 것에 대해 궁금한 거야?\n무엇이든 물어봐도 돼!";
 
   @override
@@ -72,7 +73,6 @@ class _SttPageState extends State<SttPage> {
     super.initState();
     _initSpeech();
   }
-
 
   void _initSpeech() async {
     bool available = await _speech.initialize(
@@ -142,6 +142,7 @@ class _SttPageState extends State<SttPage> {
   void _startListening() async {
     await _speech.listen(
       onResult: _onSpeechResult,
+      listenFor: const Duration(seconds: 10),
       localeId: 'ko-KR',
       listenOptions: SpeechListenOptions(
         cancelOnError: true,
@@ -153,12 +154,11 @@ class _SttPageState extends State<SttPage> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) async {
-    print("adslf;kjads;klfj;kldsjf");
     if (result.finalResult) {
       _text = result.recognizedWords;
       String gptResponse = await getResponse(_text);
       setState(() {
-        _text = 'User : $_text\n GPT-3: $gptResponse';
+        _text = 'User : $_text\nGPT-3: $gptResponse';
       });
     }
   }
