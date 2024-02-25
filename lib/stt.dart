@@ -1,5 +1,6 @@
-// import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,39 +8,14 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-//
-// Future<Map<String, dynamic>> readJsonFile(String filePath) async {
-//   final jsonString = await rootBundle.loadString(filePath);
-//   final jsonData = jsonDecode(jsonString);
-//   return jsonData;
-// }
-//
-//
-// void main() {
-//   // JSON 파일을 읽어들입니다.
-//   String jsonString = File('lib/토끼와 거북이.json').readAsStringSync();
-//
-//   // JSON 문자열을 파싱하여 Map으로 변환합니다.
-//   Map<String, dynamic> data = jsonDecode(jsonString);
-//
-//   // 필요한 내용에 접근합니다.
-//   String storyTitle = data['title'];
-//   List<Map<String, dynamic>> storyContents = List<Map<String, dynamic>>.from(data['contents'] as List<dynamic>);
-//
-//   // 토끼와 거북이 이야기의 내용을 출력합니다.
-//   print('Title: $storyTitle');
-//   print('Contents:');
-//   for (var content in storyContents) {
-//     print('${content['character']}: ${content['speech']}');
-//   }
-// }
 
 Future<String> getResponse(String question) async {
-
   final response = await http.post(
-    Uri.parse('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions'),
+    Uri.parse(
+        'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions'),
     headers: {
-      'Authorization': 'Bearer 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',
+      'Authorization':
+      'Bearer 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',
       'Content-Type': 'application/json',
     },
     body: jsonEncode({
@@ -51,8 +27,12 @@ Future<String> getResponse(String question) async {
 
   if (response.statusCode == 200) {
     var responseBody = jsonDecode(response.body);
-    if (responseBody.containsKey('choices') && responseBody['choices'].isNotEmpty && responseBody['choices'][0].containsKey('text')) {
-      return utf8.decode(responseBody['choices'][0]['text'].trim().codeUnits);
+    if (responseBody.containsKey('choices') &&
+        responseBody['choices'].isNotEmpty &&
+        responseBody['choices'][0].containsKey('text')) {
+      return utf8.decode(responseBody['choices'][0]['text']
+          .trim()
+          .codeUnits);
     } else {
       return '잘못된 포맷';
     }
@@ -61,7 +41,6 @@ Future<String> getResponse(String question) async {
     return '응답 오류';
   }
 }
-
 
 class Stt extends StatelessWidget {
   const Stt({Key? key}) : super(key: key);
@@ -83,8 +62,9 @@ class SttPage extends StatefulWidget {
 }
 
 class _SttPageState extends State<SttPage> {
-  final stt.SpeechToText _speech = stt.SpeechToText();
-  bool _isListening = false;
+  final SpeechToText _speech = stt.SpeechToText();
+
+  // bool _isListening = false;
   String _text = "어떤 것에 대해 궁금한 거야?\n무엇이든 물어봐도 돼!";
 
   @override
@@ -93,11 +73,14 @@ class _SttPageState extends State<SttPage> {
     _initSpeech();
   }
 
+
   void _initSpeech() async {
     bool available = await _speech.initialize(
-      onStatus: (status) => print('Speech recognition status: $status'),
-      onError: (errorNotification) => print('Speech recognition error: $errorNotification'),
-    );
+        onStatus: (status) => print('Speech recognition status: $status'),
+        onError: (errorNotification) {
+          print('Speech recognition error: $errorNotification');
+          _stopListening();
+        });
 
     if (available) {
       print('Speech recognition initialized');
@@ -122,7 +105,7 @@ class _SttPageState extends State<SttPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orangeAccent,
-        onPressed: _listen,
+        onPressed: _speech.isNotListening ? _startListening : _stopListening,
         shape: const CircleBorder(
           side: BorderSide(
             color: Colors.orangeAccent ?? Colors.orangeAccent,
@@ -130,9 +113,9 @@ class _SttPageState extends State<SttPage> {
           ),
         ),
         child: Icon(
-          _isListening ? Icons.stop : Icons.mic,
+          _speech.isNotListening ? Icons.mic : Icons.stop,
           size: 40,
-          color: Colors.white,// 마이크 아이콘 크기 조정
+          color: Colors.white, // 마이크 아이콘 크기 조정
         ),
       ),
       body: SingleChildScrollView(
@@ -151,34 +134,31 @@ class _SttPageState extends State<SttPage> {
     );
   }
 
+  void _stopListening() async {
+    await _speech.stop();
+    setState(() {});
+  }
 
-  void _listen() async {
-    print('Listening function called');
+  void _startListening() async {
+    await _speech.listen(
+      onResult: _onSpeechResult,
+      localeId: 'ko-KR',
+      listenOptions: SpeechListenOptions(
+        cancelOnError: true,
+        onDevice: false,
+        listenMode: ListenMode.confirmation,
+      ),
+    );
+    setState(() {});
+  }
 
-    if (!_isListening) {
-      bool available = _speech.isAvailable;
-      if (available) {
-        setState(() {
-          _isListening = true;
-        });
-        _speech.listen(
-          onResult: (val) async {
-            if (val.finalResult) {
-              _text = val.recognizedWords;
-              String gptResponse = await getResponse(_text);
-              setState(() {
-                _text = 'User : $_text\n GPT-3: $gptResponse';
-              });
-            }
-          },
-          localeId: 'ko-KR',
-          listenOptions: SpeechListenOptions(onDevice: false),
-        );
-      }
-    } else {
-      _speech.stop();
+  void _onSpeechResult(SpeechRecognitionResult result) async {
+    print("adslf;kjads;klfj;kldsjf");
+    if (result.finalResult) {
+      _text = result.recognizedWords;
+      String gptResponse = await getResponse(_text);
       setState(() {
-        _isListening = false;
+        _text = 'User : $_text\n GPT-3: $gptResponse';
       });
     }
   }
