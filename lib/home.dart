@@ -52,7 +52,7 @@ class _MainState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: false, // 제목을 가운데 정렬하지 않음
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-        backgroundColor: const Color(0xffffd966),
+        backgroundColor: const Color(0xffffb13d),
         title: Row(
           children: [
             Image.asset(
@@ -60,7 +60,7 @@ class _MainState extends State<HomePage> {
               width: 120, // 이미지 너비 조절
               height: 140, // 이미지 높이 조절
             ),
-            SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
+            const SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
           ],
         ),
         actions: [
@@ -76,10 +76,9 @@ class _MainState extends State<HomePage> {
           ),
         ],
       ),
-
-      backgroundColor: Color(0xffffd966),
+      backgroundColor: const Color(0xffffb13d),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/배경.png'),
             fit: BoxFit.cover,
@@ -89,11 +88,11 @@ class _MainState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               _searchBox(),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               _recommendBook(),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               _fourMenu(),
             ],
           ),
