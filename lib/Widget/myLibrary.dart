@@ -19,10 +19,6 @@ class MyLibraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('내 서재'),
-      ),
       body: CustomScrollView(
         slivers: [
           SliverPadding(
@@ -30,26 +26,23 @@ class MyLibraryPage extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-              Row(
-              children: [
-              Flexible(
-              child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(20), // 모서리를 동그랗게 설정
-              ),
-              child: Text(
-                '전체 도서',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          child: const Text(
+                            '전체 도서',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(thickness: 1.0),
                   const BookItem(
                     imagePath: 'assets/images/토끼와거북이.png',
                     title: '토끼와 거북이',
@@ -122,7 +115,6 @@ class BookItem extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: 'Pretendard',
                   fontSize: 19,
-                  // fontWeight: Font/,
                 ),
               ),
               Text(progress),

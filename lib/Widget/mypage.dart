@@ -20,14 +20,6 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('관리',
-          style: TextStyle(
-            fontFamily: 'Pretendard'
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<Map<String, dynamic>>(
@@ -47,13 +39,13 @@ class MyPage extends StatelessWidget {
                         radius: 40.0,
                         backgroundImage: AssetImage('assets/images/마이페이지토끼.png'),
                       ),
-                      SizedBox(width: 16.0),
+                      const SizedBox(width: 16.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             '${snapshot.data!['name']} 님',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'Pretendard',
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
@@ -61,8 +53,8 @@ class MyPage extends StatelessWidget {
                           ),
                           Text(
                             '$email',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
+                            style: const TextStyle(
+                              fontFamily:  'Pretendard',
                               fontSize: 16.0,
                               color: Colors.grey,
                             ),
@@ -71,7 +63,6 @@ class MyPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // 나머지 코드는 이전과 동일하게 유지합니다.
                   SizedBox(height: 20.0),
                   Divider(thickness: 1.0),
                   SizedBox(height: 20.0),
@@ -83,9 +74,9 @@ class MyPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  ListTile(
+                  const ListTile(
                     leading: Icon(Icons.payment),
-                    title: const Text('녹음 기록',
+                    title: Text('녹음 기록',
                       style: TextStyle(
                           fontFamily: 'Pretendard'
                       ),
@@ -121,7 +112,7 @@ class MyPage extends StatelessWidget {
                   SwitchListTile(
                     title: const Text('푸시 알림',
                       style: TextStyle(
-                          fontFamily: 'Pretendard',
+                        fontFamily: 'Pretendard',
                       ),
                     ),
                     value: true,
