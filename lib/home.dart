@@ -52,7 +52,7 @@ class _MainState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: false, // 제목을 가운데 정렬하지 않음
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-        backgroundColor: const Color(0xffffb13d),
+        backgroundColor: const Color(0xffffd966),
         title: Row(
           children: [
             Image.asset(
@@ -76,7 +76,7 @@ class _MainState extends State<HomePage> {
           ),
         ],
       ),
-      backgroundColor: const Color(0xffffb13d),
+      backgroundColor: const Color(0xffffd966),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -181,7 +181,7 @@ class _MainState extends State<HomePage> {
                   child: Text(
                     '$userName님을 위한 취향저격 도서 📚',
                     style: const TextStyle(
-                      fontSize: 24, // 폰트 크기 조정
+                      fontSize: 22, // 폰트 크기 조정
                       fontFamily: 'Pretendard',
                       color: Color(0xff929292),
                       fontWeight: FontWeight.w500,
