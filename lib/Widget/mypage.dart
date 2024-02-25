@@ -63,7 +63,7 @@ class MyPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Divider(thickness: 1.0),
                   SizedBox(height: 20.0),
                   const Text(

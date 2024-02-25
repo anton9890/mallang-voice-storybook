@@ -78,6 +78,13 @@ class _testState extends State<test> {
     getAudio();
   }
 
+  @override
+  void dispose() {
+    recorder.closeRecorder();
+    audioPlayer.stop();
+    super.dispose();
+  }
+
   Future getScripts() async {
     Map<String, String> data = {
       'email' : widget.email,
@@ -247,6 +254,7 @@ class _testState extends State<test> {
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
+                    audioPlayer.stop();
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
@@ -294,7 +302,7 @@ class _testState extends State<test> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: this.image?.image ?? AssetImage('assets/images/background.png'),
+          image: this.image?.image ?? const AssetImage('assets/images/background.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -310,7 +318,7 @@ class _testState extends State<test> {
         onTap: () {
           prevScript();
           getAudio();
-          audioPlayer.stop();
+          //audioPlayer.stop();
         },
         child: Image.asset(
           'assets/images/prev.png',
@@ -358,6 +366,7 @@ class _testState extends State<test> {
           InkWell(
             onTap: () {
               nextScript();
+              getAudio();
             },
             child: Image.asset(
               'assets/images/next.png',
