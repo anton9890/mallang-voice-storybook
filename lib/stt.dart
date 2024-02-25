@@ -11,8 +11,9 @@ Future<String> getResponse(String question) async {
       'Authorization': 'Bearer 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',
       'Content-Type': 'application/json',
     },
-    body: jsonEncode(<String, dynamic>{
-      'prompt': question,
+    body: jsonEncode({
+      'prompt': "Tell me like you're explaining to an eight-year-old.",
+      'temperature': 0,
       'max_tokens': 60,
     }),
   );
@@ -53,7 +54,7 @@ class SttPage extends StatefulWidget {
 class _SttPageState extends State<SttPage> {
   final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
-  String _text = '마이크 버튼을 누르고 질문을 해주세요 :)';
+  String _text = "어떤 것에 대해 궁금한 거야?\n    무엇이든 물어봐도 돼!";
 
   @override
   void initState() {
@@ -81,23 +82,23 @@ class _SttPageState extends State<SttPage> {
         centerTitle: true,
         title: const Text('말랑한테 물어봐! \u{1f60e}',
           style: TextStyle(
-            fontFamily: 'Moebius',
+            fontFamily: 'Pretendard',
             fontSize: 20,
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.yellow[100],
+        backgroundColor: Colors.orangeAccent,
         onPressed: _listen,
-        shape: CircleBorder(side: BorderSide(color: Colors.yellow[100] ?? Colors.yellow, width: 4.0)),
+        shape: CircleBorder(side: BorderSide(color: Colors.orangeAccent ?? Colors.orangeAccent, width: 4.0)),
         child: Icon(_isListening ? Icons.stop : Icons.mic),
 
       ),
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
-          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
+          padding: const EdgeInsets.fromLTRB(90.0, 30.0, 30.0, 150.0),
           child: Text(_text,
             style: const TextStyle(
               fontFamily: 'Pretendard',
