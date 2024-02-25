@@ -81,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           '회원가입',
           style: TextStyle(
             fontFamily: 'Pretendard',
@@ -116,13 +116,13 @@ class _SignUpPageState extends State<SignUpPage> {
       child: DashedStepper(
         height: 25,
         step: _currentStep,
-        labels: ['개인정보 입력','회원정보 입력','관심분야 설정','목소리 녹음'],
-        labelStyle: TextStyle(fontFamily: 'Pretendard', fontSize: 11),
+        labels: const ['개인정보 입력','회원정보 입력','관심분야 설정','목소리 녹음'],
+        labelStyle: const TextStyle(fontFamily: 'Pretendard', fontSize: 11),
         indicatorColor: Colors.orangeAccent,
         length: 4,
         dotSize: 12,
         lineHeight: 3,
-        icons: [
+        icons: const [
           Icon(Icons.privacy_tip_outlined, size: 20, color: Colors.orange),
           Icon(Icons.email_outlined, size: 20, color: Colors.orange),
           Icon(Icons.favorite_border_outlined, size: 20, color: Colors.orange),
@@ -174,7 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildSkipButton() {
     return TextButton(
       onPressed: () => setState(() => _currentStep = 5),
-      child: Text('스킵', style: TextStyle(fontFamily: 'Pretendard',
+      child: const Text('스킵', style: TextStyle(fontFamily: 'Pretendard',
           color: Colors.grey)),
     );
   }
@@ -183,8 +183,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextButton(
       onPressed: _handleNextOrCompleteButtonPress,
       child: _currentStep == 5
-          ? Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black))
-          : Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black)),
+          ? const Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black))
+          : const Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Colors.black)),
     );
   }
 
@@ -201,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
         setState(() => _currentStep += 1);
       } else{
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('관심사를 1개 이상 선택해주세요.')),
+          const SnackBar(content: Text('관심사를 1개 이상 선택해주세요.')),
         );
       }
     } else if (_currentStep == 5) {
@@ -222,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Align(
             alignment: Alignment.center,
             child: TextButton(
-              child: Text('확인',
+              child: const Text('확인',
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                 ),
@@ -255,7 +255,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           '이름',
           style: TextStyle(
             fontFamily: 'Pretendard',
@@ -266,7 +266,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 10,),
         TextFormField(
           controller: _nameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '띄어쓰기 없이 한글 입력',
             hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
@@ -278,8 +278,8 @@ class _SignUpPageState extends State<SignUpPage> {
             return null;
           },
         ),
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           '나이',
           style: TextStyle(
             fontFamily: 'Pretendard',
@@ -290,7 +290,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 10,),
         TextFormField(
           controller: _ageController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '5세이면 5을 입력해주세요',
             hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
@@ -302,8 +302,8 @@ class _SignUpPageState extends State<SignUpPage> {
             return null;
           },
         ),
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           '성별',
           style: TextStyle(
             fontFamily: 'Pretendard',
@@ -311,7 +311,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         ToggleButtons(
           children: <Widget>[
             Center(child: Text('남성',
@@ -340,8 +340,8 @@ class _SignUpPageState extends State<SignUpPage> {
           fillColor: Colors.grey,
           selectedColor: Colors.white,
         ),
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           '휴대폰 번호',
           style: TextStyle(
             fontFamily: 'Pretendard',
@@ -356,7 +356,7 @@ class _SignUpPageState extends State<SignUpPage> {
               child: TextFormField(
                 controller: _phonenumberController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '010',
                   border: OutlineInputBorder(),
                   hintStyle: TextStyle(fontFamily: 'Pretendard'),
@@ -373,7 +373,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Expanded(
               child: TextFormField(
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
                   hintStyle: TextStyle(fontFamily: 'Pretendard'),
@@ -390,7 +390,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Expanded(
               child: TextFormField(
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '0000',
                   border: OutlineInputBorder(),
                   hintStyle: TextStyle(fontFamily: 'Pretendard'),
@@ -413,7 +413,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('이메일',
+        const Text('이메일',
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontSize: 16.0,),
@@ -422,7 +422,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SizedBox(height: 10,),
         TextFormField(
           controller: _emailController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '이메일을 입력해주세요',
             hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
@@ -441,7 +441,7 @@ class _SignUpPageState extends State<SignUpPage> {
           },
         ),
         SizedBox(height: 35),
-        Text('비밀번호',
+        const Text('비밀번호',
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontSize: 16.0,),
@@ -451,7 +451,7 @@ class _SignUpPageState extends State<SignUpPage> {
         TextFormField(
           controller: _passwordController,
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '비밀번호를 입력해주세요',
             hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
@@ -463,8 +463,8 @@ class _SignUpPageState extends State<SignUpPage> {
             return null;
           },
         ),
-        SizedBox(height: 35),
-        Text('비밀번호 확인',
+        const SizedBox(height: 35),
+        const Text('비밀번호 확인',
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontSize: 16.0,),
@@ -474,7 +474,7 @@ class _SignUpPageState extends State<SignUpPage> {
         TextFormField(
           controller: _confirmPasswordController,
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '비밀번호를 재입력해주세요',
             hintStyle: TextStyle(fontFamily: 'Pretendard'),
             border: OutlineInputBorder(),
@@ -498,13 +498,13 @@ class _SignUpPageState extends State<SignUpPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildInterestCategory('계절 ☀️', ['봄', '여름', '가을', '겨울'], Colors.yellow),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           _buildInterestCategory('활동 🏀', ['그림 그리기', '노래 부르기', '춤추기', '달리기', '수영'], Colors.orange),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           _buildInterestCategory('동물 🐥', ['토끼', '호랑이', '사자', '돼지', '여우', '곰'], Colors.yellow),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           _buildInterestCategory('곤충 🐛', ['거미', '벌', '무당벌레', '개미', '나비', '베짱이', '잠자리'], Colors.green),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           _buildInterestCategory('공룡 🦖', ['초식공룡', '육식공룡', '익룡', '어룡'], Colors.green),
         ],
       ),
@@ -524,7 +524,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: <TextSpan>[
               TextSpan(
                 text: categoryText,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Pretendard',
                   fontSize: 18,
                 ),
@@ -562,7 +562,7 @@ class _SignUpPageState extends State<SignUpPage> {
               _selectedInterests.add(interest);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('5개 이상 선택할 수 없습니다.',
+                const SnackBar(content: Text('5개 이상 선택할 수 없습니다.',
                 )),
               );
             }
@@ -579,27 +579,27 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('아이들이 동화책을 읽을 때,',
+          const Text('아이들이 동화책을 읽을 때,',
             style: TextStyle(
               fontFamily: 'Pretendard',
             ),),
-          Text('더욱 몰입하고 재미를 느낄 수 있도록',
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              // fontSize: 20,
-            ),),
-          Text('어머님, 아버님의 목소리 녹음이 필요해요.',
+          const Text('더욱 몰입하고 재미를 느낄 수 있도록',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
-          SizedBox(height: 30,),
-          Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.',
+          const Text('어머님, 아버님의 목소리 녹음이 필요해요.',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
-          Text('조용한 환경에서 정확한 발음으로 할수록 좋아요 :)',
+          const SizedBox(height: 30,),
+          const Text('녹음 버튼을 누르고 아래 문장을 읽어주세요.',
+            style: TextStyle(
+              fontFamily: 'Pretendard',
+              // fontSize: 20,
+            ),),
+          const Text('조용한 환경에서 정확한 발음으로 할수록 좋아요 :)',
             style: TextStyle(
               fontFamily: 'Pretendard',
               color: Colors.grey,
@@ -642,23 +642,23 @@ class _SignUpPageState extends State<SignUpPage> {
               setState(() {});
             },
           ),
-          SizedBox(height: 30),
-          Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
+          const SizedBox(height: 30),
+          const Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
-          Text('토끼는 거북이를 보고 먼저 말을 걸었어요.',
+          const Text('토끼는 거북이를 보고 먼저 말을 걸었어요.',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
-          Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?',
+          const Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
             ),),
-          Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?',
+          const Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?',
             style: TextStyle(
               fontFamily: 'Pretendard',
               // fontSize: 20,
@@ -678,13 +678,13 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 200, // 애니메이션의 높이 조정
             child: Lottie.asset('assets/lottie/lottie2.json'), // 로티 애니메이션 파일 불러오기
           ),
-          SizedBox(height: 20), // 애니메이션과 텍스트 사이의 간격 조정
-          Text(
+          const SizedBox(height: 20), // 애니메이션과 텍스트 사이의 간격 조정
+          const Text(
             '환영합니다!',
             style: TextStyle(fontSize: 20, fontFamily: 'Pretendard'),
             // 텍스트의 크기 조정
           ),
-          Text(
+          const Text(
             '가입이 완료되었습니다.',
             style: TextStyle(fontSize: 20, fontFamily: 'Pretendard'),
           ),
