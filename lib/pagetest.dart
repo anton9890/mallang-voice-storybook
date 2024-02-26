@@ -181,12 +181,6 @@ class _testState extends State<test> {
         throw Exception('Failed to load audio data');
       }
     }
-    // 오디오 파일을 재생합니다.
-    // print('http://20.249.17.142:8000/data/audio/${widget.title}/${currentIndex}');
-    // await audioPlayer.play(UrlSource('http://20.249.17.142:8000/data/audio/${widget.title}/${currentIndex}'));
-    // } else {
-    //   throw Exception('Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
-    // }
   }
 
   void nextScript() {
@@ -418,7 +412,7 @@ class _testState extends State<test> {
 //
               },
               borderRadius: BorderRadius.circular(12),
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.all(8.0),
               ),
             ),
@@ -436,7 +430,7 @@ class _testState extends State<test> {
               // Add your speech button action here
             },
             borderRadius: BorderRadius.circular(12),
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
             ),
           ),

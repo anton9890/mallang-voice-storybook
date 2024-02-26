@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/mainTab.dart';
 import 'package:mallang/pagetest.dart';
-// import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:button_animations/button_animations.dart';
@@ -228,7 +226,7 @@ class _TestState extends State<Test> {
                                 color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 5,
                                 blurRadius: 7,
-                                offset: Offset(1, 3),
+                                offset: const Offset(1, 3),
                               ),
                             ],
                             image: const DecorationImage(
@@ -280,7 +278,7 @@ class _TestState extends State<Test> {
                               ),
                             ],
                             image: const DecorationImage(
-                              image: AssetImage('assets/images/7.png'),
+                              image: AssetImage('assets/images/nightmode.png'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -291,7 +289,8 @@ class _TestState extends State<Test> {
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),),
+                            ),
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
