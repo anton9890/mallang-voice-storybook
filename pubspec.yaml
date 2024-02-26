@@ -79,15 +79,10 @@ flutter:
 
 
   assets:
-  - assets/images/title.png
   - assets/images/구름빵.png
   - assets/images/토끼와거북이.png
   - assets/images/흥부놀부.png
   - assets/images/해님달님.png
-  - assets/images/category.png
-  - assets/images/heart.png
-  - assets/images/recommand.png
-  - assets/images/star.png
   - assets/images/끝말잇기.png
   - assets/images/나의 빛나는 친구.png
   - assets/images/너는 어떤 씨앗이니.png
@@ -118,11 +113,10 @@ flutter:
   - assets/images/bee.png
   - assets/images/giraffe.png
   - assets/images/lion.png
-  - assets/images/1-2.png
+#  - assets/images/1-2.png
   - assets/images/rabbit.png
   - assets/images/거.png
   - assets/images/토.png
-  - assets/images/speech.png
   - assets/images/chick.png
   - assets/images/sea.png
   - assets/images/to.png
@@ -131,10 +125,8 @@ flutter:
   - assets/images/prev.png
   - assets/images/ic_launcher.png
   - assets/images/next.png
-  - assets/images/그림1.png
   - assets/images/토낑.png
   - assets/images/그림2.png
-  - assets/images/3.png
   - assets/images/찐막.png
   - assets/images/배경.png
   - assets/images/appbar.png

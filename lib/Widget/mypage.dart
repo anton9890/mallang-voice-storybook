@@ -65,7 +65,7 @@ class MyPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
                   Divider(thickness: 1.0),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   const Text(
                     '내 데이터 관리',
                     style: TextStyle(
@@ -98,9 +98,9 @@ class MyPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
-                  Divider(thickness: 1.0),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
+                  const Divider(thickness: 1.0),
+                  const SizedBox(height: 20.0),
                   const Text(
                     '알림 설정',
                     style: TextStyle(
