@@ -605,6 +605,35 @@ class _SignUpPageState extends State<SignUpPage> {
               color: Colors.grey,
             ),),
           SizedBox(height: 30,),
+          Container(
+            padding: const EdgeInsets.all(8.0), // 패딩을 추가합니다.
+            decoration: BoxDecoration(
+              //color: Colors.yellow[100], // 컨테이너의 배경색을 지정합니다.
+              border: Border.all(color: Colors.orangeAccent), // 테두리 색상을 지정합니다.
+              borderRadius: BorderRadius.circular(10), // 테두리 라운드를 지정합니다.
+            ),
+            child: Column(
+              children: <Widget>[
+                const Text(
+                  '맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    color: Colors.orangeAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  '토끼는 거북이를 보고 먼저 말을 걸었어요.',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    color: Colors.orangeAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30,),
           StreamBuilder<RecordingDisposition>(
             builder: (context, snapshot) {
               final duration = snapshot.hasData
@@ -642,27 +671,6 @@ class _SignUpPageState extends State<SignUpPage> {
               setState(() {});
             },
           ),
-          const SizedBox(height: 30),
-          const Text('맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              // fontSize: 20,
-            ),),
-          const Text('토끼는 거북이를 보고 먼저 말을 걸었어요.',
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              // fontSize: 20,
-            ),),
-          const Text('하하, 거북이야, 너는 왜 그리 느리게 걸어?',
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              // fontSize: 20,
-            ),),
-          const Text('나처럼 빠르게 달리는 게 얼마나 재미있는지 알아?',
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              // fontSize: 20,
-            ),),
         ],
       ),
     );

@@ -197,8 +197,10 @@ class _testState extends State<test> {
       });
       getImage(currentIndex.toString() ,'background');
       getImage(scriptData[currentIndex]['role'], '');
+      getAudio();
     }
     else{
+      audioPlayer.stop();
       showPop();
     }
   }
@@ -211,6 +213,7 @@ class _testState extends State<test> {
       });
       getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], '');
+      getAudio();
     }
   }
 
@@ -317,8 +320,7 @@ class _testState extends State<test> {
       child: InkWell(
         onTap: () {
           prevScript();
-          getAudio();
-          //audioPlayer.stop();
+          //getAudio();
         },
         child: Image.asset(
           'assets/images/prev.png',
@@ -331,7 +333,7 @@ class _testState extends State<test> {
 
   Widget buildsttButton() {
     return Positioned(
-      left: 757.0,
+      left: 20.0,
       bottom: 80.0,
       child: Stack(
         children: [
@@ -340,7 +342,7 @@ class _testState extends State<test> {
               audioPlayer.stop();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SttPage()
+                MaterialPageRoute(builder: (context) => SttPage(widget.email)
                 ),
               );
             },
@@ -366,7 +368,7 @@ class _testState extends State<test> {
           InkWell(
             onTap: () {
               nextScript();
-              getAudio();
+              //getAudio();
             },
             child: Image.asset(
               'assets/images/next.png',
@@ -480,7 +482,7 @@ class _testState extends State<test> {
                   fontSize: 20.0,
                   fontFamily: 'Pretendard',
                 ),
-                speed: Duration(milliseconds: 50),
+                speed: Duration(milliseconds: 150),
                 repeatForever: false,
                 totalRepeatCount: 1,
               ),
