@@ -49,6 +49,7 @@ dependencies:
   flutter_animated_button: ^2.0.3
   button_animations: ^2.0.0+3
   chat_gpt_sdk: ^2.0.0
+  speech_balloon: ^0.0.4
 
 flutter_icons:
   image_path: "images/ic_launcher.png"
@@ -141,4 +142,5 @@ flutter:
   - assets/images/stt.png
   - assets/json/토끼와 거북이.json
   - assets/images/거.png
+  - assets/images/불꽃길.png
 
