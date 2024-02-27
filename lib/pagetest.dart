@@ -257,7 +257,7 @@ class _testState extends State<test> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Text(
                   '${widget.title}를 다 읽으셨네요 !',
                   style: const TextStyle(
@@ -403,42 +403,77 @@ class _testState extends State<test> {
     );
   }
 
+  // 마이크 버튼
   Widget buildMicrophoneButton() {
     bool isRecording = false;
 
     if (getScript_done) {
       if (scriptData[currentIndex]['role'] == widget.selectedcharacter) {
-        return Positioned(
-            left: (MediaQuery.of(context).size.width),
-            bottom: 20.0,
-            child: InkWell(
-              onTap: () async {
-                if (recorder.isRecording) {
-                  await stopRecorder();
-                } else {
-                  await startRecord();
-                }
-                setState(() {});
-              },
-              child: Padding(
-                padding: EdgeInsets.all(9.0),
-                child: Image.asset(
-                  recorder.isRecording ? 'assets/images/pause.png' : 'assets/images/mic.png',
-                  width: 70,
-                  height: 70,
+        return Stack(
+          children: [
+            Positioned(
+              left: (MediaQuery.of(context).size.width - 50),
+              bottom: 100.0,
+              child: InkWell(
+                onTap: () async {
+                  if (recorder.isRecording) {
+                    await stopRecorder();
+                  } else {
+                    await startRecord();
+                  }
+                  setState(() {});
+                },
+                child: (!recorder.isRecording)
+                    ? Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: const Text(
+                    '눌러서 따라 읽어볼까요? \u{1F3A4}',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      color: Colors.black,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )
+                    : const SizedBox.shrink(),
+              ),
+            ),
+            Positioned(
+              left: (MediaQuery.of(context).size.width),
+              bottom: 20.0,
+              child: InkWell(
+                onTap: () async {
+                  if (recorder.isRecording) {
+                    await stopRecorder();
+                  } else {
+                    await startRecord();
+                  }
+                  setState(() {});
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(9.0),
+                  child: Image.asset(
+                    recorder.isRecording ? 'assets/images/pause.png' : 'assets/images/mic.png',
+                    width: 70,
+                    height: 70,
+                  ),
                 ),
               ),
-            ));}
-      else {
+            ),
+          ],
+        );
+      } else {
         return Positioned(
           top: 0.0,
           right: 0.0,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {
-//
-              },
+              onTap: () {},
               borderRadius: BorderRadius.circular(12),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
@@ -454,9 +489,7 @@ class _testState extends State<test> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {
-              // Add your speech button action here
-            },
+            onTap: () {},
             borderRadius: BorderRadius.circular(12),
             child: Padding(
               padding: EdgeInsets.all(8.0),

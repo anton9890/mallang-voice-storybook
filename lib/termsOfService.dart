@@ -22,7 +22,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             '약관 동의',
             style: TextStyle(
               fontFamily: 'Pretendard',
@@ -32,11 +32,11 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           ),
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 20),
           child: Center(
             child: Column(
               children: [
-                Text(
+                const Text(
                   '말랑에 오신 것을 환영합니다!',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
@@ -60,9 +60,9 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     color: Colors.grey.withOpacity(0.9),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 _buildCheckboxWithContainer('전체 약관 동의', allAgreed, _handleAllAgreed),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 _buildTermsCheckboxes(),
               ],
             ),
@@ -91,7 +91,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('다음', style: TextStyle(fontFamily: 'Pretendard', fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+            child: const Text('다음', style: TextStyle(fontFamily: 'Pretendard', fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ),
       ),
@@ -101,8 +101,8 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
   Widget _buildCheckboxWithContainer(
       String title, bool value, ValueChanged<bool?> onChanged) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(10),

@@ -49,7 +49,7 @@ class AgeBookPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     const Text(
-                      '1~2세 추천동화',
+                      '1~2세 추천도서',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
