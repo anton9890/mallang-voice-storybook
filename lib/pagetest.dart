@@ -24,8 +24,9 @@ class test extends StatefulWidget {
   final String email;
   final String title;
   final String? selectedcharacter;
+  final bool sleepMode;
 
-  const test(this.email, this.title, this.selectedcharacter, {Key? key}) : super(key: key);
+  const test(this.email, this.title, this.selectedcharacter, this.sleepMode, {Key? key}) : super(key: key);
 
   @override
   _testState createState() => _testState();
@@ -155,12 +156,12 @@ class _testState extends State<test> {
 
   Future<void> getAudio() async {
     audioPlayer.stop();
-    if(scriptData[currentIndex]['role'] != widget.selectedcharacter) {
+    if (widget.sleepMode) {
       Map<String, String> data = {
         'email': widget.email,
         'type': 'audio',
         'book': widget.title,
-        'file': currentIndex.toString(),
+        'file': "${currentIndex.toString()}_slow",
       };
 
       final response = await http.post(
@@ -181,8 +182,35 @@ class _testState extends State<test> {
         throw Exception('Failed to load audio data');
       }
     }
-  }
+    else {
+      if (scriptData[currentIndex]['role'] != widget.selectedcharacter) {
+        Map<String, String> data = {
+          'email': widget.email,
+          'type': 'audio',
+          'book': widget.title,
+          'file': currentIndex.toString(),
+        };
 
+        final response = await http.post(
+          Uri.parse('http://20.249.17.142:8000/data/get/file'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(data),
+        );
+
+        if (response.statusCode == 200) {
+          Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+          print(jsonResponse);
+          var audioData = jsonResponse['data'];
+          var bytes = base64Decode(audioData);
+          await audioPlayer.play(BytesSource(bytes));
+        } else {
+          throw Exception('Failed to load audio data');
+        }
+      }
+    }
+  }
   void nextScript() {
     // 다음 스크립트
     if (currentIndex < scriptData.length - 1) {
@@ -412,7 +440,7 @@ class _testState extends State<test> {
 //
               },
               borderRadius: BorderRadius.circular(12),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.all(8.0),
               ),
             ),
@@ -430,7 +458,7 @@ class _testState extends State<test> {
               // Add your speech button action here
             },
             borderRadius: BorderRadius.circular(12),
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.all(8.0),
             ),
           ),

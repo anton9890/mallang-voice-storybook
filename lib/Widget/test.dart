@@ -150,7 +150,7 @@ class _TestState extends State<Test> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, turtle), // 'rabbit' 값을 전달
+                                builder: (context) => test(widget.email, widget.title, turtle, false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -198,7 +198,7 @@ class _TestState extends State<Test> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, rabbit), // 'rabbit' 값을 전달
+                                builder: (context) => test(widget.email, widget.title, rabbit, false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -246,7 +246,7 @@ class _TestState extends State<Test> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, parent), // 'rabbit' 값을 전달
+                                builder: (context) => test(widget.email, widget.title, parent, false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -289,13 +289,12 @@ class _TestState extends State<Test> {
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),
-                          ),
+                            ),),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, parent), // 'rabbit' 값을 전달
+                                builder: (context) => test(widget.email, widget.title, parent, true), // 'rabbit' 값을 전달
                               ),
                             );
                           },

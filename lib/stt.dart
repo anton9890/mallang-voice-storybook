@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
@@ -169,8 +168,8 @@ class _SttPageState extends State<SttPage> {
                   Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -184,15 +183,15 @@ class _SttPageState extends State<SttPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Color(0xffffb467),
+                          color: const Color(0xffffb467),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           '$gptResponse',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'Pretendard',
                             fontSize: 20,
