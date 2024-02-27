@@ -217,7 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: Text('녹음을 완료해주세요', textAlign: TextAlign.center,),
+        content: const Text('녹음을 완료해주세요', textAlign: TextAlign.center,),
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
@@ -287,7 +287,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         TextFormField(
           controller: _ageController,
           decoration: const InputDecoration(
@@ -470,7 +470,7 @@ class _SignUpPageState extends State<SignUpPage> {
             fontSize: 16.0,),
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         TextFormField(
           controller: _confirmPasswordController,
           obscureText: true,
@@ -604,7 +604,7 @@ class _SignUpPageState extends State<SignUpPage> {
               fontFamily: 'Pretendard',
               color: Colors.grey,
             ),),
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           Container(
             padding: const EdgeInsets.all(8.0), // 패딩을 추가합니다.
             decoration: BoxDecoration(
@@ -612,9 +612,9 @@ class _SignUpPageState extends State<SignUpPage> {
               border: Border.all(color: Colors.orangeAccent), // 테두리 색상을 지정합니다.
               borderRadius: BorderRadius.circular(10), // 테두리 라운드를 지정합니다.
             ),
-            child: Column(
+            child: const Column(
               children: <Widget>[
-                const Text(
+                Text(
                   '맑은 날, 숲속에서 토끼와 거북이가 만났습니다.',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
@@ -622,7 +622,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text(
+                Text(
                   '토끼는 거북이를 보고 먼저 말을 걸었어요.',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
@@ -633,7 +633,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
           ),
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           StreamBuilder<RecordingDisposition>(
             builder: (context, snapshot) {
               final duration = snapshot.hasData
@@ -659,7 +659,7 @@ class _SignUpPageState extends State<SignUpPage> {
             stream: recorder.onProgress,
           ),
           IconButton(
-            icon: Icon(recorder.isRecording ? Icons.stop : Icons.mic),
+            icon: Icon(recorder.isRecording ? Icons.stop : Icons.mic, color: Colors.orange),
             iconSize: 50,
             onPressed: () async {
               if (recorder.isRecording) {
