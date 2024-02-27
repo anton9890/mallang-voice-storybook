@@ -166,7 +166,7 @@ class _SttPageState extends State<SttPage> {
                   ),
                 if (isUserQuestionAsked) // 사용자 질문이 있으면 user와 gpt 표시
                   Column(
-                    children: [
+                    children: <Widget>[
                       Container(
                         margin: const EdgeInsets.all(10),
                         padding: const EdgeInsets.all(10),
@@ -174,6 +174,7 @@ class _SttPageState extends State<SttPage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        alignment: Alignment.centerLeft, // 왼쪽 정렬
                         child: Text(
                           '$userQuestion', // 사용자 질문 표시
                           style: const TextStyle(
