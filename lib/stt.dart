@@ -69,6 +69,11 @@ class _SttPageState extends State<SttPage> {
     super.initState();
     _initSpeech();
   }
+  @override
+  void dispose(){
+    audioPlayer.stop();
+    // _speech.cancel();
+  }
 
   Future<void> getTTS(String text) async {
     var jsonBody = jsonEncode({
