@@ -196,35 +196,35 @@ def getPath(folder_path, extension):
 
 #set voice Octav parameter from Gender and age
 def setOctav(childGender, characterGender, childAge, characterAge):
+    print(childAge,characterAge,childGender,characterGender)
     f0up_key = 0
     if characterGender == 0:
         if childGender == 0: 
             if (characterAge >= 13) & (childAge < 13): f0up_key = -2
-            elif (characterAge >= 13) & (childAge > 13): f0up_key = 0
-            elif (characterAge <= 13) & (childAge < 13): f0up_key = 0
-            elif (characterAge <= 13) & (childAge > 13): f0up_key = 2
+            elif (characterAge >= 13) & (childAge >= 13): f0up_key = 0
+            elif (characterAge < 13) & (childAge < 13): f0up_key = 0
+            elif (characterAge < 13) & (childAge >= 13): f0up_key = 2
             else: print("character or user's information has error")
         if childGender == 1:
             if (characterAge >= 13) & (childAge < 15): f0up_key = 1
-            elif (characterAge >= 13) & (childAge > 15): f0up_key = 12
-            elif (characterAge <= 13) & (childAge < 15): f0up_key = 3
-            elif (characterAge <= 13) & (childAge > 15): f0up_key = 13
+            elif (characterAge >= 13) & (childAge >= 15): f0up_key = 12
+            elif (characterAge < 13) & (childAge < 15): f0up_key = 3
+            elif (characterAge < 13) & (childAge >= 15): f0up_key = 13
             else: print("character or user's information has error")
-    if characterGender == 1:
+    elif characterGender == 1:
         if childGender == 0: 
             if (characterAge >= 15) & (childAge < 13): f0up_key = -13
-            elif (characterAge >= 15) & (childAge > 13): f0up_key = -12
-            elif (characterAge <= 15) & (childAge < 13): f0up_key = -3
-            elif (characterAge <= 15) & (childAge > 13): f0up_key = -1
+            elif (characterAge >= 15) & (childAge >= 13): f0up_key = -12
+            elif (characterAge < 15) & (childAge < 13): f0up_key = -3
+            elif (characterAge < 15) & (childAge >= 13): f0up_key = -1
             else: print("character or user's information has error")
         if childGender == 1:
             if (characterAge >= 15) & (childAge < 15): f0up_key = 9
-            elif (characterAge >= 15) & (childAge > 15): f0up_key = 0 
-            elif (characterAge <= 15) & (childAge < 15): f0up_key = 0
-            elif (characterAge <= 15) & (childAge > 15): f0up_key = -9
-    else: print("character or user's information has error")         
-    
-    return f0up_key
+            elif (characterAge >= 15) & (childAge >= 15): f0up_key = 0 
+            elif (characterAge < 15) & (childAge < 15): f0up_key = 0
+            elif (characterAge < 15) & (childAge >= 15): f0up_key = -9
+    else: print("character or user's information has error")
+
 
 def getParameter(characterId,childAge,childGender):
     # userPath = "user.json"
