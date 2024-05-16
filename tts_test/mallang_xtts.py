@@ -4,14 +4,14 @@ from TTS.tts.configs.xtts_config import XttsConfig
 from TTS.tts.models.xtts import Xtts
 from huggingface_hub import snapshot_download
 
-#snapshot_download(repo_id="princesslucy/mallang_xtts_v2", local_dir='./model')
+snapshot_download(repo_id="princesslucy/mallang_xtts_large", local_dir='./model')
 config = XttsConfig()
 config.load_json("./model/config.json")
 model = Xtts.init_from_config(config)
 model.load_checkpoint(config, checkpoint_dir="./model")
 model.cuda()
 
-def tts(text, temperature=0.7, length_penalty=0.7, repetition_penalty=2.0, speed=1.0, audio="./wavs/input.wav",):
+def tts(text, temperature=0.3, length_penalty=0.1, repetition_penalty=2.0, speed=1.0, audio="./wavs/input.wav",):
     gpt_cond_latent, speaker_embedding = model.get_conditioning_latents(audio_path=[audio])
 
     out = model.inference(
@@ -29,4 +29,5 @@ def tts(text, temperature=0.7, length_penalty=0.7, repetition_penalty=2.0, speed
     return torchaudio.save("./wavs/output.wav", torch.tensor(out["wav"]).unsqueeze(0), 24000)
 
 #test
-tts("이후로 두 친구는 평화롭게 숲속에서 살아갔습니다.", audio="./wavs/jeh.wav")
+
+#tts("하지만 윤동주는 조선의 독립과 현대 한국인들이 그를 자국인으로 간주하는 것은 당연하다.")

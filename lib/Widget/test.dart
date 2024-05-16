@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mallang/MainPage.dart';
 import 'package:mallang/pagetest.dart';
-// import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:button_animations/button_animations.dart';
 
 class Test extends StatefulWidget {
   final String email;
@@ -55,7 +54,7 @@ class _TestState extends State<Test> {
 
       setState(() {
         this.info = info;
-        this.parent = character[0];
+        this.parent = "";
         this.rabbit = character[1];
         this.turtle = character[2];
       });
@@ -86,10 +85,10 @@ class _TestState extends State<Test> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/images/토끼와거북이.png'),
                         fit: BoxFit.cover,
                       ),
@@ -98,190 +97,235 @@ class _TestState extends State<Test> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Center(
               child: Text(
                 '${widget.title}',
-                style: TextStyle(fontSize: 28, fontFamily: 'Moebius'),
+                style: const TextStyle(fontSize: 28, fontFamily: 'Pretendard'),
               ),
             ),
-            Center(
+            const Center(
               child: Text(
                 '김미견 그림/만화',
-                style: TextStyle(fontSize: 15, fontFamily : 'Moebius', color: Colors.grey),
+                style: TextStyle(fontSize: 15, fontFamily : 'Pretendard', color: Colors.grey),
               ),
             ),
-            SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(1, 3),
+            const SizedBox(height: 20,),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(1, 3),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/거.png'),
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/거.png'),
-                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => test(widget.email, widget.title, turtle), // 'rabbit' 값을 전달
-                            ),
-                          );
-                          // Handle the onPressed event
-                          print('거북이 목소리 tapped');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          primary: Colors.yellow[100],
+                        const SizedBox(height: 10),
+                        AnimatedButton(
+                          child: Text('${turtle ?? "거북이"} 모드',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                            ),),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => test(widget.email, widget.title, turtle, false), // 'rabbit' 값을 전달
+                              ),
+                            );
+                          },
+                          height: 40,
+                          width: 100,
+                          type: null,
+                          color: Colors.white70,
+                          shadowColor: Colors.amber[300],
+                          borderRadius: 30,
                         ),
-                        child: Text('${turtle ?? "거북이"}로 읽기',
-                          style: TextStyle(
-                            fontFamily: 'Moebius',
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/토.png'),
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/토.png'),
-                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle the onPressed event
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => test(widget.email, widget.title, rabbit),
-                            ),
-                          );
-                          print('토끼 목소리 tapped');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          primary: Colors.yellow[100],
+                        const SizedBox(height: 10),
+                        AnimatedButton(
+                          child: Text('${rabbit ?? "토끼"} 모드',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                            ),),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => test(widget.email, widget.title, rabbit, false), // 'rabbit' 값을 전달
+                              ),
+                            );
+                          },
+                          height: 40,
+                          width: 100,
+                          type: null,
+                          color: Colors.white70,
+                          shadowColor: Colors.amber[300],
+                          borderRadius: 30,
                         ),
-                        child: Text('${rabbit ?? "토끼"}로 읽기',
-                        style: TextStyle(
-                            fontFamily: 'Moebius',
-                        ),
-                      ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(1, 3),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(1, 3),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/to.png'),
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/to.png'),
-                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle the onPressed event
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => test(widget.email, widget.title, parent), // 'turtle' 값을 전달
-                            ),
-                          );
-                          print('그냥 듣기 tapped');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          primary: Colors.yellow[100],
+                        const SizedBox(height: 10),
+                        AnimatedButton(
+                          child: Text('감상 모드',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                            ),),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => test(widget.email, widget.title, parent, false), // 'rabbit' 값을 전달
+                              ),
+                            );
+                          },
+                          height: 40,
+                          width: 100,
+                          type: null,
+                          color: Colors.white70,
+                          shadowColor: Colors.amber[300],
+                          borderRadius: 30,
                         ),
-                        child: Text('감상 모드',
-                          style: TextStyle(
-                            fontFamily: 'Moebius',
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(1, 3),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/nightmode.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        AnimatedButton(
+                          child: Text('자장가 모드',
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                            ),),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => test(widget.email, widget.title, parent, true), // 'rabbit' 값을 전달
+                              ),
+                            );
+                          },
+                          height: 40,
+                          width: 100,
+                          type: null,
+                          color: Colors.white70,
+                          shadowColor: Colors.amber[300],
+                          borderRadius: 30,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            SizedBox(height: 12,),
+            const SizedBox(height: 12,),
             Container(
               width: 380.0,
               decoration: BoxDecoration(
-                color: Colors.yellow[100],
-                borderRadius: BorderRadius.circular(20.0), // 모든 모서리를 둥글게 만듭니다.
+                color: Colors.orange[100],
+                borderRadius: BorderRadius.circular(25.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${info}',
-                      style: TextStyle(fontSize: 16, fontFamily: 'Moebius', color: Colors.black),
+                      style: const TextStyle(fontSize: 16, fontFamily: 'Pretendard', color: Colors.black),
                     ),
                   ],
                 ),
