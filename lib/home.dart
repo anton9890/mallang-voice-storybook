@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CombinedPage.dart';
 import 'MainPage.dart';
-import 'Splash.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -211,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
+                        backgroundColor: Colors.transparent,
                         elevation: 0,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
@@ -232,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
+                        backgroundColor: Colors.transparent,
                         elevation: 0,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),

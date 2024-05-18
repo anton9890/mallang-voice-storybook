@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
-  double size;
+  final double size;
   final String text;
-  Color color;
+  final Color color;
 
   AppText(
       {Key? key,

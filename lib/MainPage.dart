@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mallang/Widget/Agebook.dart';
-import 'main.dart';
-import 'home.dart';
 import 'package:mallang/Widget/Mypage.dart';
 import 'package:mallang/Widget/library.dart';
 import 'package:mallang/Widget/Alert.dart';
 import 'package:mallang/Widget/BrandNew.dart';
 import 'package:mallang/Widget/PopularBook.dart';
-import 'package:mallang/pagetest.dart'; // 페이지 테스트 추가
 import 'package:mallang/Widget/cartagory.dart';
 import 'package:mallang/Widget/test.dart';
 import 'dart:convert';
@@ -264,7 +261,7 @@ class _MainState extends State<MainPage> {
         targetScreen = PopularBook();
         break;
       case '연령별 추천도서':
-        targetScreen = agebook();
+        targetScreen = AgeBookPage();
         break;
       case '카테고리':
         targetScreen = catagory();

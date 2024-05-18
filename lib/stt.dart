@@ -73,6 +73,7 @@ class _SttPageState extends State<SttPage> {
   void dispose(){
     audioPlayer.stop();
     // _speech.cancel();
+    super.dispose();
   }
 
   Future<void> getTTS(String text) async {

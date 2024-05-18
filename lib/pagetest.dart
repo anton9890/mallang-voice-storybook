@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -13,9 +12,6 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'dart:async';
 
 // fast api 통신할 때 필요한 라이브러리
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mallang/stt.dart';
@@ -63,9 +59,8 @@ class _testState extends State<test> {
   Future<String> stopRecorder() async {
     isRecordingDone = true;
     final filePath = await recorder.stopRecorder();
-    final file = File(filePath!);
     print('녹음 파일 경로: $filePath');
-    voiceChange(filePath);
+    voiceChange(filePath!);
 
 
     return filePath;
@@ -405,7 +400,6 @@ class _testState extends State<test> {
 
   // 마이크 버튼
   Widget buildMicrophoneButton() {
-    bool isRecording = false;
 
     if (getScript_done) {
       if (scriptData[currentIndex]['role'] == widget.selectedcharacter) {

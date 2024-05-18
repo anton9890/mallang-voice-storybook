@@ -4,11 +4,10 @@ import 'package:lottie/lottie.dart';
 import 'login.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
 import 'dart:async';
 // fast api 통신할 때 필요한 라이브러리
 import 'package:http/http.dart' as http;
-import 'dart:convert';import 'package:dio/dio.dart';
+import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -56,10 +55,9 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   // 녹음을 멈추고 녹음된 파일의 경로를 반환
-  Future<String> stopRecorder() async {
+  Future<String?> stopRecorder() async {
     isRecordingDone = true;
     final filePath = await recorder.stopRecorder();
-    final file = File(filePath!);
     print('녹음 파일 경로: $filePath');
     return filePath;
   }
@@ -207,7 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (_currentStep == 5) {
       registerUser();
       stopRecorder().then((filePath) {
-        sendAudioFile(filePath);
+        sendAudioFile(filePath!);
       });
       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(title: '')));
     }
