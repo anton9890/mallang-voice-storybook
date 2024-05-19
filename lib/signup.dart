@@ -729,7 +729,7 @@ class _SignUpPageState extends State<SignUpPage> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/account/register'),  // 서버의 URL
+      Uri.parse('http://4.217.252.206:8000/account/register'),  // 서버의 URL
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -746,7 +746,7 @@ class _SignUpPageState extends State<SignUpPage> {
 // 녹음된 파일 서버로 보내기
   Future<void> sendAudioFile(String filePath) async {
     String email = _emailController.text;
-    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/data/upload/parent_audio/${email}'));  // 서버의 URL
+    var request = http.MultipartRequest('POST', Uri.parse('http://4.217.252.206:8000/data/upload/parent_audio/${email}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',

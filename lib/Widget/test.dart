@@ -35,7 +35,7 @@ class _TestState extends State<Test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://4.217.252.206:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

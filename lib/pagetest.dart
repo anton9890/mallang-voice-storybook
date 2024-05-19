@@ -90,7 +90,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://4.217.252.206:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -125,7 +125,7 @@ class _testState extends State<test> {
     };
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/data/get/file'),
+      Uri.parse('http://4.217.252.206:8000/data/get/file'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -160,7 +160,7 @@ class _testState extends State<test> {
       };
 
       final response = await http.post(
-        Uri.parse('http://20.249.17.142:8000/data/get/file'),
+        Uri.parse('http://4.217.252.206:8000/data/get/file'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -187,7 +187,7 @@ class _testState extends State<test> {
         };
 
         final response = await http.post(
-          Uri.parse('http://20.249.17.142:8000/data/get/file'),
+          Uri.parse('http://4.217.252.206:8000/data/get/file'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -554,7 +554,7 @@ class _testState extends State<test> {
   }
 
   Future<void> voiceChange(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://20.249.17.142:8000/api/rvc/${widget.email}/${widget.title}/${scriptData[currentIndex]['role']}'));  // 서버의 URL
+    var request = http.MultipartRequest('POST', Uri.parse('http://4.217.252.206:8000/api/rvc/${widget.email}/${widget.title}/${scriptData[currentIndex]['role']}'));  // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',

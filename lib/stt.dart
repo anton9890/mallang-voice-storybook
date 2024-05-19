@@ -85,7 +85,7 @@ class _SttPageState extends State<SttPage> {
     });
 
     final response = await http.post(
-      Uri.parse('http://20.249.17.142:8000/api/tts'),
+      Uri.parse('http://4.217.252.206:8000/api/tts'),
       headers: {
         'Content-Type': 'application/json',
       },

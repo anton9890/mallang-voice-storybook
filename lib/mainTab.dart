@@ -29,7 +29,7 @@ class _MainTabState extends State<MainTabPage> {
 
   Future<void> getUserInfo() async {
     final response = await http.get(
-        Uri.parse('http://20.249.17.142:8000/account/get/${widget.email}'));
+        Uri.parse('http://4.217.252.206:8000/account/get/${widget.email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));

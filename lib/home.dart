@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    final String url = 'http://20.249.17.142:8000/account/login';
+    final String url = 'http://4.217.252.206:8000/account/login';
     // 이메일과 비밀번호를 json형식으로 인코딩
     final String body = json.encode({
       'email' : email,

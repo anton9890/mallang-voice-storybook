@@ -114,7 +114,7 @@ class LoginPage extends StatelessWidget {
       final String email = _emailController.text;
       final String password = _passwordController.text;
 
-      const String url = 'http://20.249.17.142:8000/account/login';
+      const String url = 'http://4.217.252.206:8000/account/login';
       // 이메일과 비밀번호를 json형식으로 인코딩
       final String body = json.encode({
         'email' : email,
