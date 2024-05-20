@@ -128,7 +128,6 @@ flutter:
   - assets/images/찐막.png
   - assets/images/배경.png
   - assets/images/appbar.png
-  - assets/images/검색토끼.png
   - assets/lottie/lottie1.json
   - assets/images/마이페이지토끼.png
   - assets/lottie/lottie2.json
@@ -144,4 +143,5 @@ flutter:
   - assets/images/불꽃길.png
   - assets/images/nightmode.png
   - assets/images/logo.png
+  - assets/images/search.png
 

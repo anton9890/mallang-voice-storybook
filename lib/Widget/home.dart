@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             hintText: '동화책을 검색해주세요',
             hintStyle: const TextStyle(fontFamily: 'Pretendard'),
             prefixIcon: Image.asset(
-              'assets/images/검색토끼.png',
+              'assets/images/search.png',
               width: 20, // 이미지의 너비 설정
               height: 24, // 이미지의 높이 설정
             ),
