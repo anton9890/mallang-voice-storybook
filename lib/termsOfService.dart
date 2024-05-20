@@ -37,7 +37,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
             child: Column(
               children: [
                 const Text(
-                  '말랑에 오신 것을 환영합니다!',
+                  '피카북에 오신 것을 환영합니다!',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontSize: 16,
@@ -45,7 +45,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  '말랑 서비스를 이용하기 전에',
+                  '피카북 서비스를 이용하기 전에',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontSize: 16,
@@ -61,8 +61,11 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                _buildCheckboxWithContainer('전체 약관 동의', allAgreed, _handleAllAgreed),
-                const SizedBox(height: 20,),
+                _buildCheckboxWithContainer(
+                    '전체 약관 동의', allAgreed, _handleAllAgreed),
+                const SizedBox(
+                  height: 20,
+                ),
                 _buildTermsCheckboxes(),
               ],
             ),
@@ -73,11 +76,9 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           child: ElevatedButton(
             onPressed: (allAgreed || (serviceAgreed && privacyAgreed))
                 ? () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SignUpPage()));
-            }
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                  }
                 : null,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -91,7 +92,12 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('다음', style: TextStyle(fontFamily: 'Pretendard', fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+            child: const Text('다음',
+                style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
           ),
         ),
       ),
@@ -155,8 +161,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           _buildCheckbox(
               '[필수] 개인정보 수집 및 이용동의', privacyAgreed, _handlePrivacyAgreed),
           SizedBox(height: 20),
-          _buildCheckbox(
-              '[선택] 품질 향상을 위한 이용자 데이터 수집', dataCollectionAgreed,
+          _buildCheckbox('[선택] 품질 향상을 위한 이용자 데이터 수집', dataCollectionAgreed,
               _handleDataCollectionAgreed),
           SizedBox(height: 20),
           _buildCheckbox(
