@@ -124,7 +124,6 @@ flutter:
   - assets/images/prev.png
   - assets/images/ic_launcher.png
   - assets/images/next.png
-  - assets/images/토낑.png
   - assets/images/그림2.png
   - assets/images/찐막.png
   - assets/images/배경.png
@@ -144,4 +143,5 @@ flutter:
   - assets/images/거.png
   - assets/images/불꽃길.png
   - assets/images/nightmode.png
+  - assets/images/logo.png
 
