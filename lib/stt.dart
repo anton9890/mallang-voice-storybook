@@ -142,8 +142,8 @@ class _SttPageState extends State<SttPage> {
           onPressed: _speech.isNotListening ? _startListening : _stopListening,
           shape: const CircleBorder(
             side: BorderSide(
-              color: Color(0xffffb467),
-              width: 4.0,
+              color: Color.fromARGB(255, 228, 136, 44),
+              width: 2,
             ),
           ),
           child: Icon(
