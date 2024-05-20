@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _phonenumberController = TextEditingController();
+  //final _phonenumberController = TextEditingController();
   final _ageController = TextEditingController();
   List<bool> _genderSelection = [false, false];
 
@@ -101,8 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
           if (_currentStep == 1) _buildFormPage(_formKey1, _formWidgetFirstPage()),
           if (_currentStep == 2) _buildFormPage(_formKey2, _formWidgetSecondPage()),
           if (_currentStep == 3) _buildPadding(_formWidgetThirdPage()),
-          if (_currentStep == 4) _buildPadding(_formWidgetFourthPage()),
-          if (_currentStep == 5) _buildPadding(_formWidgetLastPage()),
+          if (_currentStep == 4) _buildPadding(_formWidgetLastPage()),
         ],
       ),
     );
@@ -114,16 +113,15 @@ class _SignUpPageState extends State<SignUpPage> {
       child: DashedStepper(
         height: 25,
         step: _currentStep,
-        labels: const ['개인정보 입력','회원정보 입력','관심분야 설정','목소리 녹음'],
+        labels: const ['개인정보 입력','회원정보 입력','목소리 녹음'],
         labelStyle: const TextStyle(fontFamily: 'Pretendard', fontSize: 11),
         indicatorColor: Colors.orangeAccent,
-        length: 4,
+        length: 3,
         dotSize: 12,
         lineHeight: 3,
         icons: const [
           Icon(Icons.privacy_tip_outlined, size: 20, color: Colors.orange),
           Icon(Icons.email_outlined, size: 20, color: Colors.orange),
-          Icon(Icons.favorite_border_outlined, size: 20, color: Colors.orange),
           Icon(Icons.mic, size: 20, color: Colors.orange),
         ],
       ),
@@ -151,7 +149,6 @@ class _SignUpPageState extends State<SignUpPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _buildPreviousButton(),
-          if (_currentStep == 4) _buildSkipButton(),
           _buildNextOrCompleteButton(),
         ],
       ),
@@ -160,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildPreviousButton() {
     return Visibility(
-      visible: _currentStep != 1 && _currentStep != 5,
+      visible: _currentStep != 1 && _currentStep != 4,
       child: TextButton(
         onPressed: _currentStep > 1 ? () => setState(() => _currentStep -= 1) : null,
         child: const Text('이전', style: TextStyle(fontFamily: 'Pretendard',
@@ -169,18 +166,10 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildSkipButton() {
-    return TextButton(
-      onPressed: () => setState(() => _currentStep = 5),
-      child: const Text('스킵', style: TextStyle(fontFamily: 'Pretendard',
-          color: Colors.grey, fontSize: 20)),
-    );
-  }
-
   Widget _buildNextOrCompleteButton() {
     return TextButton(
       onPressed: _handleNextOrCompleteButtonPress,
-      child: _currentStep == 5
+      child: _currentStep == 4
           ? const Text('완료', style: TextStyle(fontFamily: 'Pretendard',color: Color(0xffffb13d), fontSize: 20))
           : const Text('다음', style: TextStyle(fontFamily: 'Pretendard',color: Color(0xffffb13d), fontSize: 20)),
     );
@@ -189,20 +178,12 @@ class _SignUpPageState extends State<SignUpPage> {
   void _handleNextOrCompleteButtonPress() {
     if (_shouldValidateAndMoveToNextStep()) {
       setState(() => _currentStep += 1);
-    } else if (_currentStep == 4 ) {
+    } else if (_currentStep == 3 ) {
       if (isRecordingDone){
         setState(() => _currentStep += 1);
       } else
         _showRecordingAlertDialog();
-    } else if (_currentStep == 3) {
-      if (_selectedInterests.length >= 1){
-        setState(() => _currentStep += 1);
-      } else{
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('관심사를 1개 이상 선택해주세요.')),
-        );
-      }
-    } else if (_currentStep == 5) {
+    } else if (_currentStep == 4) {
       registerUser();
       stopRecorder().then((filePath) {
         sendAudioFile(filePath!);
@@ -339,70 +320,68 @@ class _SignUpPageState extends State<SignUpPage> {
           selectedColor: Colors.white,
         ),
         const SizedBox(height: 20),
-        const Text(
-          '휴대폰 번호',
-          style: TextStyle(
-            fontFamily: 'Pretendard',
-            fontSize: 16.0,
-          ),
-          textAlign: TextAlign.left,
-        ),
-        const SizedBox(height: 10,),
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                controller: _phonenumberController,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: '010',
-                  border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '전화번호를 다시 입력해주세요.';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: '0000',
-                  border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '전화번호를 다시 입력해주세요.';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: '0000',
-                  border: OutlineInputBorder(),
-                  hintStyle: TextStyle(fontFamily: 'Pretendard'),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '전화번호를 다시 입력해주세요.';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ],
-        ),
+        // const Text(
+        //   '휴대폰 번호',
+        //   style: TextStyle(
+        //     fontFamily: 'Pretendard',
+        //     fontSize: 16.0,
+        //   ),
+        //   textAlign: TextAlign.left,
+        // ),
+        // const SizedBox(height: 10,),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: TextFormField(
+        //         controller: _phonenumberController,
+        //         keyboardType: TextInputType.phone,
+        //         decoration: const InputDecoration(
+        //           hintText: '010',
+        //           border: OutlineInputBorder(),
+        //           hintStyle: TextStyle(fontFamily: 'Pretendard'),
+        //         ),
+        //         validator: (value) {
+        //           if (value == null || value.isEmpty) {
+        //             return '전화번호를 다시 입력해주세요.';
+        //           }
+        //           return null;
+        //         },
+        //       ),
+        //     ),
+        //     SizedBox(width: 8),
+        //     Expanded(
+        //       child: TextFormField(
+        //         keyboardType: TextInputType.phone,
+        //         decoration: const InputDecoration(
+        //           hintText: '0000',
+        //           border: OutlineInputBorder(),
+        //           hintStyle: TextStyle(fontFamily: 'Pretendard'),
+        //         ),
+        //         validator: (value) {
+        //           if (value == null || value.isEmpty) {
+        //             return '전화번호를 다시 입력해주세요.';
+        //           }
+        //           return null;
+        //         },
+        //       ),
+        //     ),
+        // const SizedBox(width: 8),
+        // Expanded(
+        //   child: TextFormField(
+        //     keyboardType: TextInputType.phone,
+        //     decoration: const InputDecoration(
+        //       hintText: '0000',
+        //       border: OutlineInputBorder(),
+        //       hintStyle: TextStyle(fontFamily: 'Pretendard'),
+        //     ),
+        //     validator: (value) {
+        //       if (value == null || value.isEmpty) {
+        //         return '전화번호를 다시 입력해주세요.';
+        //       }
+        //       return null;
+        //     },
+        //   ),
+        // ),
       ],
     );
   }
@@ -490,89 +469,89 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Widget _formWidgetThirdPage() {
+  //   return SingleChildScrollView(
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: <Widget>[
+  //         _buildInterestCategory('계절 ☀️', ['봄', '여름', '가을', '겨울'], Colors.yellow),
+  //         const SizedBox(height: 20,),
+  //         _buildInterestCategory('활동 🏀', ['그림 그리기', '노래 부르기', '춤추기', '달리기', '수영'], Colors.orange),
+  //         const SizedBox(height: 20,),
+  //         _buildInterestCategory('동물 🐥', ['토끼', '호랑이', '사자', '돼지', '여우', '곰'], Colors.yellow),
+  //         const SizedBox(height: 20,),
+  //         _buildInterestCategory('곤충 🐛', ['거미', '벌', '무당벌레', '개미', '나비', '베짱이', '잠자리'], Colors.green),
+  //         const SizedBox(height: 20,),
+  //         _buildInterestCategory('공룡 🦖', ['초식공룡', '육식공룡', '익룡', '어룡'], Colors.green),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _buildInterestCategory(String category, List<String> interests, Color? color) {
+  //   String categoryText = category.contains(RegExp(r'\s')) ? category.split(RegExp(r'\s'))[0] : category;
+  //   String categoryEmoji = category.contains(RegExp(r'\s')) ? category.split(RegExp(r'\s'))[1] : '';
+
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: <Widget>[
+  //       category.contains(RegExp(r'\s'))
+  //           ? Text.rich(
+  //         TextSpan(
+  //           children: <TextSpan>[
+  //             TextSpan(
+  //               text: categoryText,
+  //               style: const TextStyle(
+  //                 fontFamily: 'Pretendard',
+  //                 fontSize: 18,
+  //               ),
+  //             ),
+  //             TextSpan(
+  //               text: categoryEmoji,
+  //               style: TextStyle(
+  //                 fontFamily: 'Pretendard',
+  //                 fontSize: 17,
+  //                 color: color,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       )
+  //           : Text(category),
+  //       Wrap(
+  //         spacing: 8.0,
+  //         runSpacing: 4.0,
+  //         children: interests.map((interest) => _buildInterestChip(interest)).toList(),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // Widget _buildInterestChip(String interest) {
+  //   return FilterChip(
+  //     label: Text(interest),
+  //     selected: _selectedInterests.contains(interest),
+  //     selectedColor: Colors.amber[100],
+  //     onSelected: (bool selected) {
+  //       setState(() {
+  //         if (selected) {
+  //           if (_selectedInterests.length < 5) {
+  //             _selectedInterests.add(interest);
+  //           } else {
+  //             ScaffoldMessenger.of(context).showSnackBar(
+  //               const SnackBar(content: Text('5개 이상 선택할 수 없습니다.',
+  //               )),
+  //             );
+  //           }
+  //         } else {
+  //           _selectedInterests.remove(interest);
+  //         }
+  //       });
+  //     },
+  //   );
+  // }
+
   Widget _formWidgetThirdPage() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildInterestCategory('계절 ☀️', ['봄', '여름', '가을', '겨울'], Colors.yellow),
-          const SizedBox(height: 20,),
-          _buildInterestCategory('활동 🏀', ['그림 그리기', '노래 부르기', '춤추기', '달리기', '수영'], Colors.orange),
-          const SizedBox(height: 20,),
-          _buildInterestCategory('동물 🐥', ['토끼', '호랑이', '사자', '돼지', '여우', '곰'], Colors.yellow),
-          const SizedBox(height: 20,),
-          _buildInterestCategory('곤충 🐛', ['거미', '벌', '무당벌레', '개미', '나비', '베짱이', '잠자리'], Colors.green),
-          const SizedBox(height: 20,),
-          _buildInterestCategory('공룡 🦖', ['초식공룡', '육식공룡', '익룡', '어룡'], Colors.green),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInterestCategory(String category, List<String> interests, Color? color) {
-    String categoryText = category.contains(RegExp(r'\s')) ? category.split(RegExp(r'\s'))[0] : category;
-    String categoryEmoji = category.contains(RegExp(r'\s')) ? category.split(RegExp(r'\s'))[1] : '';
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        category.contains(RegExp(r'\s'))
-            ? Text.rich(
-          TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                text: categoryText,
-                style: const TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontSize: 18,
-                ),
-              ),
-              TextSpan(
-                text: categoryEmoji,
-                style: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontSize: 17,
-                  color: color,
-                ),
-              ),
-            ],
-          ),
-        )
-            : Text(category),
-        Wrap(
-          spacing: 8.0,
-          runSpacing: 4.0,
-          children: interests.map((interest) => _buildInterestChip(interest)).toList(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildInterestChip(String interest) {
-    return FilterChip(
-      label: Text(interest),
-      selected: _selectedInterests.contains(interest),
-      selectedColor: Colors.amber[100],
-      onSelected: (bool selected) {
-        setState(() {
-          if (selected) {
-            if (_selectedInterests.length < 5) {
-              _selectedInterests.add(interest);
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('5개 이상 선택할 수 없습니다.',
-                )),
-              );
-            }
-          } else {
-            _selectedInterests.remove(interest);
-          }
-        });
-      },
-    );
-  }
-
-  Widget _formWidgetFourthPage() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -696,7 +675,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           SizedBox(height: 20,),
           Text(
-            '로그인하고 말랑 서비스를 이용해보세요 :)',
+            '로그인하고 피카북 서비스를 이용해보세요 :)',
             style: TextStyle(
               fontSize: 14,
               fontFamily: 'Pretendard',
@@ -712,7 +691,7 @@ class _SignUpPageState extends State<SignUpPage> {
   // 회원 정보 서버로 보내기
   Future registerUser() async{
     String gender = _genderSelection[0] ? '남성' : '여성';
-    String phoneNumber = _phonenumberController.text;
+    //String phoneNumber = _phonenumberController.text;
     String age = _ageController.text;
     String name = _nameController.text;
     String email = _emailController.text;
@@ -723,7 +702,7 @@ class _SignUpPageState extends State<SignUpPage> {
       'email' : email,
       'password' : password,
       'gender' : gender,
-      'phoneNumber' : phoneNumber,
+      //'phoneNumber' : phoneNumber,
       'age' : age,
       'interests' : _selectedInterests.join(','),
     };
