@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToSignUpPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TermsOfService()),
+      MaterialPageRoute(builder: (context) => const TermsOfService()),
     );
   }
 
@@ -70,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('로그인 성공',
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Moebius',
             ),),
-          content: Text('로그인이 성공적으로 완료되었습니다.',
+          content: const Text('로그인이 성공적으로 완료되었습니다.',
             style: TextStyle(
               fontFamily: 'Moebius',
             ),),
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: Text('확인',
+              child: const Text('확인',
                 style: TextStyle(
                   fontFamily: 'Moebius',
                 ),
@@ -99,19 +99,19 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 실패',
+          title: const Text('로그인 실패',
             style: TextStyle(
               fontFamily: 'Moebius',
             ),
           ),
 
-          content: Text('로그인을 다시 해주세요.'),
+          content: const Text('로그인을 다시 해주세요.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: Text('확인'),
+              child: const Text('확인'),
             ),
           ],
         );
@@ -130,8 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(40.0),
+            const Padding(
+              padding: EdgeInsets.all(40.0),
               child: Text(
                 '간편하게 로그인하고\n다양한 서비스를 이용하세요',
                 style: TextStyle(
