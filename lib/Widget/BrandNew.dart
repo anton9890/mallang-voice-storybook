@@ -19,7 +19,7 @@ class brandnewbook extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -28,7 +28,7 @@ class brandnewbook extends StatelessWidget {
                   _buildBookImage('assets/images/너는 어떤 씨앗이니.png'),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -37,7 +37,7 @@ class brandnewbook extends StatelessWidget {
                   _buildBookImage('assets/images/클림트의 정원으로.png'),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -46,7 +46,7 @@ class brandnewbook extends StatelessWidget {
                   _buildBookImage('assets/images/변신요가.png'),
                 ],
               ),
-              SizedBox(height: 20), // 사진과 버튼 사이 간격 조정
+              const SizedBox(height: 20), // 사진과 버튼 사이 간격 조정
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -55,9 +55,8 @@ class brandnewbook extends StatelessWidget {
                   _buildBookImage('assets/images/홀짝홀짝호로록.png'),
                 ],
               ),
-              SizedBox(height: 20), // 스크롤의 마지막 간격
-            ],
-          ),
+              const SizedBox(height: 20), // 스크롤의 마지막 간격
+          ]),
         ),
       ),
     );
@@ -78,7 +77,7 @@ class brandnewbook extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 3,
             blurRadius: 7,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
