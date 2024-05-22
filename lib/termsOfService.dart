@@ -43,7 +43,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   '피카북 서비스를 이용하기 전에',
                   style: TextStyle(
@@ -72,7 +72,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: (allAgreed || (serviceAgreed && privacyAgreed))
                 ? () {
@@ -157,13 +157,13 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
         children: [
           _buildCheckbox(
               '[필수] 서비스 이용약관 동의', serviceAgreed, _handleServiceAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox(
               '[필수] 개인정보 수집 및 이용동의', privacyAgreed, _handlePrivacyAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox('[선택] 품질 향상을 위한 이용자 데이터 수집', dataCollectionAgreed,
               _handleDataCollectionAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox(
               '[선택] 마케팅 정보 수신 동의', marketingAgreed, _handleMarketingAgreed),
         ],
