@@ -69,8 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('로그인 성공',
-            style: const TextStyle(
+          title: const Text('로그인 성공',
+            style: TextStyle(
               fontFamily: 'Moebius',
             ),),
           content: const Text('로그인이 성공적으로 완료되었습니다.',
