@@ -227,7 +227,7 @@ class _MainState extends State<MainPage> {
         }
       },
       child: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Image.asset(
@@ -252,16 +252,16 @@ class _MainState extends State<MainPage> {
 
     switch (text) {
       case '신간도서':
-        targetScreen = brandnewbook();
+        targetScreen = const brandnewbook();
         break;
       case '인기도서':
-        targetScreen = PopularBook();
+        targetScreen = const PopularBook();
         break;
       case '연령별 추천도서':
-        targetScreen = AgeBookPage();
+        targetScreen = const AgeBookPage();
         break;
       case '카테고리':
-        targetScreen = catagory();
+        targetScreen = const catagory();
         break;
       default:
         break;
@@ -293,7 +293,7 @@ class _MainState extends State<MainPage> {
                 height: 50,
                 fit: BoxFit.contain,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 text,
                 style: TextStyle(
@@ -319,16 +319,16 @@ class _MainState extends State<MainPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard('신간도서', 'assets/images/star.png', Color(0xffffa07a)),
-            _buildCard('인기도서', 'assets/images/heart.png', Color(0xffADD797)),
+            _buildCard('신간도서', 'assets/images/star.png', const Color(0xffffa07a)),
+            _buildCard('인기도서', 'assets/images/heart.png', const Color(0xffADD797)),
           ],
         ),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard('연령별 추천도서', 'assets/images/recommand.png', Color(0xffb0c4de)),
-            _buildCard('카테고리', 'assets/images/category.png', Color(0xffffb6c1)),
+            _buildCard('연령별 추천도서', 'assets/images/recommand.png', const Color(0xffb0c4de)),
+            _buildCard('카테고리', 'assets/images/category.png', const Color(0xffffb6c1)),
           ],
         ),
       ],
