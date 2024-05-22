@@ -8,7 +8,7 @@ class AlertPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('알림 센터'),
+        title: const Text('알림 센터'),
       ),
       body: Center(
         child: GestureDetector(
@@ -18,7 +18,7 @@ class AlertPage extends StatelessWidget {
           //     MaterialPageRoute(builder: (context) => AlertPage()),
           //   );
           // },
-          child: Text(
+          child: const Text(
             '알림이 없습니다.',
             style: TextStyle(
               fontSize: 20,

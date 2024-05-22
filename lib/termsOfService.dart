@@ -76,9 +76,9 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
           child: ElevatedButton(
             onPressed: (allAgreed || (serviceAgreed && privacyAgreed))
                 ? () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
-                  }
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SignUpPage()));
+            }
                 : null,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),

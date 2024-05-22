@@ -54,8 +54,8 @@ class _MainState extends State<MainPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false, // 뒤로가기 버튼 제거
-        backgroundColor: Color(0xffffe4e1),
-        title: Text(
+        backgroundColor: const Color(0xffffe4e1),
+        title: const Text(
           "말랑",
           style: TextStyle(
             fontFamily: 'Moebius',
@@ -65,29 +65,26 @@ class _MainState extends State<MainPage> {
         actions: [
           IconButton(
             // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AlertPage()),
+                MaterialPageRoute(builder: (context) => const AlertPage()),
               );
             },
           ),
         ],
       ),
-      body: Container(
-        //color: Color(0xffF4f1b1),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 20,),
-              _searchBox(),
-              SizedBox(height: 20,),
-              _recommendBook(),
-              SizedBox(height: 20,),
-              _fourMenu(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20,),
+            _searchBox(),
+            const SizedBox(height: 20,),
+            _recommendBook(),
+            const SizedBox(height: 20,),
+            _fourMenu(),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -114,7 +111,7 @@ class _MainState extends State<MainPage> {
             }
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: "내 서재",
@@ -146,13 +143,13 @@ class _MainState extends State<MainPage> {
           fillColor: Colors.white, // 배경색을 원하는 색상으로 설정
           hintText: '동화책을 검색해주세요',
           // labelStyle: TextStyle(fontFamily: 'Moebius'), // 라벨 폰트 변경
-          hintStyle: TextStyle(fontFamily: 'Moebius'),
+          hintStyle: const TextStyle(fontFamily: 'Moebius'),
           suffixIcon: IconButton(
-            icon: Icon(Icons.clear),
+            icon: const Icon(Icons.clear),
             onPressed: () => _searchController.clear(),
           ),
           prefixIcon: IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               // 검색창 누르면 보일 화면
               print('검색어: ${_searchController.text}');
@@ -160,7 +157,7 @@ class _MainState extends State<MainPage> {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
         ),
       ),
@@ -168,10 +165,10 @@ class _MainState extends State<MainPage> {
   }
 
   Widget _recommendBook(){
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
-        padding: EdgeInsets.only(left: 3, top: 1),
+        padding: const EdgeInsets.only(left: 3, top: 1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -181,15 +178,15 @@ class _MainState extends State<MainPage> {
                   width: double.infinity,
                   height: 40, // 텍스트 높이에 맞게 조절
                   decoration: BoxDecoration(
-                    color: Color(0xfffaebd7), // 배경 색 및 투명도 조절
+                    color: const Color(0xfffaebd7), // 배경 색 및 투명도 조절
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    '$userName 님 취향저격 도서 \u{1F340}',
-                    style: TextStyle(
+                    '$userName 님께 추천하는 책 \u{1F340}',
+                    style: const TextStyle(
                       fontSize: 21,
                       fontFamily: 'Moebius',
                       color: Color(0xff929292),
@@ -199,7 +196,7 @@ class _MainState extends State<MainPage> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -238,10 +235,10 @@ class _MainState extends State<MainPage> {
               width: width,
               height: height,
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               title,
-              style: TextStyle(fontSize: 16, fontFamily: 'Moebius'),
+              style: const TextStyle(fontSize: 16, fontFamily: 'Moebius'),
             ),
           ],
         ),
@@ -326,7 +323,7 @@ class _MainState extends State<MainPage> {
             _buildCard('인기도서', 'assets/images/heart.png', Color(0xffADD797)),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

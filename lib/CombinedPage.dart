@@ -22,7 +22,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             '약관 동의',
             style: TextStyle(
               fontFamily: 'Moebius',
@@ -36,14 +36,14 @@ class _TermsOfServiceState extends State<TermsOfService> {
           child: Center(
             child: Column(
               children: [
-                Text(
+                const Text(
                   '말랑에 오신 것을 환영합니다!',
                   style: TextStyle(
                     fontFamily: 'Moebius',
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   '말랑 서비스를 이용하기 전에',
                   style: TextStyle(
@@ -60,16 +60,16 @@ class _TermsOfServiceState extends State<TermsOfService> {
                     color: Colors.grey.withOpacity(0.5),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 _buildCheckboxWithContainer('전체 약관 동의', allAgreed, _handleAllAgreed),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 _buildTermsCheckboxes(),
               ],
             ),
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: (allAgreed || (serviceAgreed && privacyAgreed))
                 ? () {
@@ -80,7 +80,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
             }
                 : null,
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               backgroundColor: (allAgreed || (serviceAgreed && privacyAgreed))
                   ? Colors.black // 변경된 부분
                   : Colors.blueGrey.withOpacity(0.5), // 변경된 부분
@@ -91,7 +91,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('다음', style: TextStyle(fontFamily: 'Moebius', fontSize: 16, color: Colors.white)),
+            child: const Text('다음', style: TextStyle(fontFamily: 'Moebius', fontSize: 16, color: Colors.white)),
           ),
         ),
       ),
@@ -101,8 +101,8 @@ class _TermsOfServiceState extends State<TermsOfService> {
   Widget _buildCheckboxWithContainer(
       String title, bool value, ValueChanged<bool?> onChanged) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(10),
@@ -145,20 +145,20 @@ class _TermsOfServiceState extends State<TermsOfService> {
 
   Widget _buildTermsCheckboxes() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.all(5),
       child: Column(
         children: [
           _buildCheckbox(
               '[필수] 서비스 이용약관 동의', serviceAgreed, _handleServiceAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox(
               '[필수] 개인정보 수집 및 이용동의', privacyAgreed, _handlePrivacyAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox(
               '[선택] 품질 향상을 위한 이용자 데이터 수집', dataCollectionAgreed,
               _handleDataCollectionAgreed),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildCheckbox(
               '[선택] 마케팅 정보 수신 동의', marketingAgreed, _handleMarketingAgreed),
         ],
