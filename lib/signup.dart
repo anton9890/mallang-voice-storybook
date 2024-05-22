@@ -109,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildDashedStepper() {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: DashedStepper(
         height: 25,
         step: _currentStep,
@@ -130,7 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildFormPage(GlobalKey<FormState> key, Widget child) {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Form(
         key: key,
         child: child,
@@ -139,12 +139,12 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _buildPadding(Widget child) {
-    return Padding(padding: EdgeInsets.all(20), child: child);
+    return Padding(padding: const EdgeInsets.all(20), child: child);
   }
 
   Widget _buildBottomNavigationBar() {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -292,7 +292,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         const SizedBox(height: 10,),
         ToggleButtons(
-          children: <Widget>[
+          children: const <Widget>[
             Center(child: Text('남성',
               style: TextStyle(
                 fontFamily: 'Pretendard',
@@ -407,7 +407,7 @@ class _SignUpPageState extends State<SignUpPage> {
           validator: (value) {
             String pattern =
                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-            RegExp regex = new RegExp(pattern);
+            RegExp regex = RegExp(pattern);
             if (value == null || value.isEmpty) {
               return '이메일을 다시 입력해주세요.';
             } else if (!regex.hasMatch(value)) {
@@ -673,7 +673,7 @@ class _SignUpPageState extends State<SignUpPage> {
             '가입이 완료되었습니다.',
             style: TextStyle(fontSize: 20, fontFamily: 'Pretendard'),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           Text(
             '로그인하고 피카북 서비스를 이용해보세요 :)',
             style: TextStyle(
