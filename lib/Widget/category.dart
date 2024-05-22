@@ -6,7 +6,9 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfffff3cc),
       appBar: AppBar(
+        backgroundColor: const Color(0xffffd966),
         centerTitle: true,
         title: Text(
           '카테고리',
