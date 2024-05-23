@@ -53,7 +53,8 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             actions: [
-              Center( // 여기 추가
+              Center(
+                // 여기 추가
                 child: TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -78,19 +79,23 @@ class LoginPage extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('로그인 실패',
+            title: const Text(
+              '로그인 실패',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Pretendard',
               ),
             ),
-            content: const Text('로그인을 다시 해주세요.',
+            content: const Text(
+              '로그인을 다시 해주세요.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Pretendard',
-              ),),
+              ),
+            ),
             actions: [
-              Center( // 여기 추가
+              Center(
+                // 여기 추가
                 child: TextButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // 다이얼로그 닫기
@@ -117,8 +122,8 @@ class LoginPage extends StatelessWidget {
       const String url = 'http://4.217.252.206:8000/account/login';
       // 이메일과 비밀번호를 json형식으로 인코딩
       final String body = json.encode({
-        'email' : email,
-        'password' : password,
+        'email': email,
+        'password': password,
       });
 
       // http.post 메서드를 사용하여 서버에 post요청
@@ -136,13 +141,12 @@ class LoginPage extends StatelessWidget {
         // 응답 본문을 JSON으로 변환
         String jsonData = jsonDecode(responseBody);
 
-        if(!context.mounted) return;
+        if (!context.mounted) return;
 
         if (jsonData == 'success') {
           _navigateToMainPage(email);
           _showLoginSuccessDialog();
-        }
-        else {
+        } else {
           _showLoginFailDialog();
         }
       }
@@ -157,24 +161,25 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-          Padding(
-          padding: const EdgeInsets.all(60.0),
-          child: Column(
-            children: [
-             const Text(
-                '아이가 즐거워지는\n동화 낭독 시간',
-                style: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontSize: 27.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: Column(
+                children: [
+                  const Text(
+                    '아이가 즐거워지는\n동화 낭독 시간',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontSize: 27.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30), // 이미지와 텍스트 사이 여백 조정
+                  Image.asset(
+                      'assets/images/logo.png'), // 이미지 추가, 이미지는 assets 폴더에 넣어야 합니다.
+                ],
               ),
-              const SizedBox(height: 30), // 이미지와 텍스트 사이 여백 조정
-              Image.asset('assets/images/logo.png'), // 이미지 추가, 이미지는 assets 폴더에 넣어야 합니다.
-            ],
-          ),
-        ),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -187,8 +192,10 @@ class LoginPage extends StatelessWidget {
                       hintText: '이메일을 입력해주세요.',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
-                      labelStyle: TextStyle(fontFamily: 'Pretendard'), // 라벨 폰트 변경
-                      hintStyle: TextStyle(fontFamily: 'Pretendard'), // 힌트 폰트 변경
+                      labelStyle:
+                          TextStyle(fontFamily: 'Pretendard'), // 라벨 폰트 변경
+                      hintStyle:
+                          TextStyle(fontFamily: 'Pretendard'), // 힌트 폰트 변경
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -212,13 +219,16 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10), // 테두리 둥글기 설정
                       color: Colors.orange,
                     ),
-                    child:
-                    ElevatedButton(
+                    child: ElevatedButton(
                       onPressed: _signInWithEmailAndPassword,
                       style: MallangButtonStyle.noSplash,
                       child: const Text(
                         '로그인 하기',
-                        style: TextStyle(fontFamily: 'Pretendard', color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -232,7 +242,10 @@ class LoginPage extends StatelessWidget {
                         },
                         child: const Text(
                           '아이디 찾기',
-                          style: TextStyle(fontFamily: 'Pretendard', color: Colors.black, fontSize: 15),
+                          style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                              fontSize: 15),
                         ),
                       ),
                       TextButton(
@@ -241,14 +254,20 @@ class LoginPage extends StatelessWidget {
                         },
                         child: const Text(
                           '비밀번호 찾기',
-                          style: TextStyle(fontFamily: 'Pretendard', color: Colors.black, fontSize: 15),
+                          style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                              fontSize: 15),
                         ),
                       ),
                       TextButton(
                         onPressed: _navigateToSignUpPage,
                         child: const Text(
                           '회원가입',
-                          style: TextStyle(fontFamily: 'Pretendard', color: Colors.black, fontSize: 15),
+                          style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Colors.black,
+                              fontSize: 15),
                         ),
                       ),
                     ],
