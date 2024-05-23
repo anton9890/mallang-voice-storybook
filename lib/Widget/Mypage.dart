@@ -137,7 +137,7 @@ class MyPage extends StatelessWidget {
                           fontFamily: 'Pretendard',
                         ),
                       ),
-                      value: true,
+                      value: false,
                       onChanged: (bool value) {},
                     ),
                     SwitchListTile(

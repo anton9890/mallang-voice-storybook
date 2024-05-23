@@ -44,7 +44,8 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
+    Widget _buildBook(String imagePath, String title,
+        {double width = 150, double height = 180}) {
       return GestureDetector(
         onTap: () {
           if (title == '토끼와 거북이') {
@@ -76,10 +77,7 @@ class HomePage extends StatelessWidget {
 
     Widget _recommendBook() {
       return Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * 0.95,
+        width: MediaQuery.of(context).size.width * 0.95,
         child: Padding(
           padding: const EdgeInsets.only(left: 0, top: 1),
           child: Column(
@@ -106,15 +104,14 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    _buildBook(
-                        'assets/images/토끼와거북이.png', '토끼와 거북이', width: 150,
-                        height: 200),
-                    _buildBook('assets/images/구름빵.png', '구름빵', width: 150,
-                        height: 200),
-                    _buildBook('assets/images/인기도서5.png', '도도도 도착!', width: 150,
-                        height: 200),
-                    _buildBook('assets/images/해님달님.png', '해님달님', width: 150,
-                        height: 200),
+                    _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이',
+                        width: 150, height: 200),
+                    _buildBook('assets/images/구름빵.png', '구름빵',
+                        width: 150, height: 200),
+                    _buildBook('assets/images/인기도서5.png', '도도도 도착!',
+                        width: 150, height: 200),
+                    _buildBook('assets/images/해님달님.png', '해님달님',
+                        width: 150, height: 200),
                   ],
                 ),
               ),
@@ -190,7 +187,7 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget _fourMenu(){
+    Widget _fourMenu() {
       return Column(
         children: [
           Row(
@@ -204,34 +201,42 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildCard('연령별 추천도서', 'assets/images/chickchick.png', Color(0xffb0c4de)),
-              _buildCard('카테고리', 'assets/images/dinasour.png', Color(0xffffb6c1)),
+              _buildCard('연령별 추천도서', 'assets/images/chickchick.png',
+                  Color(0xffb0c4de)),
+              _buildCard(
+                  '카테고리', 'assets/images/dinasour.png', Color(0xffffb6c1)),
             ],
           ),
         ],
       );
     }
 
-    return SizedBox(
-      child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/배경.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+    return Scaffold(
+      // child: Container(
+      // decoration: const BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage('assets/images/배경.png'),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
 // color: Color(0xffF4f1b1),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 20,),
-              _searchBox(),
-              const SizedBox(height: 20,),
-              _recommendBook(),
-              const SizedBox(height: 20,),
-              _fourMenu(),
-            ],
-          ),
+      backgroundColor: Color(0xffF4f1b1),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            _searchBox(),
+            const SizedBox(
+              height: 20,
+            ),
+            _recommendBook(),
+            const SizedBox(
+              height: 20,
+            ),
+            _fourMenu(),
+          ],
         ),
       ),
     );
