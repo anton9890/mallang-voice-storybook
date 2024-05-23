@@ -117,7 +117,6 @@ flutter:
   - assets/images/rabbit.png
   - assets/images/토.png
   - assets/images/chick.png
-  - assets/images/sea.png
   - assets/images/to.png
   - assets/images/prev.png
   - assets/images/splash.png
@@ -144,4 +143,5 @@ flutter:
   - assets/images/nightmode.png
   - assets/images/logo.png
   - assets/images/search.png
+  - assets/images/agebackground.png
 

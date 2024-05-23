@@ -4,10 +4,12 @@ import 'package:http/http.dart' as http;
 
 class MyPage extends StatelessWidget {
   final String email;
+
   const MyPage(this.email);
 
   Future<Map<String, dynamic>> getUserInfo() async {
-    final response = await http.get(Uri.parse('http://4.217.252.206:8000/account/get/${email}'));
+    final response = await http
+        .get(Uri.parse('http://4.217.252.206:8000/account/get/${email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -17,6 +19,22 @@ class MyPage extends StatelessWidget {
     }
   }
 
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          content: Text(
+            '준비중입니다',
+            textAlign: TextAlign.center,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +42,8 @@ class MyPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<Map<String, dynamic>>(
           future: getUserInfo(),
-          builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+          builder: (BuildContext context,
+              AsyncSnapshot<Map<String, dynamic>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
@@ -38,7 +57,8 @@ class MyPage extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           radius: 40.0,
-                          backgroundImage: AssetImage('assets/images/마이페이지토끼.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/마이페이지토끼.png'),
                         ),
                         const SizedBox(width: 16.0),
                         Column(
@@ -55,7 +75,7 @@ class MyPage extends StatelessWidget {
                             Text(
                               '$email',
                               style: const TextStyle(
-                                fontFamily:  'Pretendard',
+                                fontFamily: 'Pretendard',
                                 fontSize: 16.0,
                                 color: Colors.grey,
                               ),
@@ -75,28 +95,28 @@ class MyPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const ListTile(
+                    ListTile(
+                      onTap: () => _showDialog(context),
                       leading: Icon(Icons.payment),
-                      title: Text('녹음 기록',
-                        style: TextStyle(
-                            fontFamily: 'Pretendard'
-                        ),
+                      title: Text(
+                        '녹음 기록',
+                        style: TextStyle(fontFamily: 'Pretendard'),
                       ),
                     ),
-                    const ListTile(
+                    ListTile(
+                      onTap: () => _showDialog(context),
                       leading: Icon(Icons.account_balance_wallet),
-                      title: Text('분석 내역',
-                        style: TextStyle(
-                            fontFamily: 'Pretendard'
-                        ),
+                      title: Text(
+                        '분석 내역',
+                        style: TextStyle(fontFamily: 'Pretendard'),
                       ),
                     ),
-                    const ListTile(
+                    ListTile(
+                      onTap: () => _showDialog(context),
                       leading: Icon(Icons.credit_card),
-                      title: Text('개인정보 수정',
-                        style: TextStyle(
-                            fontFamily: 'Pretendard'
-                        ),
+                      title: Text(
+                        '개인정보 수정',
+                        style: TextStyle(fontFamily: 'Pretendard'),
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -111,7 +131,8 @@ class MyPage extends StatelessWidget {
                       ),
                     ),
                     SwitchListTile(
-                      title: const Text('푸시 알림',
+                      title: const Text(
+                        '푸시 알림',
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                         ),
@@ -120,10 +141,9 @@ class MyPage extends StatelessWidget {
                       onChanged: (bool value) {},
                     ),
                     SwitchListTile(
-                      title: const Text('이메일 알림',
-                        style: TextStyle(
-                            fontFamily: 'Pretendard'
-                        ),
+                      title: const Text(
+                        '이메일 알림',
+                        style: TextStyle(fontFamily: 'Pretendard'),
                       ),
                       value: false,
                       onChanged: (bool value) {},

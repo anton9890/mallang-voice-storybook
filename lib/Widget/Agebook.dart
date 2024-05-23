@@ -6,7 +6,9 @@ class AgeBookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfffff3cc),
       appBar: AppBar(
+        backgroundColor: const Color(0xffffd966),
         centerTitle: true,
         title: const Text(
           '연령별 추천도서',
@@ -172,13 +174,12 @@ class AgeBookPage extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xffDaeefa),
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(20.0),
             topLeft: Radius.circular(20.0),
           ),
         ),
-        child: Image.asset('assets/images/sea.png'),
+        child: Image.asset('assets/images/agebackground.png'),
       ),
     );
   }
