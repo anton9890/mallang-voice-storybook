@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 
-
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 1500), () {});
+    await Future.delayed(const Duration(milliseconds: 2000), () {});
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginPage(title: ' ')),
