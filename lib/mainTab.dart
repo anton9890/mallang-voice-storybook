@@ -61,9 +61,9 @@ class _MainTabState extends State<MainTabPage> {
         title: Row(
           children: [
             Image.asset(
-              'assets/images/appbar.png', // 이미지 경로 지정
-              width: 120, // 이미지 너비 조절
-              height: 140, // 이미지 높이 조절
+              'assets/images/splash1.gif', // 이미지 경로 지정
+              width: 179, // 이미지 너비 조절
+              height: 179, // 이미지 높이 조절
             ),
             const SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
           ],

@@ -8,7 +8,7 @@ class catagory extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           '카테고리',
           style: TextStyle(
             fontSize: 20,
@@ -17,7 +17,7 @@ class catagory extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 1.0,
@@ -48,8 +48,8 @@ class catagory extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '명작동화',
                       style: TextStyle(
                         fontSize: 16,
@@ -57,8 +57,8 @@ class catagory extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 8.0,),
-                    Text(
+                    const SizedBox(height: 8.0,),
+                    const Text(
                       '유명한 이야기가 좋아요',
                       style: TextStyle(
                         fontSize: 14,
@@ -81,7 +81,7 @@ class catagory extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -94,8 +94,8 @@ class catagory extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '전래동화',
                       style: TextStyle(
                         fontFamily: 'Moebius',
@@ -103,8 +103,8 @@ class catagory extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 8.0,),
-                    Text(
+                    const SizedBox(height: 8.0,),
+                    const Text(
                       '옛날 이야기가 좋아요',
                       style: TextStyle(
                         fontFamily: 'Moebius',
@@ -140,8 +140,8 @@ class catagory extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '이솝우화',
                       style: TextStyle(
                         fontFamily: 'Moebius',
@@ -149,8 +149,8 @@ class catagory extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 8.0,),
-                    Text(
+                    const SizedBox(height: 8.0,),
+                    const Text(
                       '동물 이야기가 좋아요',
                       style: TextStyle(
                         fontFamily: 'Moebius',
@@ -186,8 +186,8 @@ class catagory extends StatelessWidget {
                       width: 40,
                       height: 40,
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '그림책',
                       style: TextStyle(
                         fontFamily: 'Moebius',
@@ -195,8 +195,8 @@ class catagory extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 8.0,),
-                    Text(
+                    const SizedBox(height: 8.0,),
+                    const Text(
                       '그림 보는게 좋아요',
                       style: TextStyle(
                         fontFamily: 'Moebius',

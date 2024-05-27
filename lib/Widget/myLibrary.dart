@@ -22,7 +22,7 @@ class MyLibraryPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -42,7 +42,7 @@ class MyLibraryPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Divider(thickness: 1.0),
+                  const Divider(thickness: 1.0),
                   const BookItem(
                     imagePath: 'assets/images/토끼와거북이.png',
                     title: '토끼와 거북이',
@@ -115,7 +115,7 @@ class BookItem extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 3,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
