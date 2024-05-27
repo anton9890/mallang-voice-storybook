@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/images/splash.png',
+          'assets/images/splash.gif',
           width: 120, // Adjust the width as needed
           height: 120, // Adjust the height as needed
         ),

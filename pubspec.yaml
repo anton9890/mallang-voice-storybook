@@ -119,7 +119,7 @@ flutter:
   - assets/images/chick.png
   - assets/images/to.png
   - assets/images/prev.png
-  - assets/images/splash.png
+  - assets/images/splash.gif
   - assets/images/prev.png
   - assets/images/ic_launcher.png
   - assets/images/next.png
@@ -141,7 +141,6 @@ flutter:
   - assets/images/거.png
   - assets/images/불꽃길.png
   - assets/images/nightmode.png
-  - assets/images/logo.png
   - assets/images/search.png
   - assets/images/agebackground.png
   - assets/images/test.gif

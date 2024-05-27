@@ -176,7 +176,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 30), // 이미지와 텍스트 사이 여백 조정
                   Image.asset(
-                      'assets/images/logo.png'), // 이미지 추가, 이미지는 assets 폴더에 넣어야 합니다.
+                      'assets/images/splash.gif'), // 이미지 추가, 이미지는 assets 폴더에 넣어야 합니다.
                 ],
               ),
             ),
