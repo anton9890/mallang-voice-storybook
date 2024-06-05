@@ -7,7 +7,7 @@ import 'package:button_animations/button_animations.dart';
 class Test extends StatefulWidget {
   final String email;
   final String title;
-  const Test(this.email,this.title, {Key? key}) : super(key: key);
+  const Test(this.email, this.title, {Key? key}) : super(key: key);
 
   @override
   _TestState createState() => _TestState();
@@ -19,6 +19,8 @@ class _TestState extends State<Test> {
   String? rabbit;
   String? turtle;
 
+  List<String?> character = [];
+
   @override
   void initState() {
     super.initState();
@@ -26,12 +28,11 @@ class _TestState extends State<Test> {
   }
 
   Future bookCheck() async {
-
     Map<String, String> data = {
-      'email' : widget.email,
-      'type' : 'json',
-      'book' : widget.title,
-      'file' : '',
+      'email': widget.email,
+      'type': 'json',
+      'book': widget.title,
+      'file': '',
     };
 
     final response = await http.post(
@@ -43,7 +44,8 @@ class _TestState extends State<Test> {
     );
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> responseData = jsonDecode(utf8.decode(response.bodyBytes));
+      Map<String, dynamic> responseData =
+          jsonDecode(utf8.decode(response.bodyBytes));
       String title = responseData['title'];
       String info = responseData['info'];
       List<String> character = List<String>.from(responseData['character']);
@@ -58,9 +60,9 @@ class _TestState extends State<Test> {
         this.rabbit = character[1];
         this.turtle = character[2];
       });
-
     } else {
-      throw Exception('Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
+      throw Exception(
+          'Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
     }
   }
 
@@ -97,7 +99,9 @@ class _TestState extends State<Test> {
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Center(
               child: Text(
                 '${widget.title}',
@@ -107,10 +111,13 @@ class _TestState extends State<Test> {
             const Center(
               child: Text(
                 '김미견 그림/만화',
-                style: TextStyle(fontSize: 15, fontFamily : 'Pretendard', color: Colors.grey),
+                style: TextStyle(
+                    fontSize: 15, fontFamily: 'Pretendard', color: Colors.grey),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -141,16 +148,22 @@ class _TestState extends State<Test> {
                         ),
                         const SizedBox(height: 10),
                         AnimatedButton(
-                          child: Text('${turtle ?? "거북이"} 모드',
+                          child: Text(
+                            '${turtle ?? "거북이"} 모드',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),),
+                            ),
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, turtle, false), // 'rabbit' 값을 전달
+                                builder: (context) => test(
+                                    widget.email,
+                                    widget.title,
+                                    turtle,
+                                    false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -189,16 +202,22 @@ class _TestState extends State<Test> {
                         ),
                         const SizedBox(height: 10),
                         AnimatedButton(
-                          child: Text('${rabbit ?? "토끼"} 모드',
+                          child: Text(
+                            '${rabbit ?? "토끼"} 모드',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),),
+                            ),
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, rabbit, false), // 'rabbit' 값을 전달
+                                builder: (context) => test(
+                                    widget.email,
+                                    widget.title,
+                                    rabbit,
+                                    false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -237,16 +256,22 @@ class _TestState extends State<Test> {
                         ),
                         const SizedBox(height: 10),
                         AnimatedButton(
-                          child: Text('감상 모드',
+                          child: Text(
+                            '감상 모드',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),),
+                            ),
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, parent, false), // 'rabbit' 값을 전달
+                                builder: (context) => test(
+                                    widget.email,
+                                    widget.title,
+                                    parent,
+                                    false), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -285,16 +310,22 @@ class _TestState extends State<Test> {
                         ),
                         const SizedBox(height: 10),
                         AnimatedButton(
-                          child: Text('자장가 모드',
+                          child: Text(
+                            '자장가 모드',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Colors.black,
-                            ),),
+                            ),
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => test(widget.email, widget.title, parent, true), // 'rabbit' 값을 전달
+                                builder: (context) => test(
+                                    widget.email,
+                                    widget.title,
+                                    parent,
+                                    true), // 'rabbit' 값을 전달
                               ),
                             );
                           },
@@ -311,7 +342,9 @@ class _TestState extends State<Test> {
                 ],
               ),
             ),
-            const SizedBox(height: 12,),
+            const SizedBox(
+              height: 12,
+            ),
             Container(
               width: 380.0,
               decoration: BoxDecoration(
@@ -324,8 +357,11 @@ class _TestState extends State<Test> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${info}',
-                      style: const TextStyle(fontSize: 16, fontFamily: 'Pretendard', color: Colors.black),
+                      info,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Pretendard',
+                          color: Colors.black),
                     ),
                   ],
                 ),

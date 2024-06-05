@@ -10,6 +10,7 @@ import 'package:mallang/Widget/test.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'api/resources/book_title.dart';
 
 class MainPage extends StatefulWidget {
   final String email;
@@ -36,7 +37,8 @@ class _MainState extends State<MainPage> {
   }
 
   Future<void> getUserInfo() async {
-    final response = await http.get(Uri.parse('http://4.217.252.206:8000/account/get/${widget.email}'));
+    final response = await http.get(
+        Uri.parse('http://4.217.252.206:8000/account/get/${widget.email}'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -78,11 +80,17 @@ class _MainState extends State<MainPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             _searchBox(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             _recommendBook(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             _fourMenu(),
           ],
         ),
@@ -129,7 +137,7 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _searchBox(){
+  Widget _searchBox() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: TextField(
@@ -164,7 +172,7 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _recommendBook(){
+  Widget _recommendBook() {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
@@ -201,10 +209,15 @@ class _MainState extends State<MainPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildBook('assets/images/구름빵.png', '구름빵', width: 150, height: 200),
-                  _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이', width: 150, height: 200),
-                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부', width: 150, height: 200),
-                  _buildBook('assets/images/해님달님.png', '해님달님', width: 150, height: 200),
+                  _buildBook('assets/images/구름빵.png', '구름빵',
+                      width: 150, height: 200),
+                  _buildBook(
+                      'assets/images/토끼와거북이.png', BookTitle.rabbitAndTutle,
+                      width: 150, height: 200),
+                  _buildBook('assets/images/흥부놀부.png', '흥부와 놀부',
+                      width: 150, height: 200),
+                  _buildBook('assets/images/해님달님.png', '해님달님',
+                      width: 150, height: 200),
                 ],
               ),
             ),
@@ -214,12 +227,29 @@ class _MainState extends State<MainPage> {
     );
   }
 
-
-
-  Widget _buildBook(String imagePath, String title, {double width = 150, double height = 180}) {
+  Widget _buildBook(String imagePath, String title,
+      {double width = 150, double height = 180}) {
     return GestureDetector(
       onTap: () {
-        if (title == '토끼와 거북이') {
+        if (title == BookTitle.rabbitAndTutle) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
+          );
+        }
+        if (title == BookTitle.parrotAndFriend) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
+          );
+        }
+        if (title == BookTitle.foxAndCrane) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Test(widget.email, title)),
+          );
+        }
+        if (title == BookTitle.sunAndMoon) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Test(widget.email, title)),
@@ -245,7 +275,6 @@ class _MainState extends State<MainPage> {
       ),
     );
   }
-
 
   Widget _buildCard(String text, String imagePath, Color color) {
     Widget? targetScreen;
@@ -312,23 +341,27 @@ class _MainState extends State<MainPage> {
     );
   }
 
-  Widget _fourMenu(){
+  Widget _fourMenu() {
     return Column(
       children: [
         // SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard('신간도서', 'assets/images/star.png', const Color(0xffffa07a)),
-            _buildCard('인기도서', 'assets/images/heart.png', const Color(0xffADD797)),
+            _buildCard(
+                '신간도서', 'assets/images/star.png', const Color(0xffffa07a)),
+            _buildCard(
+                '인기도서', 'assets/images/heart.png', const Color(0xffADD797)),
           ],
         ),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard('연령별 추천도서', 'assets/images/recommand.png', const Color(0xffb0c4de)),
-            _buildCard('카테고리', 'assets/images/category.png', const Color(0xffffb6c1)),
+            _buildCard('연령별 추천도서', 'assets/images/recommand.png',
+                const Color(0xffb0c4de)),
+            _buildCard(
+                '카테고리', 'assets/images/category.png', const Color(0xffffb6c1)),
           ],
         ),
       ],
