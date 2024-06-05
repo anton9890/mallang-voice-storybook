@@ -54,23 +54,20 @@ class _MainTabState extends State<MainTabPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        // 제목을 가운데 정렬하지 않음
         automaticallyImplyLeading: false,
-        // 뒤로가기 버튼 제거
         backgroundColor: const Color(0xffffd966),
         title: Row(
           children: [
-            Image.asset(
-              'assets/images/splash1.gif', // 이미지 경로 지정
-              width: 179, // 이미지 너비 조절
-              height: 179, // 이미지 높이 조절
+            Flexible(
+              child: Image.asset(
+                'assets/images/main.gif', // 이미지 경로 지정
+              ),
             ),
             const SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
           ],
         ),
         actions: [
           IconButton(
-            // 업데이트 사항, 신규 동화책 등록 등 알림 볼 수 있게 하기
             icon: const Icon(Icons.notifications),
             onPressed: () {
               Navigator.push(
