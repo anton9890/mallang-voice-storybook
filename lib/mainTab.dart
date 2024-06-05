@@ -58,9 +58,10 @@ class _MainTabState extends State<MainTabPage> {
         backgroundColor: const Color(0xffffd966),
         title: Row(
           children: [
-            Flexible(
+            SizedBox(
+              width: 120,
               child: Image.asset(
-                'assets/images/main.gif', // 이미지 경로 지정
+                'assets/images/main.gif',
               ),
             ),
             const SizedBox(width: 10), // 이미지와 텍스트 사이의 간격 조절
