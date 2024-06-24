@@ -53,6 +53,16 @@ class HomePage extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => Test(email, title)),
             );
+          } else if (title == '여우와두루미') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Test(email, title)),
+            );
+          } else if (title == '해와달이된오누이') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Test(email, title)),
+            );
           }
         },
         child: Container(
@@ -106,9 +116,9 @@ class HomePage extends StatelessWidget {
                   children: [
                     _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이',
                         width: 150, height: 200),
-                    _buildBook('assets/images/구름빵.png', '구름빵',
+                    _buildBook('assets/images/여우와두루미.png', '여우와두루미',
                         width: 150, height: 200),
-                    _buildBook('assets/images/인기도서5.png', '도도도 도착!',
+                    _buildBook('assets/images/sun_and_moon.png', '해와달이된오누이',
                         width: 150, height: 200),
                     _buildBook('assets/images/해님달님.png', '해님달님',
                         width: 150, height: 200),

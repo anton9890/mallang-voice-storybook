@@ -90,8 +90,8 @@ class _TestState extends State<Test> {
                           offset: const Offset(0, 3),
                         ),
                       ],
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/토끼와거북이.png'),
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/${widget.title}.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
