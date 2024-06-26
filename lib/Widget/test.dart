@@ -25,6 +25,24 @@ class _TestState extends State<Test> {
   void initState() {
     super.initState();
     bookCheck();
+    ttsPrepare();
+  }
+
+  /// 책 선택 시 tts 요청하는 코드
+  Future ttsPrepare() async {
+    // request body
+    Map<String, dynamic> data = {
+      'email': 'widget.email',
+      'book': widget.title,
+    };
+
+    await http.post(
+      Uri.parse('http://4.217.252.206:8000/api/tts/prepare'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
   }
 
   Future bookCheck() async {
