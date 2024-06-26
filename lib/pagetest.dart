@@ -342,7 +342,7 @@ class _testState extends State<test> {
             buildPrevButton(),
             buildNextButton(),
             buildMicrophoneButton(),
-            buildsttButton(),
+            //buildsttButton(),
             buildScriptText(currentScript),
           ],
         ),
@@ -383,30 +383,30 @@ class _testState extends State<test> {
     );
   }
 
-  Widget buildsttButton() {
-    return Positioned(
-      left: 20.0,
-      bottom: 80.0,
-      child: Stack(
-        children: [
-          InkWell(
-            onTap: () {
-              audioPlayer.stop();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SttPage(widget.email)),
-              );
-            },
-            child: Image.asset(
-              'assets/images/stt.png',
-              width: 45.0,
-              height: 100.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget buildsttButton() {
+  //   return Positioned(
+  //     left: 20.0,
+  //     bottom: 80.0,
+  //     child: Stack(
+  //       children: [
+  //         InkWell(
+  //           onTap: () {
+  //             audioPlayer.stop();
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(builder: (context) => SttPage(widget.email)),
+  //             );
+  //           },
+  //           child: Image.asset(
+  //             'assets/images/stt.png',
+  //             width: 45.0,
+  //             height: 100.0,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
 // 다음 버튼을 그리는 위젯
   Widget buildNextButton() {

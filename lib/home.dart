@@ -24,8 +24,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final String url = 'http://4.217.252.206:8000/account/login';
     // 이메일과 비밀번호를 json형식으로 인코딩
     final String body = json.encode({
-      'email' : email,
-      'password' : password,
+      'email': email,
+      'password': password,
     });
 
     // http.post 메서드를 사용하여 서버에 post요청
@@ -44,14 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
       String jsonData = jsonDecode(responseBody);
 
       if (jsonData == 'success') {
-
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MainPage(email)),
         );
         _showLoginSuccessDialog();
-      }
-      else {
+      } else {
         _showLoginfailDialog();
       }
     }
@@ -69,20 +67,25 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('로그인 성공',
+          title: const Text(
+            '로그인 성공',
             style: TextStyle(
               fontFamily: 'Moebius',
-            ),),
-          content: const Text('로그인이 성공적으로 완료되었습니다.',
+            ),
+          ),
+          content: const Text(
+            '로그인이 성공적으로 완료되었습니다.',
             style: TextStyle(
               fontFamily: 'Moebius',
-            ),),
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: const Text('확인',
+              child: const Text(
+                '확인',
                 style: TextStyle(
                   fontFamily: 'Moebius',
                 ),
@@ -99,12 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('로그인 실패',
+          title: const Text(
+            '로그인 실패',
             style: TextStyle(
               fontFamily: 'Moebius',
             ),
           ),
-
           content: const Text('로그인을 다시 해주세요.'),
           actions: [
             TextButton(
@@ -181,7 +184,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '아이디 찾기',
-                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
+                          style: TextStyle(
+                              fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                       TextButton(
@@ -190,15 +194,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: Text(
                           '비밀번호 찾기',
-                          style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
+                          style: TextStyle(
+                              fontFamily: 'Moebius', color: Colors.black),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 40.0),
                   Container(
-                    width: 100,  // 너비 조정
-                    height: 50,  // 높이 조정
+                    width: 100, // 너비 조정
+                    height: 50, // 높이 조정
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.yellow[100],
@@ -207,19 +212,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _signInWithEmailAndPassword,
                       child: Text(
                         '로그인',
-                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
+                        style: TextStyle(
+                            fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
                   Container(
-                    width: 100,  // 너비 조정
-                    height: 50,  // 높이 조정
+                    width: 100, // 너비 조정
+                    height: 50, // 높이 조정
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.yellow[100],
@@ -228,12 +235,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _navigateToSignUpPage,
                       child: Text(
                         '회원가입',
-                        style: TextStyle(fontFamily: 'Moebius', color: Colors.black),
+                        style: TextStyle(
+                            fontFamily: 'Moebius', color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
                   ),

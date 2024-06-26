@@ -18,6 +18,10 @@ class _TestState extends State<Test> {
   String? parent;
   String? rabbit;
   String? turtle;
+  // 해와달 오빠 역할
+  String? bro;
+  // 해와달 누이 역할
+  String? sis;
 
   List<String?> character = [];
 
@@ -46,7 +50,7 @@ class _TestState extends State<Test> {
   Future ttsPrepare() async {
     // request body
     Map<String, dynamic> data = {
-      'email': 'widget.email',
+      'email': widget.email,
       'book': widget.title,
     };
 
@@ -87,10 +91,19 @@ class _TestState extends State<Test> {
       print('Character: $character');
 
       setState(() {
-        this.info = info;
-        this.parent = "";
-        this.rabbit = character[1];
-        this.turtle = character[2];
+        if (widget.title == '해와달이된오누이') {
+          this.info = info;
+          this.parent = "";
+          this.rabbit = character[1];
+          this.turtle = character[2];
+          this.bro = character[3];
+          this.sis = character[4];
+        } else {
+          this.info = info;
+          this.parent = "";
+          this.rabbit = character[1];
+          this.turtle = character[2];
+        }
       });
     } else {
       throw Exception(
@@ -264,6 +277,116 @@ class _TestState extends State<Test> {
                       ],
                     ),
                   ),
+                  if (widget.title == '해와달이된오누이')
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(1, 3),
+                                ),
+                              ],
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/to.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          AnimatedButton(
+                            child: Text(
+                              '오빠 모드',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => test(
+                                      widget.email,
+                                      widget.title,
+                                      bro,
+                                      false), // 'rabbit' 값을 전달
+                                ),
+                              );
+                            },
+                            height: 40,
+                            width: 100,
+                            type: null,
+                            color: Colors.white70,
+                            shadowColor: Colors.amber[300],
+                            borderRadius: 30,
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (widget.title == '해와달이된오누이')
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(1, 3),
+                                ),
+                              ],
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/to.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          AnimatedButton(
+                            child: Text(
+                              '누이 모드',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => test(
+                                      widget.email,
+                                      widget.title,
+                                      sis,
+                                      false), // 'rabbit' 값을 전달
+                                ),
+                              );
+                            },
+                            height: 40,
+                            width: 100,
+                            type: null,
+                            color: Colors.white70,
+                            shadowColor: Colors.amber[300],
+                            borderRadius: 30,
+                          ),
+                        ],
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
