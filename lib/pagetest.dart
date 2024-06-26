@@ -87,7 +87,7 @@ class _testState extends State<test> {
 
   /// 처음에 딜레이 걸어주기
   Future<void> loading() async {
-    await Future.delayed(const Duration(seconds: 30));
+    await Future.delayed(const Duration(seconds: 60));
     setState(() {
       isLoading = false;
     });
