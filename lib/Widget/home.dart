@@ -63,6 +63,11 @@ class HomePage extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => Test(email, title)),
             );
+          } else if (title == '앵무새와숲의친구들') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Test(email, title)),
+            );
           }
         },
         child: Container(
