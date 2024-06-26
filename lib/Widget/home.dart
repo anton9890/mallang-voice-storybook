@@ -119,13 +119,13 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    _buildBook('assets/images/토끼와거북이.png', '토끼와 거북이',
+                    _buildBook('assets/images/rabbit_and_turtle.png', '토끼와 거북이',
                         width: 150, height: 200),
                     _buildBook('assets/images/여우와두루미.png', '여우와두루미',
                         width: 150, height: 200),
                     _buildBook('assets/images/sun_and_moon.png', '해와달이된오누이',
                         width: 150, height: 200),
-                    _buildBook('assets/images/해님달님.png', '해님달님',
+                    _buildBook('assets/images/parrot_book.png', '앵무새와숲의친구들',
                         width: 150, height: 200),
                   ],
                 ),

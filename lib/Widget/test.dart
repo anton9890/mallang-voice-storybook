@@ -21,6 +21,20 @@ class _TestState extends State<Test> {
 
   List<String?> character = [];
 
+  Map<String, String> bookImage = {
+    '토끼와 거북이': 'rabbit_and_turtle',
+    '해와달이된오누이': 'sun_and_moon',
+    '여우와두루미': '여우와두루미',
+    '앵무새와숲의친구들': 'parrot_book',
+  };
+
+  Map<String, String> bookWriter = {
+    '토끼와 거북이': '김미견 그림/만화',
+    '해와달이된오누이': '김세실(글), 이준선(그림)',
+    '여우와두루미': '엄혜숙(글), 한병호 그림/만화',
+    '앵무새와숲의친구들': '이승재 그림/만화',
+  };
+
   @override
   void initState() {
     super.initState();
@@ -109,7 +123,8 @@ class _TestState extends State<Test> {
                         ),
                       ],
                       image: DecorationImage(
-                        image: AssetImage('assets/images/${widget.title}.png'),
+                        image: AssetImage(
+                            'assets/images/${bookImage[widget.title]}.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -126,9 +141,9 @@ class _TestState extends State<Test> {
                 style: const TextStyle(fontSize: 28, fontFamily: 'Pretendard'),
               ),
             ),
-            const Center(
+            Center(
               child: Text(
-                '김미견 그림/만화',
+                '${bookWriter[widget.title]}',
                 style: TextStyle(
                     fontSize: 15, fontFamily: 'Pretendard', color: Colors.grey),
               ),

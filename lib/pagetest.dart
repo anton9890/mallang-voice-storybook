@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
-import 'package:get/get.dart';
 import 'package:mallang/Widget/test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
