@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
+import 'package:get/get.dart';
 import 'package:mallang/Widget/test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
@@ -22,12 +23,13 @@ class test extends StatefulWidget {
   final String? selectedcharacter;
   final bool sleepMode;
 
-  const test(this.email, this.title, this.selectedcharacter, this.sleepMode, {Key? key}) : super(key: key);
+  const test(this.email, this.title, this.selectedcharacter, this.sleepMode,
+      {Key? key})
+      : super(key: key);
 
   @override
   _testState createState() => _testState();
 }
-
 
 class _testState extends State<test> {
   List<dynamic> scriptData = [];
@@ -41,9 +43,11 @@ class _testState extends State<test> {
   bool isRecordingDone = false;
   final audioPlayer = AudioPlayer();
 
-  Future initRecorder() async{
+  bool isLoading = true;
+
+  Future initRecorder() async {
     final status = await Permission.microphone.request();
-    if (status != PermissionStatus.granted){
+    if (status != PermissionStatus.granted) {
       throw '마이크 권한을 허용해주세요';
     }
     await recorder.openRecorder();
@@ -62,7 +66,6 @@ class _testState extends State<test> {
     print('녹음 파일 경로: $filePath');
     voiceChange(filePath!);
 
-
     return filePath;
   }
 
@@ -70,6 +73,7 @@ class _testState extends State<test> {
   void initState() {
     initRecorder();
     super.initState();
+    loading();
     getScripts();
     getAudio();
   }
@@ -81,12 +85,20 @@ class _testState extends State<test> {
     super.dispose();
   }
 
+  /// 처음에 딜레이 걸어주기
+  Future<void> loading() async {
+    await Future.delayed(const Duration(seconds: 30));
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   Future getScripts() async {
     Map<String, String> data = {
-      'email' : widget.email,
-      'type' : 'json',
-      'book' : widget.title,
-      'file' : '',
+      'email': widget.email,
+      'type': 'json',
+      'book': widget.title,
+      'file': '',
     };
 
     final response = await http.post(
@@ -98,9 +110,9 @@ class _testState extends State<test> {
     );
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> responseData = jsonDecode(utf8.decode(response.bodyBytes));
+      Map<String, dynamic> responseData =
+          jsonDecode(utf8.decode(response.bodyBytes));
       List<dynamic> script = responseData['script'];
-      print(scriptData);
 
       setState(() {
         scriptData = script;
@@ -112,16 +124,17 @@ class _testState extends State<test> {
       getAudio();
       getScript_done = true;
     } else {
-      throw Exception('Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
+      throw Exception(
+          'Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
     }
   }
 
   Future getImage(String background, String flag) async {
     Map<String, String> data = {
-      'email' : widget.email,
-      'type' : 'image',
-      'book' : widget.title,
-      'file' : background,
+      'email': widget.email,
+      'type': 'image',
+      'book': widget.title,
+      'file': background,
     };
 
     final response = await http.post(
@@ -138,14 +151,13 @@ class _testState extends State<test> {
       setState(() {
         if (flag == 'background') {
           this.image = Image.memory(imageData);
-        }
-        else {
+        } else {
           this.role = Image.memory(imageData);
         }
       });
-
     } else {
-      throw Exception('Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
+      throw Exception(
+          'Failed to send data. Status code: ${response.statusCode}, Response: ${response.body}');
     }
   }
 
@@ -176,8 +188,7 @@ class _testState extends State<test> {
       } else {
         throw Exception('Failed to load audio data');
       }
-    }
-    else {
+    } else {
       if (scriptData[currentIndex]['role'] != widget.selectedcharacter) {
         Map<String, String> data = {
           'email': widget.email,
@@ -206,17 +217,17 @@ class _testState extends State<test> {
       }
     }
   }
+
   void nextScript() {
     // 다음 스크립트
     if (currentIndex < scriptData.length - 1) {
       setState(() {
         currentIndex++;
       });
-      getImage(currentIndex.toString() ,'background');
+      getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], '');
       getAudio();
-    }
-    else{
+    } else {
       audioPlayer.stop();
       showPop();
     }
@@ -239,7 +250,7 @@ class _testState extends State<test> {
       context: context,
       builder: (BuildContext context) {
         return Transform.rotate(
-          angle: -pi / -2,  // 90도 회전
+          angle: -pi / -2, // 90도 회전
           child: AlertDialog(
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -252,7 +263,9 @@ class _testState extends State<test> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Text(
                   '${widget.title}를 다 읽으셨네요 !',
                   style: const TextStyle(
@@ -295,9 +308,31 @@ class _testState extends State<test> {
 
   @override
   Widget build(BuildContext context) {
-    double progress = (scriptData.length-1) > 0 ? currentIndex / (scriptData.length-1) : 0;
-    Map<String, dynamic> currentScript = scriptData.isNotEmpty ? scriptData[currentIndex] : {};
-
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                '데이터를 로드중이에요! \n 1분 정도 기다려주세요!\u{1f60e}',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 17),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    double progress = (scriptData.length - 1) > 0
+        ? currentIndex / (scriptData.length - 1)
+        : 0;
+    Map<String, dynamic> currentScript =
+        scriptData.isNotEmpty ? scriptData[currentIndex] : {};
 
     return RotatedBox(
       quarterTurns: 1,
@@ -322,7 +357,8 @@ class _testState extends State<test> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: this.image?.image ?? const AssetImage('assets/images/background.png'),
+          image: this.image?.image ??
+              const AssetImage('assets/images/background.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -359,8 +395,7 @@ class _testState extends State<test> {
               audioPlayer.stop();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SttPage(widget.email)
-                ),
+                MaterialPageRoute(builder: (context) => SttPage(widget.email)),
               );
             },
             child: Image.asset(
@@ -373,7 +408,6 @@ class _testState extends State<test> {
       ),
     );
   }
-
 
 // 다음 버튼을 그리는 위젯
   Widget buildNextButton() {
@@ -400,7 +434,6 @@ class _testState extends State<test> {
 
   // 마이크 버튼
   Widget buildMicrophoneButton() {
-
     if (getScript_done) {
       if (scriptData[currentIndex]['role'] == widget.selectedcharacter) {
         return Stack(
@@ -419,20 +452,20 @@ class _testState extends State<test> {
                 },
                 child: (!recorder.isRecording)
                     ? Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: const Text(
-                    '눌러서 따라 읽어볼까요? \u{1F3A4}',
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      color: Colors.black,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                )
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          '눌러서 따라 읽어볼까요? \u{1F3A4}',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            color: Colors.black,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      )
                     : const SizedBox.shrink(),
               ),
             ),
@@ -451,7 +484,9 @@ class _testState extends State<test> {
                 child: Padding(
                   padding: EdgeInsets.all(9.0),
                   child: Image.asset(
-                    recorder.isRecording ? 'assets/images/pause.png' : 'assets/images/mic.png',
+                    recorder.isRecording
+                        ? 'assets/images/pause.png'
+                        : 'assets/images/mic.png',
                     width: 70,
                     height: 70,
                   ),
@@ -499,7 +534,6 @@ class _testState extends State<test> {
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(minHeight: 50),
-
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.6),
         borderRadius: BorderRadius.circular(15),
@@ -554,7 +588,10 @@ class _testState extends State<test> {
   }
 
   Future<void> voiceChange(String filePath) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://4.217.252.206:8000/api/rvc/${widget.email}/${widget.title}/${scriptData[currentIndex]['role']}'));  // 서버의 URL
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'http://4.217.252.206:8000/api/rvc/${widget.email}/${widget.title}/${scriptData[currentIndex]['role']}')); // 서버의 URL
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',
