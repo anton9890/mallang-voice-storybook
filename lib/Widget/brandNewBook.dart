@@ -8,7 +8,8 @@ class BrandNewBookPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('신간도서',
+        title: const Text(
+          '신간도서',
           style: TextStyle(
             fontFamily: 'Moebius',
           ),
@@ -32,7 +33,7 @@ class BrandNewBookPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildBookImage('assets/images/해와달이된오누이.png'),
+                  _buildBookImage('assets/images/sun_and_moon.png'),
                   _buildBookImage('assets/images/여기는 토끼아파트입니다.png'),
                   _buildBookImage('assets/images/구름빵.png'),
                 ],
