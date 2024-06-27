@@ -24,38 +24,20 @@ class BrandNewBookPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildBookImage('assets/images/rabbit_and_turtle.png'),
-                  _buildBookImage('assets/images/나의 빛나는 친구.png'),
-                  _buildBookImage('assets/images/너는 어떤 씨앗이니.png'),
+                  _buildBookImage('assets/images/여우와두루미.png'),
+                  _buildBookImage('assets/images/parrot_book.png'),
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  _buildBookImage('assets/images/해와달이된오누이.png'),
                   _buildBookImage('assets/images/여기는 토끼아파트입니다.png'),
-                  _buildBookImage('assets/images/끝말잇기.png'),
-                  _buildBookImage('assets/images/클림트의 정원으로.png'),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildBookImage('assets/images/도와줘,브루너.png'),
-                  _buildBookImage('assets/images/봄날의즐거운모자대회.png'),
-                  _buildBookImage('assets/images/호박목욕탕.png'),
-                ],
-              ),
-              const SizedBox(height: 30), // 사진과 버튼 사이 간격 조정
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildBookImage('assets/images/티니핑.png'),
                   _buildBookImage('assets/images/구름빵.png'),
-                  _buildBookImage('assets/images/홀짝홀짝호로록.png'),
                 ],
               ),
-              const SizedBox(height: 30), // 스크롤의 마지막 간격
+              const SizedBox(height: 40), // 스크롤의 마지막 간격
             ],
           ),
         ),
