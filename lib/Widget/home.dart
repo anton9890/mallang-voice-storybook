@@ -141,7 +141,7 @@ class HomePage extends StatelessWidget {
 
       switch (text) {
         case '신간도서':
-          targetScreen = BrandNewBookPage();
+          targetScreen = BrandNewBookPage(email: email);
           break;
         case '인기도서':
           targetScreen = PopularBook(email: email);

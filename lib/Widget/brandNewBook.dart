@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mallang/Widget/test.dart'; // Test 클래스가 정의된 파일의 경로에 따라 수정 필요
 
 class BrandNewBookPage extends StatelessWidget {
-  const BrandNewBookPage({Key? key}) : super(key: key);
+  final String email;
+
+  const BrandNewBookPage({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,29 +23,66 @@ class BrandNewBookPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildBookImage('assets/images/rabbit_and_turtle.png'),
-                  _buildBookImage('assets/images/여우와두루미.png'),
-                  _buildBookImage('assets/images/parrot_book.png'),
-                ],
-              ),
-              const SizedBox(height: 40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildBookImage('assets/images/sun_and_moon.png'),
-                  _buildBookImage('assets/images/여기는 토끼아파트입니다.png'),
-                  _buildBookImage('assets/images/구름빵.png'),
-                ],
-              ),
-              const SizedBox(height: 40), // 스크롤의 마지막 간격
+              const SizedBox(height: 20),
+              _BookRow(context, [
+                BookInfo(
+                    imagePath: 'assets/images/rabbit_and_turtle.png',
+                    title: '토끼와 거북이'),
+                BookInfo(
+                    imagePath: 'assets/images/sun_and_moon.png',
+                    title: '해와달이된오누이'),
+                BookInfo(
+                    imagePath: 'assets/images/여우와두루미.png', title: '여우와두루미'),
+              ]),
+              const SizedBox(height: 20),
+              _BookRow(context, [
+                BookInfo(
+                    imagePath: 'assets/images/parrot_book.png',
+                    title: '앵무새와숲의친구들'),
+                BookInfo(
+                    imagePath: 'assets/images/여기는 토끼아파트입니다.png',
+                    title: '여기는 토끼 아파트입니다'),
+                BookInfo(imagePath: 'assets/images/구름빵.png', title: '구름빵'),
+              ]),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _BookRow(BuildContext context, List<BookInfo> books) {
+    final navigableTitles = ['토끼와 거북이', '해와달이된오누이', '여우와두루미', '앵무새와숲의친구들'];
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: books.map((book) {
+        return GestureDetector(
+          onTap: () {
+            if (navigableTitles.contains(book.title)) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Test(email, book.title),
+                ),
+              );
+            }
+          },
+          child: Column(
+            children: [
+              _buildBookImage(book.imagePath),
+              const SizedBox(height: 8),
+              Text(
+                book.title,
+                style: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -67,4 +107,11 @@ class BrandNewBookPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class BookInfo {
+  final String imagePath;
+  final String title;
+
+  BookInfo({required this.imagePath, required this.title});
 }
