@@ -23,7 +23,7 @@ class BrandNewBookPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildBookImage('assets/images/토끼와거북이.png'),
+                  _buildBookImage('assets/images/rabbit_and_turtle.png'),
                   _buildBookImage('assets/images/나의 빛나는 친구.png'),
                   _buildBookImage('assets/images/너는 어떤 씨앗이니.png'),
                 ],

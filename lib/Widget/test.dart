@@ -157,7 +157,7 @@ class _TestState extends State<Test> {
             Center(
               child: Text(
                 '${bookWriter[widget.title]}',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 15, fontFamily: 'Pretendard', color: Colors.grey),
               ),
             ),
