@@ -39,6 +39,13 @@ class _TestState extends State<Test> {
     '앵무새와숲의친구들': '이승재 그림/만화',
   };
 
+  Map<String, List<String>> roleImage = {
+    '토끼와 거북이': ['turtle', 'rabbit'],
+    '여우와두루미': ['crane', 'fox'],
+    '해와달이된오누이': ['tiger', 'mom', 'bro', 'sis'],
+    '앵무새와숲의친구들': ['fox', 'parrot'],
+  };
+
   @override
   void initState() {
     super.initState();
@@ -186,8 +193,9 @@ class _TestState extends State<Test> {
                                 offset: const Offset(1, 3),
                               ),
                             ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/거.png'),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/${roleImage[widget.title]![0]}.gif'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -240,8 +248,9 @@ class _TestState extends State<Test> {
                                 offset: const Offset(0, 3),
                               ),
                             ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/토.png'),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/${roleImage[widget.title]![1]}.gif'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -295,8 +304,9 @@ class _TestState extends State<Test> {
                                   offset: const Offset(1, 3),
                                 ),
                               ],
-                              image: const DecorationImage(
-                                image: AssetImage('assets/images/to.png'),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/${roleImage[widget.title]![2]}.gif'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -350,8 +360,9 @@ class _TestState extends State<Test> {
                                   offset: const Offset(1, 3),
                                 ),
                               ],
-                              image: const DecorationImage(
-                                image: AssetImage('assets/images/to.png'),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/${roleImage[widget.title]![3]}.gif'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -405,7 +416,7 @@ class _TestState extends State<Test> {
                               ),
                             ],
                             image: const DecorationImage(
-                              image: AssetImage('assets/images/to.png'),
+                              image: AssetImage('assets/images/listen.png'),
                               fit: BoxFit.cover,
                             ),
                           ),
