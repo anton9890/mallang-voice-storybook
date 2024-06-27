@@ -35,7 +35,7 @@ class catagory extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
@@ -173,7 +173,7 @@ class catagory extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                       blurRadius: 4.0,
                     ),
                   ],
