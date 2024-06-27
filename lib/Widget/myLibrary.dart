@@ -44,7 +44,7 @@ class MyLibraryPage extends StatelessWidget {
                   ),
                   const Divider(thickness: 1.0),
                   const BookItem(
-                    imagePath: 'assets/images/토끼와거북이.png',
+                    imagePath: 'assets/images/rabbit_and_turtle.png',
                     title: '토끼와 거북이',
                     progress: '73% 읽는 중',
                   ),
