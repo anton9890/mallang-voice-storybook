@@ -295,7 +295,7 @@ class _testState extends State<test> {
                   SystemChrome.setPreferredOrientations([
                     DeviceOrientation.portraitUp,
                     DeviceOrientation.portraitDown,
-                  ]); //
+                  ]);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -442,7 +442,7 @@ class _testState extends State<test> {
         return Stack(
           children: [
             Positioned(
-              left: (MediaQuery.of(context).size.width - 50),
+              left: (MediaQuery.of(context).size.width / 2 - 80),
               bottom: 100.0,
               child: InkWell(
                 onTap: () async {
@@ -473,7 +473,7 @@ class _testState extends State<test> {
               ),
             ),
             Positioned(
-              left: (MediaQuery.of(context).size.width),
+              left: (MediaQuery.of(context).size.width / 2 - 30),
               bottom: 20.0,
               child: InkWell(
                 onTap: () async {
