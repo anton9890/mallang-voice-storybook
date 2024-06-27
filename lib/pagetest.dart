@@ -73,8 +73,6 @@ class _testState extends State<test> {
     initRecorder();
     super.initState();
     loading();
-    getScripts();
-    getAudio();
   }
 
   @override
@@ -90,6 +88,8 @@ class _testState extends State<test> {
     setState(() {
       isLoading = false;
     });
+    getScripts();
+    getAudio();
   }
 
   Future getScripts() async {

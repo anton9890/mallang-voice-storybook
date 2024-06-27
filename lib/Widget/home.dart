@@ -144,7 +144,7 @@ class HomePage extends StatelessWidget {
           targetScreen = BrandNewBookPage();
           break;
         case '인기도서':
-          targetScreen = PopularBook();
+          targetScreen = PopularBook(email: email);
           break;
         case '연령별 추천도서':
           targetScreen = AgeBookPage();
