@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:mallang/Widget/test.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -71,6 +72,10 @@ class _testState extends State<test> {
   @override
   void initState() {
     initRecorder();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.initState();
     loading();
   }
@@ -79,6 +84,10 @@ class _testState extends State<test> {
   void dispose() {
     recorder.closeRecorder();
     audioPlayer.stop();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.dispose();
   }
 
@@ -220,9 +229,7 @@ class _testState extends State<test> {
   void nextScript() {
     // 다음 스크립트
     if (currentIndex < scriptData.length - 1) {
-      setState(() {
-        currentIndex++;
-      });
+      currentIndex++;
       getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], '');
       getAudio();
@@ -235,9 +242,8 @@ class _testState extends State<test> {
   void prevScript() {
     // 이전 스크립트
     if (currentIndex > 0) {
-      setState(() {
-        currentIndex--;
-      });
+      currentIndex--;
+
       getImage(currentIndex.toString(), 'background');
       getImage(scriptData[currentIndex]['role'], '');
       getAudio();
@@ -248,58 +254,59 @@ class _testState extends State<test> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Transform.rotate(
-          angle: -pi / -2, // 90도 회전
-          child: AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  height: 150.0, // 높이를 원하는 값으로 설정하세요
-                  width: 150.0, // 너비를 원하는 값으로 설정하세요
-                  child: Lottie.asset(
-                    'assets/lottie/lottie1.json',
-                    fit: BoxFit.contain,
-                  ),
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                height: 130.0, // 높이를 원하는 값으로 설정하세요
+                width: 150.0, // 너비를 원하는 값으로 설정하세요
+                child: Lottie.asset(
+                  'assets/lottie/lottie1.json',
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  '${widget.title}를 다 읽으셨네요 !',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontFamily: 'Pretendard',
-                  ),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              Center(
-                child: TextButton(
-                  child: const Text(
-                    '꾹 눌러서 나가기❤️',
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    audioPlayer.stop();
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Test(widget.email, widget.title),
-                      ),
-                    );
-                  },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                '${widget.title}를 다 읽으셨네요 !',
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontFamily: 'Pretendard',
                 ),
               ),
             ],
-            backgroundColor: Colors.white,
           ),
+          actions: <Widget>[
+            Center(
+              child: TextButton(
+                child: const Text(
+                  '꾹 눌러서 나가기❤️',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: () {
+                  audioPlayer.stop();
+                  Navigator.of(context).pop();
+                  SystemChrome.setPreferredOrientations([
+                    DeviceOrientation.portraitUp,
+                    DeviceOrientation.portraitDown,
+                  ]); //
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Test(widget.email, widget.title),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+          backgroundColor: Colors.white,
         );
       },
     );
@@ -333,21 +340,18 @@ class _testState extends State<test> {
     Map<String, dynamic> currentScript =
         scriptData.isNotEmpty ? scriptData[currentIndex] : {};
 
-    return RotatedBox(
-      quarterTurns: 1,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            buildBackground(),
-            buildPrevButton(),
-            buildNextButton(),
-            buildMicrophoneButton(),
-            //buildsttButton(),
-            buildScriptText(currentScript),
-          ],
-        ),
-        bottomNavigationBar: buildProgressBar(progress),
+    return Scaffold(
+      body: Stack(
+        children: [
+          buildBackground(),
+          buildPrevButton(),
+          buildNextButton(),
+          buildMicrophoneButton(),
+          //buildsttButton(),
+          buildScriptText(currentScript),
+        ],
       ),
+      bottomNavigationBar: buildProgressBar(progress),
     );
   }
 
