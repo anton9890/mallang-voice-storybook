@@ -283,9 +283,9 @@ class _MainState extends State<MainPage> {
       case '신간도서':
         targetScreen = const brandnewbook();
         break;
-      case '인기도서':
-        targetScreen = const PopularBook();
-        break;
+      // case '인기도서':
+      //   targetScreen = const PopularBook();
+      //break;
       case '연령별 추천도서':
         targetScreen = const AgeBookPage();
         break;
