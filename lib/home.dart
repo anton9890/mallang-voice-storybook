@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
                       hintText: '이메일을 입력해주세요.',
                       prefixIcon: Icon(Icons.email),
@@ -161,10 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintStyle: TextStyle(fontFamily: 'Moebius'), // 힌트 폰트 변경
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       hintText: '비밀번호를 입력해주세요.',
                       prefixIcon: Icon(Icons.lock),
@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     obscureText: true,
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -182,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           // Add logic for 아이디 찾기 button
                         },
-                        child: Text(
+                        child: const Text(
                           '아이디 찾기',
                           style: TextStyle(
                               fontFamily: 'Moebius', color: Colors.black),
@@ -192,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           // Add logic for 비밀번호 찾기 button
                         },
-                        child: Text(
+                        child: const Text(
                           '비밀번호 찾기',
                           style: TextStyle(
                               fontFamily: 'Moebius', color: Colors.black),
@@ -223,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     width: 100, // 너비 조정
                     height: 50, // 높이 조정
