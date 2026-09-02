@@ -193,7 +193,7 @@ flowchart LR
 ## 📂 프로젝트 구조
 
 ```
-mallang/
+mallang-voice-storybook/
 ├── lib/                    # Flutter 앱 소스
 │   ├── MainPage.dart           # 메인 · 서재 · 카테고리
 │   ├── stt.dart                # 음성 인식 및 낭독 채점
